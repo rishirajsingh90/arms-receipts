@@ -1,16 +1,19 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import Header from './common/Header';
+import {Container} from 'semantic-ui-react'
+import {styles} from './styles'
 
-import '../assets/stylesheets/base.scss';
-
-
-const App = ({ name }) => {
-  return (
-    <h1>Hello, {name}!</h1>
-  );
-};
-
-App.propTypes = {
-  name: PropTypes.string,
-};
+const App = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <Header/>
+                <Container style={styles.receiptContainer}>
+                    {this.props.children}
+                </Container>
+            </div>
+        );
+    }
+});
 
 export default App;
