@@ -1,6 +1,7 @@
 const getDbConfig = function() {
   try {
-      return require('../config/config.json');
+      const config = require('../config/config.json');
+      return config.DATABASE_URL;
       // do stuff
   } catch (ex) {
     // Receive and parse DB URL from env var
