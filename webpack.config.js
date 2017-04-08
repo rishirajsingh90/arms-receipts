@@ -7,7 +7,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.js?$/, loader: 'babel', presets:['es2015', 'react'], exclude: /node_modules/ },
+      { test: /\.js?$/, loader: 'babel', exclude: /node_modules/ },
       { test: /\.s?css$/, loader: 'style!css!sass' },
     ]
   },
