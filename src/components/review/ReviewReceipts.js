@@ -1,14 +1,23 @@
 import React from 'react';
 import Client from '../Client';
-import {Table, Header} from 'semantic-ui-react'
+import { Table, Header } from 'semantic-ui-react';
 
-const ReviewReceipts = React.createClass({
-  getInitialState: function () {
+class ReviewReceipts extends React.Component {
+  constructor() {
+    super();
     return {
       receipts: []
     };
-  },
-  render: function () {
+  }
+  componentDidMount() {
+    this.getReceipts();
+  }
+  getReceipts() {
+    Client.search(null, (receipts) => {
+      this.setState({ receipts: receipts });
+    });
+  }
+  render() {
     return (
       <div>
         <Header as='h3'>Review Receipts</Header>
@@ -22,29 +31,21 @@ const ReviewReceipts = React.createClass({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-          {
-            this.state.receipts.map((receipt, idx) => (
-              <Table.Row key={idx}>
-                <Table.Cell>{receipt.description}</Table.Cell>
-                <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
-                <Table.Cell className='right aligned'>{receipt.amount}</Table.Cell>
-                <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
-              </Table.Row>
-            ))
-          }
+            {
+              this.state.receipts.map((receipt, idx) => (
+                <Table.Row key={idx}>
+                  <Table.Cell>{receipt.description}</Table.Cell>
+                  <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
+                  <Table.Cell className='right aligned'>{receipt.amount}</Table.Cell>
+                  <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
+                </Table.Row>
+              ))
+            }
           </Table.Body>
         </Table>
       </div>
     );
-  },
-  componentDidMount: function () {
-    this.getReceipts();
-  },
-  getReceipts: function () {
-    Client.search(null, (receipts) => {
-      this.setState({receipts: receipts})
-    });
   }
-});
+}
 
 export default ReviewReceipts;
