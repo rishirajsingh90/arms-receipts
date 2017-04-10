@@ -2,15 +2,15 @@ const db = require('../../db');
 const _ = require('lodash');
 
 exports.get = function() {
-  return db.query('select name from company', null)
+  return db.query('select name,value from country', null)
     .then(function (result, err) {
       if (err) {
         throw err;
       }
       return _.map(result.rows, function (row) {
         return {
-          value: row.name,
-          text: row.name
+          value: row.value,
+          text: row.value
         };
       });
     });

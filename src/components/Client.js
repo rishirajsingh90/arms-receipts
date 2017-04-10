@@ -16,6 +16,14 @@ function getCompanies(cb) {
     .then(cb);
 }
 
+function getCountries(cb) {
+  return fetch(`api/countries`, {
+    accept: 'application/json',
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -32,5 +40,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = {search, getCompanies};
+const Client = {search, getCompanies, getCountries};
 export default Client;
