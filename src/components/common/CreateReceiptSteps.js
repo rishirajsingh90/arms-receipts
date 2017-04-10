@@ -4,7 +4,7 @@ import { Step } from 'semantic-ui-react';
 class CreateReceiptSteps extends React.Component {
   constructor () {
     super();
-    return {
+    this.state = {
       steps: {}
     };
   }

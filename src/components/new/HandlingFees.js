@@ -5,7 +5,7 @@ import Client from '../Client';
 class HandlingFees extends React.Component {
   constructor () {
     super();
-    return {
+    this.state = {
       companies: [],
       countries: [],
       value: null
@@ -17,16 +17,16 @@ class HandlingFees extends React.Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.setState({ companies: companies, value: this.state.value, countries:this.state.countries });
+      this.state = { companies: companies, value: this.state.value, countries:this.state.countries };
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.setState({ companies: this.state.companies, value: this.state.value, countries:countries });
+      this.state = { companies: this.state.companies, value: this.state.value, countries:countries };
     });
   }
   handleChange(e, { value }) {
-    this.setState({ companies: this.state.companies, value: value, countries:this.state.countries });
+    this.state = { companies: this.state.companies, value: value, countries:this.state.countries };
   }
   render() {
     return (
@@ -41,9 +41,8 @@ class HandlingFees extends React.Component {
               text='Select Company'
             />
           </Form.Field>
-          <Header as='h4'>Case Type</Header>
           <Form.Field >
-            <label>Case Handling Fee</label>
+            <label>Case Type</label>
             <Form.Radio label='Simple' value='simple' checked={this.state.value === 'simple'} onChange={this.handleChange} />
             <Form.Radio label='Complex' value='complex' checked={this.state.value === 'complex'} onChange={this.handleChange} />
             <Form.Radio label='Custom' value='custom' checked={this.state.value === 'custom'} onChange={this.handleChange} />

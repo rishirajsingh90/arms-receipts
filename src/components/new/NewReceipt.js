@@ -7,7 +7,7 @@ import CreateReceiptSteps from '../common/CreateReceiptSteps';
 class NewReceipt extends React.Component {
   constructor() {
     super();
-    return {
+    this.state = {
       companies: [],
       countries: [],
       value: null
