@@ -10,6 +10,7 @@ class HandlingFees extends React.Component {
       countries: [],
       value: null
     };
+    this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
     this.getCompanies();
@@ -17,18 +18,19 @@ class HandlingFees extends React.Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.state = { companies: companies, value: this.state.value, countries:this.state.countries };
+      this.setState({ companies: companies });
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.state = { companies: this.state.companies, value: this.state.value, countries:countries };
+      this.setState({ countries:countries });
     });
   }
   handleChange(e, { value }) {
-    this.state = { companies: this.state.companies, value: value, countries:this.state.countries };
+    this.setState({ value: value });
   }
   render() {
+    const { value } = this.state;
     return (
       <div>
         <Form.Group inline>
@@ -43,10 +45,10 @@ class HandlingFees extends React.Component {
           </Form.Field>
           <Form.Field >
             <label>Case Type</label>
-            <Form.Radio label='Simple' value='simple' checked={this.state.value === 'simple'} onChange={this.handleChange} />
-            <Form.Radio label='Complex' value='complex' checked={this.state.value === 'complex'} onChange={this.handleChange} />
-            <Form.Radio label='Custom' value='custom' checked={this.state.value === 'custom'} onChange={this.handleChange} />
-            <Input iconPosition='left' placeholder='Amount' disabled={this.state.value !== 'custom'} type="number">
+            <Form.Radio label='Simple' value='simple' checked={value === 'simple'} onChange={this.handleChange} />
+            <Form.Radio label='Complex' value='complex' checked={value === 'complex'} onChange={this.handleChange} />
+            <Form.Radio label='Custom' value='custom' checked={value === 'custom'} onChange={this.handleChange} />
+            <Input iconPosition='left' placeholder='Amount' disabled={value !== 'custom'} type="number">
               <Icon name='dollar' />
               <input />
             </Input>
