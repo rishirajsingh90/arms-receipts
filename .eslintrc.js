@@ -149,31 +149,6 @@ module.exports = {
     'use-isnan': 'warn',
     'valid-typeof': 'warn',
 
-    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/
-
-    // TODO: import rules are temporarily disabled because they don't play well
-    // with how eslint-loader only checks the file you change. So if module A
-    // imports module B, and B is missing a default export, the linter will
-    // record this as an issue in module A. Now if you fix module B, the linter
-    // will not be aware that it needs to re-lint A as well, so the error
-    // will stay until the next restart, which is really confusing.
-
-    // This is probably fixable with a patch to eslint-loader.
-    // When file A is saved, we want to invalidate all files that import it
-    // *and* that currently have lint errors. This should fix the problem.
-
-    // 'import/default': 'warn',
-    // 'import/export': 'warn',
-    // 'import/named': 'warn',
-    // 'import/namespace': 'warn',
-    // 'import/no-amd': 'warn',
-    // 'import/no-duplicates': 'warn',
-    // 'import/no-extraneous-dependencies': 'warn',
-    // 'import/no-named-as-default': 'warn',
-    // 'import/no-named-as-default-member': 'warn',
-    // 'import/no-unresolved': ['warn', { commonjs: true }],
-
-    // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
     'react/jsx-boolean-value': 'warn',
     'react/jsx-closing-bracket-location': 'warn',
     'react/jsx-curly-spacing': 'warn',
@@ -183,7 +158,7 @@ module.exports = {
     'react/jsx-indent': ['warn', 2],
     'react/jsx-indent-props': ['warn', 2],
     'react/jsx-key': 'warn',
-    'react/jsx-max-props-per-line': 'warn',
+    'react/jsx-max-props-per-line': ['warn', { 'maximum': 6 }],
     'react/jsx-no-bind': ['warn', {'allowArrowFunctions': true}],
     'react/jsx-no-comment-textnodes': 'warn',
     'react/jsx-no-duplicate-props': ['warn', { ignoreCase: true }],
@@ -192,7 +167,6 @@ module.exports = {
       allowAllCaps: true,
       ignore: [],
     }],
-    'react/jsx-sort-props': 'warn',
     'react/jsx-space-before-closing': 'warn',
     'react/jsx-tag-spacing': 'warn',
     'react/jsx-uses-react': 'warn',
@@ -215,7 +189,6 @@ module.exports = {
     'react/style-prop-object': 'warn',
     'react/void-dom-elements-no-children': 'warn',
 
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
     'jsx-a11y/aria-role': 'warn',
     'jsx-a11y/img-has-alt': 'warn',
     'jsx-a11y/img-redundant-alt': 'warn',
