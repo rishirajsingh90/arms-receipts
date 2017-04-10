@@ -30,6 +30,11 @@ class HandlingFees extends React.Component {
     this.setState({ value: value });
   }
   render() {
+
+    if (this.props.activeComponent !== "caseHandling") {
+      return;
+    }
+
     const { value } = this.state;
     return (
       <div>
@@ -76,7 +81,7 @@ class HandlingFees extends React.Component {
               options={this.state.countries}
             />
           </Form.Field>
-      </Form.Group>
+        </Form.Group>
       </div>
     );
   }

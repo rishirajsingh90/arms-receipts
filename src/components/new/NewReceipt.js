@@ -9,15 +9,16 @@ class NewReceipt extends React.Component {
     this.state = {
       companies: [],
       countries: [],
-      value: null
+      value: null,
+      activeItem: "caseHandling"
     };
   }
   render() {
     return (
       <div>
         <Form>
-          <CreateReceiptSteps activeState="handlingFee" />
-          <HandlingFees />
+          <CreateReceiptSteps activeComponent={this.state.activeItem}/>
+          <HandlingFees activeComponent={this.state.activeItem}/>
           <Button type='submit'>Submit</Button>
         </Form>
       </div>
