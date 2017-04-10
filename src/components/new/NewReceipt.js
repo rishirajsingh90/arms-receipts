@@ -5,7 +5,8 @@ import HandlingFees from './HandlingFees';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
 
 class NewReceipt extends React.Component {
-  constructor () {
+  constructor() {
+    super();
     return {
       companies: [],
       countries: [],

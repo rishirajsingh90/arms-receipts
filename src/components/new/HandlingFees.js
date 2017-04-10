@@ -4,6 +4,7 @@ import Client from '../Client';
 
 class HandlingFees extends React.Component {
   constructor () {
+    super();
     return {
       companies: [],
       countries: [],
