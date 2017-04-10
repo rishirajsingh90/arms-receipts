@@ -1,22 +1,25 @@
-import React, { Component } from 'react'
-import { Step } from 'semantic-ui-react'
+import React from 'react';
+import { Step } from 'semantic-ui-react';
 
-const CreateReceiptSteps = React.createClass({
-  getInitialState: function () {
+class CreateReceiptSteps extends React.Component {
+  getInitialState () {
     return {
       steps: {}
-    }
-  },
-  render: function () {
-    return (
-    <Step.Group>
-      <Step title='Case Handling Fee' onClick={this.handleStepChange} />
-    </Step.Group>
-    );
-  },
-  handleStepChange: function() {
+    };
+  }
+  handleStepChange () {
     this.setState({ active: !this.state.active });
   }
-});
+  render () {
+    return (
+      <Step.Group>
+        <Step
+          onClick={this.handleStepChange}
+          title='Case Handling Fee'
+        />
+      </Step.Group>
+    );
+  }
+}
 
 export default CreateReceiptSteps;

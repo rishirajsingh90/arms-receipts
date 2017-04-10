@@ -40,5 +40,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = {search, getCompanies, getCountries};
+const Client = { search, getCompanies, getCountries };
 export default Client;
