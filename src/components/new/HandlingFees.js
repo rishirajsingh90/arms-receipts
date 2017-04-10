@@ -43,6 +43,8 @@ class HandlingFees extends React.Component {
               text='Select Company'
             />
           </Form.Field>
+        </Form.Group>
+        <Form.Group>
           <Form.Field >
             <label>Case Type</label>
             <Form.Radio label='Simple' value='simple' checked={value === 'simple'} onChange={this.handleChange} />
@@ -54,21 +56,27 @@ class HandlingFees extends React.Component {
             </Input>
           </Form.Field>
         </Form.Group>
-        <Header as='h4'>Details</Header>
-        <Form.Field>
-          <Checkbox label='Repatriation' />
-        </Form.Field>
-        <Form.Field>
-          <Checkbox label='Doctor Escort' />
-        </Form.Field>
-        <Form.Field>
-          <Checkbox label='Nurse Escort' />
-        </Form.Field>
-        <Form.Field>
-          <Dropdown text='Country of Origin' search floating labeled button className='icon'
-            options={this.state.countries}
-          />
-        </Form.Field>
+        <Form.Group>
+          <Form.Field>
+            <label>Details</label>
+          </Form.Field>
+          <Form.Field>
+            <Checkbox label='Repatriation' />
+          </Form.Field>
+          <Form.Field>
+            <Checkbox label='Doctor Escort' />
+          </Form.Field>
+          <Form.Field>
+            <Checkbox label='Nurse Escort' />
+          </Form.Field>
+        </Form.Group>
+        <Form.Group>
+          <Form.Field>
+            <Dropdown text='Country of Origin' search floating labeled button className='icon'
+              options={this.state.countries}
+            />
+          </Form.Field>
+      </Form.Group>
       </div>
     );
   }
