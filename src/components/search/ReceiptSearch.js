@@ -2,15 +2,15 @@ import React from 'react';
 import Client from '../Client';
 
 const MATCHING_ITEM_LIMIT = 25;
-const ReceiptSearch = React.createClass({
-  getInitialState: function () {
-    return {
+class ReceiptSearch extends React.Component {
+  constructor() {
+    this.state = {
       receipts: [],
       showRemoveIcon: false,
-      searchValue: '',
+      searchValue: ''
     };
-  },
-  handleSearchChange: function (e) {
+  }
+  handleSearchChange(e) {
     const value = e.target.value;
 
     this.setState({
@@ -33,15 +33,15 @@ const ReceiptSearch = React.createClass({
         });
       });
     }
-  },
-  handleSearchCancel: function () {
+  }
+  handleSearchCancel() {
     this.setState({
       receipts: [],
       showRemoveIcon: false,
       searchValue: '',
     });
-  },
-  render: function () {
+  }
+  render() {
     return (
       <div id='receipt-search'>
         <table className='ui selectable structured large table'>
@@ -95,7 +95,7 @@ const ReceiptSearch = React.createClass({
         </table>
       </div>
     );
-  },
-});
+  }
+}
 
 export default ReceiptSearch;

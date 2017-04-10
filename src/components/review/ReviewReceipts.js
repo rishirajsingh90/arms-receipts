@@ -5,7 +5,7 @@ import { Table, Header } from 'semantic-ui-react';
 class ReviewReceipts extends React.Component {
   constructor() {
     super();
-    return {
+    this.state = {
       receipts: []
     };
   }
