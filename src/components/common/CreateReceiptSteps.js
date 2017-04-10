@@ -2,7 +2,7 @@ import React from 'react';
 import { Step } from 'semantic-ui-react';
 
 class CreateReceiptSteps extends React.Component {
-  getInitialState () {
+  constructor () {
     return {
       steps: {}
     };

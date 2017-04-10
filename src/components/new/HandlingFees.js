@@ -3,7 +3,7 @@ import { Header, Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react
 import Client from '../Client';
 
 class HandlingFees extends React.Component {
-  getInitialState () {
+  constructor () {
     return {
       companies: [],
       countries: [],
