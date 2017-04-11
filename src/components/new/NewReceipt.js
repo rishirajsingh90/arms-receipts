@@ -40,9 +40,9 @@ class NewReceipt extends React.Component {
         <Form>
           <CreateReceiptSteps setStep={this.setStep.bind(this)} />
           <CaseFees activeStep={this.state.activeStep} caseFees={this.state.receipt.caseFees} updateReceipt={this.setCaseFees.bind(this)} />
-          <CarTransport activeStep={this.state.activeStep} carTransport={this.state.carTransport} updateReceipt={this.setCarTransport.bind(this)} />
-          <AirlineTickets activeStep={this.state.activeStep} airlineTickets={this.state.airlineTickets} updateReceipt={this.setAirlineTickets.bind(this)} />
-          <AircraftCharter activeStep={this.state.activeStep} aircraftCharter={this.state.aircraftCharter} updateReceipt={this.setAircraftCharter.bind(this)} />
+          <CarTransport activeStep={this.state.activeStep} carTransport={this.state.receipt.carTransport} updateReceipt={this.setCarTransport.bind(this)} />
+          <AirlineTickets activeStep={this.state.activeStep} airlineTickets={this.state.receipt.airlineTickets} updateReceipt={this.setAirlineTickets.bind(this)} />
+          <AircraftCharter activeStep={this.state.activeStep} aircraftCharter={this.state.receipt.aircraftCharter} updateReceipt={this.setAircraftCharter.bind(this)} />
           <Button type='submit'>Submit</Button>
         </Form>
       </div>

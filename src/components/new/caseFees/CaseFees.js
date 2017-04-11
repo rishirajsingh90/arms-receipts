@@ -6,17 +6,11 @@ class CaseFees extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      value: null,
-      companyName: '',
-      amount: 0,
-      country: '',
-      repatriation: false,
-      doctorEscort: false,
-      nurseEscort: false,
-      caseType: ''
+      value: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
   componentDidMount() {
     this.getCompanies();
