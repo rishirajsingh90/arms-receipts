@@ -6,7 +6,9 @@ class CaseFees extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      value: null
+      value: null,
+      country: '',
+      company: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -44,11 +46,9 @@ class CaseFees extends React.Component {
     if (!e.target.parentElement.parentElement.id) {
       return;
     }
-    if (e.target.parentElement.parentElement.id) {
-      this.setState({ [e.target.parentElement.id]: true }, () => {
-        this.props.updateReceipt(this.state);
-      });
-    }
+    this.setState({ [e.target.parentElement.parentElement.id]: value }, () => {
+      this.props.updateReceipt(this.state);
+    });
   }
   handleChange(input, value) {
     this.setState({ [input]: value }, () => {
@@ -64,7 +64,7 @@ class CaseFees extends React.Component {
     const { caseType } = this.state;
     return (
       <div>
-        <Form.Group>
+        <Form.Group inline>
           <label>Company Name</label>
           <Form.Field>
             <Dropdown
@@ -73,10 +73,11 @@ class CaseFees extends React.Component {
               floating labeled button className='icon'
               placeholder='Select Company'
               onChange={this.handleDropDownChange}
+              defaultValue={this.state.company}
             />
           </Form.Field>
         </Form.Group>
-        <Form.Group>
+        <Form.Group inline>
           <label>Case Type</label>
           <Form.Field>
             <Form.Radio id='caseTypeSimple' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange} />
@@ -89,26 +90,27 @@ class CaseFees extends React.Component {
           </Form.Field>
           <Form.Field>
             <Input iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-                   onChange={e => this.handleChange('amount', e.target.value)}
+                   onChange={e => this.handleChange('amount', e.target.value)} defaultValue={this.state.amount}
             >
               <Icon name='dollar' />
               <input />
             </Input>
           </Form.Field>
         </Form.Group>
-        <Form.Group>
+        <Form.Group inline>
           <label>Details</label>
           <Form.Field>
-            <Checkbox id='repatriation' label='Repatriation' onChange={this.handleSelectChange}/>
+            <Checkbox id='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation} />
           </Form.Field>
           <Form.Field>
-            <Checkbox id='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange}/>
+            <Checkbox id='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort} />
           </Form.Field>
           <Form.Field>
-            <Checkbox id='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange} />
+            <Checkbox id='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort} />
           </Form.Field>
         </Form.Group>
-        <Form.Group>
+        <Form.Group inline>
+          <label>Insurance Company Country</label>
           <Form.Field>
             <Dropdown
               id="country"
