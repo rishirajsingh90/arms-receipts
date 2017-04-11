@@ -51,11 +51,17 @@ class CaseFees extends React.Component {
           </Form.Field>
         </Form.Group>
         <Form.Group>
-          <Form.Field >
-            <label>Case Type</label>
+          <label>Case Type</label>
+          <Form.Field>
             <Form.Radio label='Simple' value='simple' checked={value === 'simple'} onChange={this.handleChange} />
+          </Form.Field>
+          <Form.Field>
             <Form.Radio label='Complex' value='complex' checked={value === 'complex'} onChange={this.handleChange} />
+          </Form.Field>
+          <Form.Field>
             <Form.Radio label='Custom' value='custom' checked={value === 'custom'} onChange={this.handleChange} />
+          </Form.Field>
+          <Form.Field>
             <Input iconPosition='left' placeholder='Amount' disabled={value !== 'custom'} type="number">
               <Icon name='dollar' />
               <input />

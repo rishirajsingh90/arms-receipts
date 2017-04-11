@@ -33,7 +33,7 @@ class CreateReceiptSteps extends React.Component {
           </Step.Content>
         </Step>
         <Step name="airlineTickets"  active={activeStep === "airlineTickets"} onClick={this.handleStepChange}>
-          <Icon name="plane" />
+          <Icon name="ticket" />
           <Step.Content>
             <Step.Title>Airline Tickets</Step.Title>
           </Step.Content>
