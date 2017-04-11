@@ -8,11 +8,15 @@ class CaseFees extends React.Component {
     this.state = {
       value: null,
       companyName: '',
-      caseType: '',
       amount: 0,
-      country: ''
+      country: '',
+      repatriation: false,
+      doctorEscort: false,
+      nurseEscort: false,
+      caseType: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
   componentDidMount() {
     this.getCompanies();
@@ -20,56 +24,77 @@ class CaseFees extends React.Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.setState({ companies: companies });
+      this.setState({companies: companies});
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.setState({ countries:countries });
+      this.setState({countries: countries});
     });
   }
-  caseTypeUpdated(event) {
-    this.setState({ value: event.target.value });
+  handleSelectChange(e, { value }) {
+    if (!e.target.parentElement.id) {
+      return;
+    }
+    if (e.target.parentElement.id.includes('caseType')) {
+      this.setState({ caseType: value }, () => {
+        this.props.updateReceipt(this.state);
+      });
+    } else if (e.target.parentElement.id) {
+      this.setState({ [e.target.parentElement.id]: true }, () => {
+        this.props.updateReceipt(this.state);
+      });
+    }
+  }
+  handleDropDownChange(e, { value }) {
+    if (!e.target.parentElement.parentElement.id) {
+      return;
+    }
+    if (e.target.parentElement.parentElement.id) {
+      this.setState({ [e.target.parentElement.id]: true }, () => {
+        this.props.updateReceipt(this.state);
+      });
+    }
   }
   handleChange(input, value) {
-    this.setState({
-      input: value
+    this.setState({ [input]: value }, () => {
+      this.props.updateReceipt(this.state);
     });
-    this.props.updateReceipt(this.state);
   }
   render() {
 
-    if (this.props.activeStep !== "caseHandling") {
+    if (this.props.activeStep !== 'caseHandling') {
       return null;
     }
 
-    const { value } = this.state;
+    const { caseType } = this.state;
     return (
       <div>
-        <Form.Group inline>
+        <Form.Group>
+          <label>Company Name</label>
           <Form.Field>
-            <label>Company Name</label>
             <Dropdown
+              id='companyName'
               options={this.state.companies}
               floating labeled button className='icon'
               placeholder='Select Company'
-              onChange={e => this.handleChange('companyName', e)}
+              onChange={this.handleDropDownChange}
             />
           </Form.Field>
         </Form.Group>
         <Form.Group>
           <label>Case Type</label>
           <Form.Field>
-            <Form.Radio label='Simple' value='simple' checked={value === 'simple'} onChange={this.caseTypeUpdated} />
+            <Form.Radio id='caseTypeSimple' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio label='Complex' value='complex' checked={value === 'complex'} onChange={this.caseTypeUpdated} />
+            <Form.Radio id='caseTypeComplex' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio label='Custom' value='custom' checked={value === 'custom'} onChange={this.caseTypeUpdated} />
+            <Form.Radio id='caseTypeCustom' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Input iconPosition='left' placeholder='Amount'  type="number"
+            <Input iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
                    onChange={e => this.handleChange('amount', e.target.value)}
             >
               <Icon name='dollar' />
@@ -78,26 +103,25 @@ class CaseFees extends React.Component {
           </Form.Field>
         </Form.Group>
         <Form.Group>
+          <label>Details</label>
           <Form.Field>
-            <label>Details</label>
+            <Checkbox id='repatriation' label='Repatriation' onChange={this.handleSelectChange}/>
           </Form.Field>
           <Form.Field>
-            <Checkbox label='Repatriation' />
+            <Checkbox id='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange}/>
           </Form.Field>
           <Form.Field>
-            <Checkbox label='Doctor Escort' />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox label='Nurse Escort' />
+            <Checkbox id='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange} />
           </Form.Field>
         </Form.Group>
         <Form.Group>
           <Form.Field>
             <Dropdown
+              id="country"
               options={this.state.countries}
               floating labeled button className='icon'
               placeholder='Select Country'
-              onChange={e => this.handleChange('country', e.target.value)}
+              onChange={this.handleDropDownChange}
             />
           </Form.Field>
         </Form.Group>

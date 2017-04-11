@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Label } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import CaseFees from './caseFees/CaseFees';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
 import CarTransport from './carTransport/CarTransport';
@@ -10,9 +10,6 @@ class NewReceipt extends React.Component {
   constructor() {
     super();
     this.state = {
-      companies: [],
-      countries: [],
-      value: null,
       activeStep: null,
       receipt: {
         caseFees: {},
@@ -41,7 +38,6 @@ class NewReceipt extends React.Component {
     return (
       <div>
         <Form>
-          <label>{this.state.receipt.caseFees.companyName}</label>
           <CreateReceiptSteps setStep={this.setStep.bind(this)} />
           <CaseFees activeStep={this.state.activeStep} caseFees={this.state.receipt.caseFees} updateReceipt={this.setCaseFees.bind(this)} />
           <CarTransport activeStep={this.state.activeStep} carTransport={this.state.carTransport} updateReceipt={this.setCarTransport.bind(this)} />
