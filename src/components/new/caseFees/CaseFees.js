@@ -1,8 +1,8 @@
 import React from 'react';
 import { Header, Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
-import Client from '../Client';
+import Client from '../../Client';
 
-class HandlingFees extends React.Component {
+class CaseFees extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -88,4 +88,4 @@ class HandlingFees extends React.Component {
   }
 }
 
-export default HandlingFees;
+export default CaseFees;

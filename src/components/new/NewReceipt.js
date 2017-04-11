@@ -1,7 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'semantic-ui-react';
-import HandlingFees from './HandlingFees';
+import CaseFees from './caseFees/CaseFees';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
+import CarTransport from './carTransport/CarTransport';
 
 class NewReceipt extends React.Component {
   constructor() {
@@ -21,7 +22,8 @@ class NewReceipt extends React.Component {
       <div>
         <Form>
           <CreateReceiptSteps setStep={this.setStep.bind(this)}/>
-          <HandlingFees activeStep={this.state.activeStep}/>
+          <CaseFees activeStep={this.state.activeStep}/>
+          <CarTransport activeStep={this.state.activeStep}/>
           <Button type='submit'>Submit</Button>
         </Form>
       </div>
