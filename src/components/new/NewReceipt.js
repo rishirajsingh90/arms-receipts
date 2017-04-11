@@ -10,15 +10,18 @@ class NewReceipt extends React.Component {
       companies: [],
       countries: [],
       value: null,
-      activeItem: "caseHandling"
+      activeStep: null
     };
+  }
+  setStep(activeStep) {
+    this.setState({activeStep: activeStep});
   }
   render() {
     return (
       <div>
         <Form>
-          <CreateReceiptSteps activeComponent={this.state.activeItem}/>
-          <HandlingFees activeComponent={this.state.activeItem}/>
+          <CreateReceiptSteps setStep={this.setStep.bind(this)}/>
+          <HandlingFees activeStep={this.state.activeStep}/>
           <Button type='submit'>Submit</Button>
         </Form>
       </div>

@@ -3,11 +3,12 @@ import { Header, Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react
 import Client from '../Client';
 
 class HandlingFees extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
       companies: [],
       countries: [],
+      activeStep: null,
       value: null
     };
     this.handleChange = this.handleChange.bind(this);
@@ -31,8 +32,8 @@ class HandlingFees extends React.Component {
   }
   render() {
 
-    if (this.props.activeComponent !== "caseHandling") {
-      return;
+    if (this.props.activeStep !== "caseHandling") {
+      return null;
     }
 
     const { value } = this.state;
