@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, Input, Icon } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
-require('react-datepicker/dist/react-datepicker.css');
 
 class AirlineTickets extends React.Component {
   constructor (props) {

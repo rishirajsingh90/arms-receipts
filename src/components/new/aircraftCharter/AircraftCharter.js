@@ -2,16 +2,21 @@ import React from "react";
 import { Form, Input, Icon } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 
-class CarTransport extends React.Component {
+class AircraftCharter extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       activeStep: null
     };
   }
+  handleChange(e, { value }) {
+    this.setState({ value: value });
+  }
   render() {
 
-    if (this.props.activeStep !== "carTransport") {
+    const { value } = this.state;
+
+    if (this.props.activeStep !== "aircraftCharter") {
       return null;
     }
 
@@ -24,6 +29,15 @@ class CarTransport extends React.Component {
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
+          <label>Aircraft Type</label>
+          <Form.Field>
+            <Form.Radio label='Jet' value='jet' checked={value === 'jet'} onChange={this.handleChange} />
+          </Form.Field>
+          <Form.Field>
+            <Form.Radio label='Turboprop' value='turboprop' checked={value === 'turboprop'} onChange={this.handleChange} />
+          </Form.Field>
+        </Form.Group>
+        <Form.Group inline>
           <label>City</label>
           <Form.Field>
             <Input placeholder="From" />
@@ -33,9 +47,9 @@ class CarTransport extends React.Component {
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
-          <label>Distance</label>
+          <label>Flying Time</label>
           <Form.Field>
-            <Input placeholder="Distance" type="number" labelPosition="right" label="km" />
+            <Input placeholder="Flying Time" type="number" labelPosition="right" label="hrs" />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -69,4 +83,4 @@ class CarTransport extends React.Component {
   }
 }
 
-export default CarTransport;
+export default AircraftCharter;
