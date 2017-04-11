@@ -6,10 +6,11 @@ class CaseFees extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      companies: [],
-      countries: [],
-      activeStep: null,
-      value: null
+      value: null,
+      companyName: '',
+      caseType: '',
+      amount: 0,
+      country: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -27,8 +28,14 @@ class CaseFees extends React.Component {
       this.setState({ countries:countries });
     });
   }
-  handleChange(e, { value }) {
-    this.setState({ value: value });
+  caseTypeUpdated(event) {
+    this.setState({ value: event.target.value });
+  }
+  handleChange(input, value) {
+    this.setState({
+      input: value
+    });
+    this.props.updateReceipt(this.state);
   }
   render() {
 
@@ -43,26 +50,28 @@ class CaseFees extends React.Component {
           <Form.Field>
             <label>Company Name</label>
             <Dropdown
-              className='icon'
               options={this.state.companies}
-              search floating labeled button
-              text='Select Company'
+              floating labeled button className='icon'
+              placeholder='Select Company'
+              onChange={e => this.handleChange('companyName', e)}
             />
           </Form.Field>
         </Form.Group>
         <Form.Group>
           <label>Case Type</label>
           <Form.Field>
-            <Form.Radio label='Simple' value='simple' checked={value === 'simple'} onChange={this.handleChange} />
+            <Form.Radio label='Simple' value='simple' checked={value === 'simple'} onChange={this.caseTypeUpdated} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio label='Complex' value='complex' checked={value === 'complex'} onChange={this.handleChange} />
+            <Form.Radio label='Complex' value='complex' checked={value === 'complex'} onChange={this.caseTypeUpdated} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio label='Custom' value='custom' checked={value === 'custom'} onChange={this.handleChange} />
+            <Form.Radio label='Custom' value='custom' checked={value === 'custom'} onChange={this.caseTypeUpdated} />
           </Form.Field>
           <Form.Field>
-            <Input iconPosition='left' placeholder='Amount' disabled={value !== 'custom'} type="number">
+            <Input iconPosition='left' placeholder='Amount'  type="number"
+                   onChange={e => this.handleChange('amount', e.target.value)}
+            >
               <Icon name='dollar' />
               <input />
             </Input>
@@ -84,8 +93,11 @@ class CaseFees extends React.Component {
         </Form.Group>
         <Form.Group>
           <Form.Field>
-            <Dropdown text='Country of Origin' search floating
-              labeled button className='icon' options={this.state.countries}
+            <Dropdown
+              options={this.state.countries}
+              floating labeled button className='icon'
+              placeholder='Select Country'
+              onChange={e => this.handleChange('country', e.target.value)}
             />
           </Form.Field>
         </Form.Group>
@@ -93,5 +105,9 @@ class CaseFees extends React.Component {
     );
   }
 }
+
+CaseFees.propTypes = {
+  updateReceipt: React.PropTypes.func
+};
 
 export default CaseFees;
