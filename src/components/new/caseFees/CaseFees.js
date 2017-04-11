@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
+import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
 
 class CaseFees extends React.Component {
@@ -84,8 +84,8 @@ class CaseFees extends React.Component {
         </Form.Group>
         <Form.Group>
           <Form.Field>
-            <Dropdown text='Country of Origin' search floating labeled button className='icon'
-              options={this.state.countries}
+            <Dropdown text='Country of Origin' search floating
+              labeled button className='icon' options={this.state.countries}
             />
           </Form.Field>
         </Form.Group>

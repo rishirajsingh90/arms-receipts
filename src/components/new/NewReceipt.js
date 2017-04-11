@@ -17,17 +17,17 @@ class NewReceipt extends React.Component {
     };
   }
   setStep(activeStep) {
-    this.setState({activeStep: activeStep});
+    this.setState({ activeStep: activeStep });
   }
   render() {
     return (
       <div>
         <Form>
-          <CreateReceiptSteps setStep={this.setStep.bind(this)}/>
-          <CaseFees activeStep={this.state.activeStep}/>
-          <CarTransport activeStep={this.state.activeStep}/>
-          <AirlineTickets activeStep={this.state.activeStep}/>
-          <AircraftCharter activeStep={this.state.activeStep}/>
+          <CreateReceiptSteps setStep={this.setStep.bind(this)} />
+          <CaseFees activeStep={this.state.activeStep} />
+          <CarTransport activeStep={this.state.activeStep} />
+          <AirlineTickets activeStep={this.state.activeStep} />
+          <AircraftCharter activeStep={this.state.activeStep} />
           <Button type='submit'>Submit</Button>
         </Form>
       </div>
