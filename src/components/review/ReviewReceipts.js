@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Client from '../Client';
 import { Table, Header } from 'semantic-ui-react';
 
-class ReviewReceipts extends React.Component {
+class ReviewReceipts extends Component {
   constructor() {
     super();
     this.state = {

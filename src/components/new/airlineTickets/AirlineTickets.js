@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Form, Input, Icon } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 
-class AirlineTickets extends React.Component {
+class AirlineTickets extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -82,23 +82,22 @@ class AirlineTickets extends React.Component {
               placeholderText="Start Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.startDate}
-              onChange={this.handleStartDate}
-            />
+              onChange={this.handleStartDate} />
           </Form.Field>
           <Form.Field>
             <DatePicker
               placeholderText="End Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.endDate}
-              onChange={this.handleEndDate}
-            />
+              onChange={this.handleEndDate} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <Form.Field>
             <label>Amount</label>
-            <Input iconPosition="left" placeholder="Amount" type="number" onChange={e => this.handleChange('amount', e.target.value)}
-               defaultValue={this.state.amount}>
+            <Input
+              iconPosition="left" placeholder="Amount" type="number" onChange={e => this.handleChange('amount', e.target.value)}
+              defaultValue={this.state.amount}>
               <Icon name="dollar" />
               <input />
             </Input>

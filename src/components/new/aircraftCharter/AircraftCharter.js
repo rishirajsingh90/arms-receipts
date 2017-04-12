@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Form, Input, Icon } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 
-class AircraftCharter extends React.Component {
+class AircraftCharter extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -51,7 +51,8 @@ class AircraftCharter extends React.Component {
         <Form.Group inline>
           <label>Service Provider</label>
           <Form.Field>
-            <Input placeholder="Provider" onChange={e => this.handleChange('provider', e.target.value)} defaultValue={this.state.provider} />
+            <Input
+              placeholder="Provider" onChange={e => this.handleChange('provider', e.target.value)} defaultValue={this.state.provider} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -66,17 +67,20 @@ class AircraftCharter extends React.Component {
         <Form.Group inline>
           <label>City</label>
           <Form.Field>
-            <Input placeholder="From" onChange={e => this.handleChange('fromCity', e.target.value)} defaultValue={this.state.fromCity} />
+            <Input
+              placeholder="From" onChange={e => this.handleChange('fromCity', e.target.value)} defaultValue={this.state.fromCity} />
           </Form.Field>
           <Form.Field>
-            <Input placeholder="To" onChange={e => this.handleChange('toCity', e.target.value)} defaultValue={this.state.toCity} />
+            <Input
+              placeholder="To" onChange={e => this.handleChange('toCity', e.target.value)} defaultValue={this.state.toCity} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <label>Flying Time</label>
           <Form.Field>
-            <Input placeholder="Flying Time" type="number" labelPosition="right" label="hrs" onChange={e => this.handleChange('flyingTime', e.target.value)}
-                   defaultValue={this.state.flyingTime} />
+            <Input
+              placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
+              onChange={e => this.handleChange('flyingTime', e.target.value)} defaultValue={this.state.flyingTime} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -86,23 +90,22 @@ class AircraftCharter extends React.Component {
               placeholderText="Start Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.startDate}
-              onChange={this.handleStartDate}
-            />
+              onChange={this.handleStartDate} />
           </Form.Field>
           <Form.Field>
             <DatePicker
               placeholderText="End Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.endDate}
-              onChange={this.handleEndDate}
-            />
+              onChange={this.handleEndDate} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <Form.Field>
             <label>Amount</label>
-            <Input iconPosition="left" placeholder="Amount" type="number" onChange={e => this.handleChange('amount', e.target.value)}
-                 defaultValue={this.state.amount}>
+            <Input
+              iconPosition="left" placeholder="Amount" type="number" onChange={e => this.handleChange('amount', e.target.value)}
+              defaultValue={this.state.amount}>
               <Icon name="dollar" />
               <input />
             </Input>

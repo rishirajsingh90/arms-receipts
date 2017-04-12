@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
+import PropTypes from 'prop-types';
 
-class CaseFees extends React.Component {
+class CaseFees extends Component {
   constructor (props) {
     super(props);
+    this.test = [];
     this.state = {
       value: null,
       country: '',
@@ -20,12 +22,12 @@ class CaseFees extends React.Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.setState({companies: companies});
+      this.test = companies;
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.setState({countries: countries});
+      this.props.countries = countries;
     });
   }
   handleSelectChange(e, { value }) {
@@ -69,12 +71,11 @@ class CaseFees extends React.Component {
           <Form.Field>
             <Dropdown
               id='companyName'
-              options={this.state.companies}
+              options={this.test}
               floating labeled button className='icon'
               placeholder='Select Company'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.company}
-            />
+              defaultValue={this.state.company} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -89,9 +90,9 @@ class CaseFees extends React.Component {
             <Form.Radio id='caseTypeCustom' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Input iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-                   onChange={e => this.handleChange('amount', e.target.value)} defaultValue={this.state.amount}
-            >
+            <Input
+              iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
+              onChange={e => this.handleChange('amount', e.target.value)} defaultValue={this.state.amount}>
               <Icon name='dollar' />
               <input />
             </Input>
@@ -114,11 +115,10 @@ class CaseFees extends React.Component {
           <Form.Field>
             <Dropdown
               id="country"
-              options={this.state.countries}
+              options={this.props.countries}
               floating labeled button className='icon'
               placeholder='Select Country'
-              onChange={this.handleDropDownChange}
-            />
+              onChange={this.handleDropDownChange} />
           </Form.Field>
         </Form.Group>
       </div>

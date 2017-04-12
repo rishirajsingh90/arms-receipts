@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Step, Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
-class CreateReceiptSteps extends React.Component {
+class CreateReceiptSteps extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -48,7 +49,6 @@ class CreateReceiptSteps extends React.Component {
     );
   }
 }
-
 CreateReceiptSteps.propTypes = {
   setStep: React.PropTypes.func
 };
