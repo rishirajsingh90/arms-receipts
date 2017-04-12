@@ -24,14 +24,10 @@ class AirlineTickets extends Component {
     }
   }
   handleStartDate(date) {
-    this.setState({ startDate: date }, () => {
-      this.props.updateReceipt(this.state);
-    });
+    ReceiptHandler.handleStartDate(date, this);
   }
   handleEndDate(date) {
-    this.setState({ endDate: date }, () => {
-      this.props.updateReceipt(this.state);
-    });
+    ReceiptHandler.handleEndDate(date, this);
   }
   handleChange(input, value) {
     this.setState({ [input]: value }, () => {
@@ -107,5 +103,9 @@ class AirlineTickets extends Component {
     );
   }
 }
+
+AirlineTickets.propTypes = {
+  updateReceipt: React.PropTypes.func
+};
 
 export default AirlineTickets;
