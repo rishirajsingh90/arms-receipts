@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
-<<<<<<< HEAD
-import PropTypes from 'prop-types';
 import ReceiptHandler from '../../common/ReceiptHandler';
-=======
->>>>>>> develop
 
 class CaseFees extends Component {
   constructor (props) {
@@ -16,8 +12,8 @@ class CaseFees extends Component {
       country: '',
       company: ''
     };
-    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
   componentDidMount() {
     this.getCompanies();
@@ -33,15 +29,11 @@ class CaseFees extends Component {
       this.setState({countries: countries});
     });
   }
-  handleSelectChange(e, { id, value }) {
-    this.setState({ [id]: value }, () => {
-      this.props.updateReceipt(this.state);
-    });
+  handleDropDownChange(e, { id, value }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
-  handleDropDownChange(e, { id, text }) {
-    this.setState({ [id]: text }, () => {
-      this.props.updateReceipt(this.state);
-    });
+  handleSelectChange(e, { name, value, checked}) {
+    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
   }
   render() {
 
@@ -67,13 +59,13 @@ class CaseFees extends Component {
         <Form.Group inline>
           <label>Case Type</label>
           <Form.Field>
-            <Form.Radio id='caseTypeSimple' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange} />
+            <Form.Radio name='caseType' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio id='caseTypeComplex' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange} />
+            <Form.Radio name='caseType' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio id='caseTypeCustom' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange} />
+            <Form.Radio name='caseType' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
             <Input
@@ -87,13 +79,13 @@ class CaseFees extends Component {
         <Form.Group inline>
           <label>Details</label>
           <Form.Field>
-            <Checkbox id='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation} />
+            <Checkbox name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation} />
           </Form.Field>
           <Form.Field>
-            <Checkbox id='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort} />
+            <Checkbox name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort} />
           </Form.Field>
           <Form.Field>
-            <Checkbox id='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort} />
+            <Checkbox name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>

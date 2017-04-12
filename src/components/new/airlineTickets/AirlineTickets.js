@@ -13,15 +13,8 @@ class AirlineTickets extends Component {
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
-  handleSelectChange(e, { value }) {
-    if (!e.target.parentElement.id) {
-      return;
-    }
-    if (e.target.parentElement.id.includes('flightClass')) {
-      this.setState({ flightClass: value }, () => {
-        this.props.updateReceipt(this.state);
-      });
-    }
+  handleSelectChange(e, { name, value, checked }) {
+    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
   }
   handleStartDate(date) {
     ReceiptHandler.handleStartDate(date, this);
@@ -53,13 +46,13 @@ class AirlineTickets extends Component {
         <Form.Group inline>
           <label>Ticket Class</label>
           <Form.Field>
-            <Form.Radio id='flightClassEconomy' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
+            <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio id='flightClassBusiness' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
+            <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio id='flightClassStretcher' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
+            <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
