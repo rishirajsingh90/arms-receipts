@@ -17,6 +17,12 @@ router.get('/api/receipt', (req, res) => {
   });
 });
 
+router.post('/api/receipt', (req, res) => {
+  receipt.add().then(function(response) {
+    res.send(JSON.stringify(response));
+  });
+});
+
 router.get('/api/countries', (req, res) => {
   countries.get().then(function(response) {
     res.send(JSON.stringify(response));

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
 import PropTypes from 'prop-types';
+import ReceiptHandler from '../../common/ReceiptHandler';
 
 class CaseFees extends Component {
   constructor (props) {
@@ -12,7 +13,7 @@ class CaseFees extends Component {
       country: '',
       company: ''
     };
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
@@ -30,33 +31,21 @@ class CaseFees extends Component {
       this.setState({countries: countries});
     });
   }
-  handleSelectChange(e, { value }) {
-    if (!e.target.parentElement.id) {
-      return;
-    }
-    if (e.target.parentElement.id.includes('caseType')) {
-      this.setState({ caseType: value }, () => {
-        this.props.updateReceipt(this.state);
-      });
-    } else if (e.target.parentElement.id) {
-      this.setState({ [e.target.parentElement.id]: true }, () => {
-        this.props.updateReceipt(this.state);
-      });
-    }
-  }
-  handleDropDownChange(e, { value }) {
-    if (!e.target.parentElement.parentElement.id) {
-      return;
-    }
-    this.setState({ [e.target.parentElement.parentElement.id]: value }, () => {
+  handleSelectChange(e, { id, value }) {
+    this.setState({ [id]: value }, () => {
       this.props.updateReceipt(this.state);
     });
   }
-  handleChange(input, value) {
-    this.setState({ [input]: value }, () => {
+  handleDropDownChange(e, { id, text }) {
+    this.setState({ [id]: text }, () => {
       this.props.updateReceipt(this.state);
     });
   }
+  // handleChange(input, value) {
+  //   this.setState({ [input]: value }, () => {
+  //     this.props.updateReceipt(this.state);
+  //   });
+  // }
   render() {
 
     if (this.props.activeStep !== 'caseHandling') {
@@ -91,8 +80,8 @@ class CaseFees extends Component {
           </Form.Field>
           <Form.Field>
             <Input
-              iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-              onChange={e => this.handleChange('amount', e.target.value)} defaultValue={this.state.amount}>
+              iconPosition='left' placeholder='Amount'  type='number'
+              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, this.props)} defaultValue={this.state.amount}>
               <Icon name='dollar' />
               <input />
             </Input>

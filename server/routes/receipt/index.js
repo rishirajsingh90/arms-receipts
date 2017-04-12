@@ -9,3 +9,11 @@ exports.get = function() {
       return result.rows;
     });
 };
+
+exports.add = function() {
+
+};
+
+function addCaseFee() {
+  
+}
