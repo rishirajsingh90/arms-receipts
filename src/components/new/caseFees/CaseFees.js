@@ -22,12 +22,12 @@ class CaseFees extends Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.test = companies;
+      this.setState({companies: companies});
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.props.countries = countries;
+      this.setState({countries: countries});
     });
   }
   handleSelectChange(e, { value }) {
@@ -70,8 +70,8 @@ class CaseFees extends Component {
           <label>Company Name</label>
           <Form.Field>
             <Dropdown
-              id='companyName'
-              options={this.test}
+              id='company'
+              options={this.state.companies}
               floating labeled button className='icon'
               placeholder='Select Company'
               onChange={this.handleDropDownChange}
@@ -115,10 +115,11 @@ class CaseFees extends Component {
           <Form.Field>
             <Dropdown
               id="country"
-              options={this.props.countries}
+              options={this.state.countries}
               floating labeled button className='icon'
               placeholder='Select Country'
-              onChange={this.handleDropDownChange} />
+              onChange={this.handleDropDownChange}
+              defaultValue={this.state.country} />
           </Form.Field>
         </Form.Group>
       </div>
@@ -127,7 +128,7 @@ class CaseFees extends Component {
 }
 
 CaseFees.propTypes = {
-  updateReceipt: React.PropTypes.func
+  updateReceipt: PropTypes.func
 };
 
 export default CaseFees;

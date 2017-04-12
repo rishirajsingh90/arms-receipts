@@ -50,7 +50,7 @@ class CreateReceiptSteps extends Component {
   }
 }
 CreateReceiptSteps.propTypes = {
-  setStep: React.PropTypes.func
+  setStep: PropTypes.func
 };
 
 export default CreateReceiptSteps;
