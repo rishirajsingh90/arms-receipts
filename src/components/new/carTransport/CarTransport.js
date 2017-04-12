@@ -13,14 +13,10 @@ class CarTransport extends Component {
     this.handleEndDate = this.handleEndDate.bind(this);
   }
   handleStartDate(date) {
-    this.setState({ startDate: date }, () => {
-      this.props.updateReceipt(this.state);
-    });
+    ReceiptHandler.handleStartDate(date, this);
   }
   handleEndDate(date) {
-    this.setState({ endDate: date }, () => {
-      this.props.updateReceipt(this.state);
-    });
+    ReceiptHandler.handleEndDate(date, this);
   }
   handleChange(input, value) {
     this.setState({ [input]: value }, () => {
@@ -96,5 +92,9 @@ class CarTransport extends Component {
     );
   }
 }
+
+CarTransport.propTypes = {
+  updateReceipt: React.PropTypes.func
+};
 
 export default CarTransport;

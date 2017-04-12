@@ -1,46 +1,41 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
+import ReceiptHandler from '../../common/ReceiptHandler';
 
 class AircraftCharter extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       activeStep: null
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
-  handleSelectChange(e, { value }) {
+
+  handleSelectChange(e, {value}) {
     if (!e.target.parentElement.id) {
       return;
     }
     if (e.target.parentElement.id.includes('aircraftType')) {
-      this.setState({ aircraftType: value }, () => {
+      this.setState({aircraftType: value}, () => {
         this.props.updateReceipt(this.state);
       });
     }
   }
+
   handleStartDate(date) {
-    this.setState({ startDate: date }, () => {
-      this.props.updateReceipt(this.state);
-    });
+    ReceiptHandler.handleStartDate(date, this);
   }
+
   handleEndDate(date) {
-    this.setState({ endDate: date }, () => {
-      this.props.updateReceipt(this.state);
-    });
+    ReceiptHandler.handleEndDate(date, this);
   }
-  handleChange(input, value) {
-    this.setState({ [input]: value }, () => {
-      this.props.updateReceipt(this.state);
-    });
-  }
+
   render() {
 
-    const { aircraftType } = this.state;
+    const {aircraftType} = this.state;
 
     if (this.props.activeStep !== "aircraftCharter") {
       return null;
@@ -52,27 +47,32 @@ class AircraftCharter extends Component {
           <label>Service Provider</label>
           <Form.Field>
             <Input
-              placeholder="Provider" onChange={e => this.handleChange('provider', e.target.value)} defaultValue={this.state.provider} />
+              placeholder="Provider" onChange={e => ReceiptHandler.handleChange('provider', e.target.value, this)}
+              defaultValue={this.state.provider}/>
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <label>Aircraft Type</label>
           <Form.Field>
-            <Form.Radio id="aircraftTypeJet" label='Jet' value='jet' checked={aircraftType === 'jet'} onChange={this.handleSelectChange} />
+            <Form.Radio id="aircraftTypeJet" label='Jet' value='jet' checked={aircraftType === 'jet'}
+                        onChange={this.handleSelectChange}/>
           </Form.Field>
           <Form.Field>
-            <Form.Radio id="aircraftTypeTurboprop" label='Turboprop' value='turboprop' checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange} />
+            <Form.Radio id="aircraftTypeTurboprop" label='Turboprop' value='turboprop'
+                        checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange}/>
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <label>City</label>
           <Form.Field>
             <Input
-              placeholder="From" onChange={e => this.handleChange('fromCity', e.target.value)} defaultValue={this.state.fromCity} />
+              placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+              defaultValue={this.state.fromCity}/>
           </Form.Field>
           <Form.Field>
             <Input
-              placeholder="To" onChange={e => this.handleChange('toCity', e.target.value)} defaultValue={this.state.toCity} />
+              placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+              defaultValue={this.state.toCity}/>
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -80,7 +80,8 @@ class AircraftCharter extends Component {
           <Form.Field>
             <Input
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
-              onChange={e => this.handleChange('flyingTime', e.target.value)} defaultValue={this.state.flyingTime} />
+              onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
+              defaultValue={this.state.flyingTime}/>
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -90,23 +91,24 @@ class AircraftCharter extends Component {
               placeholderText="Start Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.startDate}
-              onChange={this.handleStartDate} />
+              onChange={this.handleStartDate}/>
           </Form.Field>
           <Form.Field>
             <DatePicker
               placeholderText="End Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.endDate}
-              onChange={this.handleEndDate} />
+              onChange={this.handleEndDate}/>
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <Form.Field>
             <label>Amount</label>
             <Input
-              iconPosition="left" placeholder="Amount" type="number" onChange={e => this.handleChange('amount', e.target.value)}
+              iconPosition="left" placeholder="Amount" type="number"
+              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
               defaultValue={this.state.amount}>
-              <Icon name="dollar" />
+              <Icon name="dollar"/>
               <input />
             </Input>
           </Form.Field>
@@ -115,5 +117,9 @@ class AircraftCharter extends Component {
     );
   }
 }
+
+AircraftCharter.propTypes = {
+  updateReceipt: React.PropTypes.func
+};
 
 export default AircraftCharter;

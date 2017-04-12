@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
-import PropTypes from 'prop-types';
 
 class CaseFees extends Component {
   constructor (props) {
@@ -128,7 +127,7 @@ class CaseFees extends Component {
 }
 
 CaseFees.propTypes = {
-  updateReceipt: PropTypes.func
+  updateReceipt: React.PropTypes.func
 };
 
 export default CaseFees;
