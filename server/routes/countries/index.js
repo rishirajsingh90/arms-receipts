@@ -10,6 +10,7 @@ exports.get = function() {
       return _.map(result.rows, function (row) {
         return {
           key: row.id,
+          value: row.value,
           text: row.value
         };
       });

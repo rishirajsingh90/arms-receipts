@@ -26,8 +26,8 @@ class CaseFees extends Component {
       this.setState({countries: countries});
     });
   }
-  handleDropDownChange(e, { id, value }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
+  handleDropDownChange(e, { id, value, options }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
   }
   handleSelectChange(e, { name, value, checked}) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
@@ -50,7 +50,7 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Company'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.company} />
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.company, this.state.companies)} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -94,7 +94,7 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Country'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.country} />
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.country, this.state.countries)} />
           </Form.Field>
         </Form.Group>
       </div>
