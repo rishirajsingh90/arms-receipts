@@ -11,7 +11,6 @@ class NewReceipt extends Component {
   constructor() {
     super();
     this.state = {
-      activeStep: null,
       caseFees: {},
       carTransport: {},
       airlineTickets: {},

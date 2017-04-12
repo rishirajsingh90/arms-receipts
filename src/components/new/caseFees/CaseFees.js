@@ -6,9 +6,7 @@ import ReceiptHandler from '../../common/ReceiptHandler';
 class CaseFees extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      value: null
-    };
+    this.state = {};
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
