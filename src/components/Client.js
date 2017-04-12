@@ -2,7 +2,10 @@
 function search(query, cb) {
   query = query ? query : "";
   return fetch(`api/receipt?q=${query}`, {
-    accept: 'application/json',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
   }).then(checkStatus)
     .then(parseJSON)
     .then(cb);
@@ -10,7 +13,6 @@ function search(query, cb) {
 
 function getCompanies(cb) {
   return fetch(`api/companies`, {
-    accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON)
     .then(cb);
@@ -18,7 +20,23 @@ function getCompanies(cb) {
 
 function getCountries(cb) {
   return fetch(`api/countries`, {
-    accept: 'application/json',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function addReceipt(receipt, cb) {
+  return fetch(`api/receipt`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(receipt)
   }).then(checkStatus)
     .then(parseJSON)
     .then(cb);
@@ -40,5 +58,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getCompanies, getCountries };
+const Client = { search, getCompanies, getCountries, addReceipt };
 export default Client;

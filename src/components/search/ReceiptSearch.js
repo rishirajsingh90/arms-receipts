@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Client from '../Client';
 
 const MATCHING_ITEM_LIMIT = 25;
-class ReceiptSearch extends React.Component {
+class ReceiptSearch extends Component {
   constructor() {
     this.state = {
       receipts: [],

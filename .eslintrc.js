@@ -150,7 +150,6 @@ module.exports = {
     'valid-typeof': 'warn',
 
     'react/jsx-boolean-value': 'warn',
-    'react/jsx-closing-bracket-location': 'warn',
     'react/jsx-curly-spacing': 'warn',
     'react/jsx-equals-spacing': ['warn', 'never'],
     'react/jsx-first-prop-new-line': ['warn', 'multiline'],

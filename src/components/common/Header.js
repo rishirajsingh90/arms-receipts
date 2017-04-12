@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
-class Header extends React.Component {
+class Header extends Component {
   constructor() {
     super();
     this.state = {

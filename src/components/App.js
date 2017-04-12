@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './common/Header';
 import { Container } from 'semantic-ui-react';
 import { styles } from './styles';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <div>
