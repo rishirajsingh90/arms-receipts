@@ -13,7 +13,6 @@ class CaseFees extends Component {
       country: '',
       company: ''
     };
-    // this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
@@ -41,11 +40,6 @@ class CaseFees extends Component {
       this.props.updateReceipt(this.state);
     });
   }
-  // handleChange(input, value) {
-  //   this.setState({ [input]: value }, () => {
-  //     this.props.updateReceipt(this.state);
-  //   });
-  // }
   render() {
 
     if (this.props.activeStep !== 'caseHandling') {
