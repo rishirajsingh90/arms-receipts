@@ -11,5 +11,21 @@ function handleChange(input, value, ctx) {
   });
 }
 
+<<<<<<< HEAD
 const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange };
+=======
+function handleStartDate(date, ctx) {
+  ctx.setState({ startDate: date }, () => {
+    ctx.props.updateReceipt(ctx.state);
+  });
+}
+
+function handleEndDate(date, ctx) {
+  ctx.setState({ endDate: date }, () => {
+    ctx.props.updateReceipt(ctx.state);
+  });
+}
+
+const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate };
+>>>>>>> develop
 export default ReceiptHandler;
