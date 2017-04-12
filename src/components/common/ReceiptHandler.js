@@ -1,9 +1,13 @@
-function handleSelectChange(e, { id, value }, ctx) {
-  return ctx.setState({ [id]: value });
+function handleSelectChange(e, { name, value, checked }, ctx) {
+  ctx.setState({ [name]: value ? value : checked }, () => {
+    ctx.props.updateReceipt(ctx.state);
+  });
 }
 
-function handleDropDownChange(e, { id, text }, ctx) {
-  return ctx.setState({ [id]: text });
+function handleDropDownChange(e, { id, value  }, ctx) {
+  return ctx.setState({ [id]: value }, () => {
+    ctx.props.updateReceipt(ctx.state);
+  });
 }
 function handleChange(input, value, ctx) {
   ctx.setState({ [input]: value }, () => {

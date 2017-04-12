@@ -14,15 +14,8 @@ class AircraftCharter extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
-  handleSelectChange(e, {value}) {
-    if (!e.target.parentElement.id) {
-      return;
-    }
-    if (e.target.parentElement.id.includes('aircraftType')) {
-      this.setState({aircraftType: value}, () => {
-        this.props.updateReceipt(this.state);
-      });
-    }
+  handleSelectChange(e, { name, value, checked }) {
+    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
   }
 
   handleStartDate(date) {
@@ -54,11 +47,11 @@ class AircraftCharter extends Component {
         <Form.Group inline>
           <label>Aircraft Type</label>
           <Form.Field>
-            <Form.Radio id="aircraftTypeJet" label='Jet' value='jet' checked={aircraftType === 'jet'}
+            <Form.Radio name="aircraftType" label='Jet' value='jet' checked={aircraftType === 'jet'}
                         onChange={this.handleSelectChange}/>
           </Form.Field>
           <Form.Field>
-            <Form.Radio id="aircraftTypeTurboprop" label='Turboprop' value='turboprop'
+            <Form.Radio name="aircraftType" label='Turboprop' value='turboprop'
                         checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange}/>
           </Form.Field>
         </Form.Group>
@@ -102,8 +95,8 @@ class AircraftCharter extends Component {
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
+          <label>Amount</label>
           <Form.Field>
-            <label>Amount</label>
             <Input
               iconPosition="left" placeholder="Amount" type="number"
               onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
