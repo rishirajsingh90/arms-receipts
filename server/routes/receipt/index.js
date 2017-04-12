@@ -11,10 +11,10 @@ exports.get = function() {
 };
 
 exports.add = function(receipt) {
-  addCaseFee(receipt.caseFees);
-  addCarTransport(receipt.carTransport);
+  // addCaseFee(receipt.caseFees);
+  // addCarTransport(receipt.carTransport);
   addAirlineTickets(receipt.airlineTickets);
-  addAirlineCharter(receipt.airlineCharter);
+  addAirlineCharter(receipt.aircraftCharter);
 };
 
 function addCaseFee(caseFees) {
@@ -40,7 +40,7 @@ function addCarTransport(carTransport) {
 function addAirlineTickets(airlineTickets) {
   return db.query('INSERT INTO airline_tickets(airline_id, from_city, to_city, ticket_class, start_date, end_date, amount)' +
     ' VALUES($1, $2, $3, $4, $5, $6, $7)',
-    [airlineTickets.airline, airlineTickets.fromCity, airlineTickets.toCity, airlineTickets.ticketClass,
+    [airlineTickets.provider, airlineTickets.fromCity, airlineTickets.toCity, airlineTickets.flightClass,
       airlineTickets.startDate, airlineTickets.endDate, airlineTickets.amount]).then(function(result, err) {
     if (err) {
       throw err;
@@ -48,11 +48,11 @@ function addAirlineTickets(airlineTickets) {
   });
 }
 
-function addAirlineCharter(airlineCharter) {
+function addAirlineCharter(aircraftCharter) {
   return db.query('INSERT INTO airline_charter(airline_provider_id, aircraft_type, from_city, to_city, flying_time, start_date,' +
     ' end_date, amount)  VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
-    [airlineCharter.airline, airlineCharter.aircraftType, airlineCharter.fromCity, airlineCharter.toCity, airlineCharter.flyingTime,
-      airlineCharter.startDate, airlineCharter.endDate, airlineCharter.amount]).then(function(result, err) {
+    [aircraftCharter.provider, aircraftCharter.aircraftType, aircraftCharter.fromCity, aircraftCharter.toCity, aircraftCharter.flyingTime,
+      aircraftCharter.startDate, aircraftCharter.endDate, aircraftCharter.amount]).then(function(result, err) {
     if (err) {
       throw err;
     }
