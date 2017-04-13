@@ -11,10 +11,12 @@ exports.get = function() {
 };
 
 exports.add = function(receipt) {
-  // addCaseFee(receipt.caseFees);
-  // addCarTransport(receipt.carTransport);
-  addAirlineTickets(receipt.airlineTickets);
-  addAirlineCharter(receipt.aircraftCharter);
+  return [
+    addCaseFee(receipt.caseFees),
+    addCarTransport(receipt.carTransport),
+    addAirlineTickets(receipt.airlineTickets),
+    addAircraftCharter(receipt.aircraftCharter)
+  ];
 };
 
 function addCaseFee(caseFees) {
@@ -48,7 +50,7 @@ function addAirlineTickets(airlineTickets) {
   });
 }
 
-function addAirlineCharter(aircraftCharter) {
+function addAircraftCharter(aircraftCharter) {
   return db.query('INSERT INTO airline_charter(airline_provider_id, aircraft_type, from_city, to_city, flying_time, start_date,' +
     ' end_date, amount)  VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
     [aircraftCharter.provider, aircraftCharter.aircraftType, aircraftCharter.fromCity, aircraftCharter.toCity, aircraftCharter.flyingTime,
