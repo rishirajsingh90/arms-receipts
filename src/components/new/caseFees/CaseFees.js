@@ -65,7 +65,7 @@ class CaseFees extends Component {
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, this.props)} defaultValue={this.state.amount}>
+              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}>
               <Icon name='dollar' />
               <input />
             </Input>
