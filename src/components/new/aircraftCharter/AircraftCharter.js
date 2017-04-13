@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon } from "semantic-ui-react";
+import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
+import Client from '../../Client';
+const _ = require('lodash');
 
 class AircraftCharter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeStep: null
-    };
+    this.state = {};
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
-
+  componentDidMount() {
+    this.getAirlines();
+  }
+  getAirlines() {
+    Client.getAirlines((airlines) => {
+      const charterAirlines = _.filter(airlines, function(airline) { return airline.charter; });
+      this.setState({airlines: charterAirlines});
+    });
+  }
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
   }
@@ -24,6 +33,9 @@ class AircraftCharter extends Component {
 
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
+  }
+  handleDropDownChange(e, { id, value, options }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
   }
 
   render() {
@@ -39,9 +51,13 @@ class AircraftCharter extends Component {
         <Form.Group inline>
           <label>Service Provider</label>
           <Form.Field>
-            <Input
-              placeholder="Provider" onChange={e => ReceiptHandler.handleChange('provider', e.target.value, this)}
-              defaultValue={this.state.provider}/>
+            <Dropdown
+              id='provider'
+              options={this.state.airlines}
+              floating labeled button className='icon'
+              placeholder='Select Airline'
+              onChange={this.handleDropDownChange}
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.provider, this.state.airlines)} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>

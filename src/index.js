@@ -5,7 +5,6 @@ import NewReceipt from './components/new/NewReceipt';
 import ReviewReceipts from './components/review/ReviewReceipts';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import DatePicker from 'react-datepicker/dist/react-datepicker.css';
-const _ = require('lodash');
 
 render(
   // TODO potentially drop this in a routes file

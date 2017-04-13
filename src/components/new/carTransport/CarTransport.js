@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon } from 'semantic-ui-react';
+import { Form, Input, Icon, Dropdown } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import Client from '../../Client';
 
 class CarTransport extends Component {
   constructor (props) {
@@ -11,12 +12,24 @@ class CarTransport extends Component {
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
+    this.handleDropDownChange = this.handleDropDownChange.bind(this);
+  }
+  componentDidMount() {
+    this.getCarProviders();
+  }
+  getCarProviders() {
+    Client.getCarProviders((carProviders) => {
+      this.setState({carProviders: carProviders});
+    });
   }
   handleStartDate(date) {
     ReceiptHandler.handleStartDate(date, this);
   }
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
+  }
+  handleDropDownChange(e, { id, value, options }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
   }
   render() {
 
@@ -29,9 +42,13 @@ class CarTransport extends Component {
         <Form.Group inline>
           <label>Service Provider</label>
           <Form.Field>
-            <Input
-              placeholder='Provider' onChange={e => ReceiptHandler.handleChange('provider', e.target.value, this)}
-              defaultValue={this.state.provider} />
+            <Dropdown
+              id='provider'
+              options={this.state.carProviders}
+              floating labeled button className='icon'
+              placeholder='Select Car Company'
+              onChange={this.handleDropDownChange}
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.provider, this.state.carProviders)} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>

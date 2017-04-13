@@ -2,7 +2,7 @@ const db = require('../../db');
 const _ = require('lodash');
 
 exports.get = function() {
-  return db.query('select * from company', null)
+  return db.query('select * from country', null)
     .then(function (result, err) {
       if (err) {
         throw err;
@@ -10,8 +10,8 @@ exports.get = function() {
       return _.map(result.rows, function (row) {
         return {
           key: row.id,
-          value: row.name,
-          text: row.name
+          value: row.value,
+          text: row.value
         };
       });
     });

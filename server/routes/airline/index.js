@@ -2,8 +2,8 @@ const db = require('../../db');
 const _ = require('lodash');
 
 exports.get = function() {
-  return db.query('select * from company', null)
-    .then(function (result, err) {
+  return db.query('select * from airlines', null)
+    .then(function(result, err) {
       if (err) {
         throw err;
       }
@@ -11,7 +11,8 @@ exports.get = function() {
         return {
           key: row.id,
           value: row.name,
-          text: row.name
+          text: row.name,
+          charter: row.charter
         };
       });
     });

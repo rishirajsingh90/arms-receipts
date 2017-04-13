@@ -29,6 +29,28 @@ function getCountries(cb) {
     .then(cb);
 }
 
+function getCarProviders(cb) {
+  return fetch(`api/car-providers`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function getAirlines(cb) {
+  return fetch(`api/airlines`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function addReceipt(receipt, cb) {
   return fetch(`api/receipt`, {
     method: 'POST',
@@ -58,5 +80,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getCompanies, getCountries, addReceipt };
+const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, addReceipt };
 export default Client;

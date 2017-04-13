@@ -6,9 +6,7 @@ import ReceiptHandler from '../../common/ReceiptHandler';
 class CaseFees extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      value: null
-    };
+    this.state = {};
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
@@ -26,8 +24,8 @@ class CaseFees extends Component {
       this.setState({countries: countries});
     });
   }
-  handleDropDownChange(e, { id, value }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
+  handleDropDownChange(e, { id, value, options }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
   }
   handleSelectChange(e, { name, value, checked}) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
@@ -50,7 +48,7 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Company'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.company} />
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.company, this.state.companies)} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -66,8 +64,8 @@ class CaseFees extends Component {
           </Form.Field>
           <Form.Field>
             <Input
-              iconPosition='left' placeholder='Amount'  type='number'
-              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, this.props)} defaultValue={this.state.amount}>
+              iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
+              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}>
               <Icon name='dollar' />
               <input />
             </Input>
@@ -94,7 +92,7 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Country'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.country} />
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.country, this.state.countries)} />
           </Form.Field>
         </Form.Group>
       </div>
