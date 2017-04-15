@@ -4,7 +4,7 @@
   "description": "An application for ARMS to manage and create receipts.",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha -w src/test/helpers/browser.js src/test/**/*Spec.js",
+    "test": "NODE_ENV=test mocha -w src/test/helpers/browser.js src/test/**/*Spec.js src/test/*Spec.js",
     "start": "node server.js",
     "postinstall": "webpack -p --config webpack.prod.config.js",
     "lint": "eslint src/**",

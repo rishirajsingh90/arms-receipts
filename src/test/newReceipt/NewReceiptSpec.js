@@ -1,13 +1,10 @@
-import {React} from 'react';
-import { mount, shallow } from 'enzyme';
+import React, { Component } from 'react';
 import {expect} from 'chai';
-import Header from '../../components/common/Header';
 
 import {describe, it} from "mocha";
 
-describe('<Header/>', function () {
-  it('should load app on calls to index', function () {
-    const wrapper = shallow(<Header/>);
-    expect(wrapper.find('#newReceipt')).to.be.ok;
+describe('<App/>', function () {
+  it('should load app on calls to index and set the default view to review', function () {
+
   });
 });
