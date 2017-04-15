@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import {describe, it} from "mocha";
 import {expect} from 'chai';
 
-import Header from '../../components/common/Header';
+import Header from '../../client/components/common/Header';
 import { Menu } from 'semantic-ui-react';
 
 let wrapper;

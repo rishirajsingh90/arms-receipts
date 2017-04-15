@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 import {describe, it} from "mocha";
 import {expect} from 'chai';
 
-import App from '../components/App';
-import Header from '../components/common/Header';
+import App from '../client/components/App';
+import Header from '../client/components/common/Header';
 
 let wrapper;
 
