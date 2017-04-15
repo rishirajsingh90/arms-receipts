@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "NODE_ENV=test mocha -w src/test/helpers/browser.js src/test/**/*Spec.js src/test/*Spec.js",
-    "start": "node server.js",
+    "start": "node src/server/server.js",
     "postinstall": "webpack -p --config webpack.prod.config.js",
     "lint": "eslint src/**",
     "lint:watch": "esw -w src/**"

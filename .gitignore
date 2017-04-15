@@ -1,6 +1,6 @@
 node_modules/
 *npm-debug.log
 *.DS_Store
-dist/bundle.js
+public/bundle.js
 .idea/
 *.iml
