@@ -1,4 +1,4 @@
-const db = require('../../db');
+const db = require('../../db/index');
 
 exports.get = function() {
   return db.query('select * from receipt left join person on receipt.creator_id=person.id', null)
