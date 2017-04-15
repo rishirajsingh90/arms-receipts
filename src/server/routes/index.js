@@ -1,9 +1,9 @@
 const express = require('express');
-const receipt = require('./receipt/index');
-const company = require('./company/index');
-const countries = require('./country/index');
-const carProvider = require('./carProvider/index');
-const airline = require('./airline/index');
+const receipt = require('./receipt');
+const company = require('./company');
+const countries = require('./country');
+const carProvider = require('./carProvider');
+const airline = require('./airline');
 const bodyParser = require('body-parser');
 
 const router = express.Router();

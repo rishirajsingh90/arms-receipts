@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const routes = require('./routes/index');
+const routes = require('./routes');
 
 // using webpack-dev-server and middleware in development environment
 if(process.env.NODE_ENV !== 'production') {
