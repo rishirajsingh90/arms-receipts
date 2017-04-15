@@ -22,6 +22,7 @@ class Header extends Component {
       <div>
         <Menu>
           <Menu.Item
+            id='newReceipt'
             active={activeItem === 'new'}
             as={Link}
             name='new'
@@ -35,6 +36,7 @@ class Header extends Component {
           </Menu.Item>
 
           <Menu.Item
+            id='reviewReceipts'
             active={activeItem === 'review'}
             as={Link}
             name='review'
@@ -48,6 +50,7 @@ class Header extends Component {
           </Menu.Item>
 
           <Menu.Item
+            id='findReceipt'
             active={activeItem === 'search'}
             as={Link}
             name='search'
