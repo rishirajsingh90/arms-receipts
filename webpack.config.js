@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    './src/index'
+    './src/client/index'
   ],
   module: {
     loaders: [
@@ -15,12 +15,12 @@ module.exports = {
     extensions: ['', '.js']
   },
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/public'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: '../dist',
+    contentBase: './public',
     hot: true
   },
   plugins: [
