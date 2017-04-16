@@ -12,7 +12,7 @@ before(function() {
   wrapper = mount(<Header />);
 });
 
-describe('<App/> tests', function () {
+describe('<Header/> tests', function () {
   it('Header should display all sub menus', function () {
     expect(wrapper.find(Menu)).to.have.length(1);
     expect(wrapper.find(Menu.Item)).to.have.length(3);

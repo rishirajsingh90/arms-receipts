@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import 'whatwg-fetch';
+
 function search(query, cb) {
   query = query ? query : "";
   return fetch(`api/receipt?q=${query}`, {

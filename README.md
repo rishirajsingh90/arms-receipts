@@ -9,7 +9,7 @@ This product is designed to manage receipts for ARMS. It supports the following 
 **Getting started**
 
 1. Clone the repo via git `git clone git@github.com:rishirajsingh90/arms-receipts.git`
-2. Install and configure Postgres database, the SQL dump file containing all DB schema is checked in. An existing `arms` DB is assumed to exist to create the DB under
+2. Install and configure Postgres database, the SQL dump file containing all DB schema is checked in. An existing `arms` DB is assumed to exist under
 3. Create a file under `./server/config/config.json` with the following format for local development
 ```
 {

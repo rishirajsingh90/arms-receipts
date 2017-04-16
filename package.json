@@ -4,7 +4,7 @@
   "description": "An application for ARMS to manage and create receipts.",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha -w src/test/helpers/browser.js src/test/**/*Spec.js src/test/*Spec.js",
+    "test": "NODE_ENV=test mocha -w --recursive src/test/helpers/browser.js src/test/**",
     "start": "node src/server/server.js",
     "postinstall": "webpack -p --config webpack.prod.config.js",
     "lint": "eslint src/**",
@@ -40,7 +40,8 @@
     "sass-loader": "3.2.3",
     "semantic-ui-react": "0.63.5",
     "style-loader": "0.13.2",
-    "webpack": "1.14.0"
+    "webpack": "1.14.0",
+    "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
     "babel-eslint": "7.2.1",
@@ -51,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
     "eslint-watch": "3.0.1",
+    "fetch-mock": "5.10.0",
     "jsdom": "9.12.0",
     "mocha": "3.2.0",
     "react-addons-test-utils": "15.0.0",
