@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "NODE_ENV=test mocha -w --recursive src/test/helpers/browser.js src/test/**",
-    "start": "node src/server/server.js",
+    "start": "npm run test && npm run lint && node src/server/server.js",
     "postinstall": "webpack -p --config webpack.prod.config.js",
     "lint": "eslint src/**",
     "lint:watch": "esw -w src/**"
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "babel-eslint": "7.2.1",
+    "babel-register": "^6.24.1",
     "chai": "3.5.0",
     "enzyme": "2.8.0",
     "eslint": "3.19.0",
