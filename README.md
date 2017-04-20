@@ -18,4 +18,4 @@ This product is designed to manage receipts for ARMS. It supports the following 
 ```
 4. Navigate to the project and run the following:
     * `npm install`
-    * `npm start:dev` (to run it locally) and `npm start` on prem
+    * `npm start`
