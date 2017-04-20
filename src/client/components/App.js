@@ -5,6 +5,7 @@ import { styles } from './styles';
 
 class App extends Component {
   render() {
+    console.log(this.props.children);
     return (
       <div>
         <Header />
@@ -15,5 +16,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  children: React.PropTypes.object
+};
 
 export default App;

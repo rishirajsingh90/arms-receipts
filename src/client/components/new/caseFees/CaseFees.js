@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import _ from 'lodash';
 
 class CaseFees extends Component {
   constructor (props) {
@@ -16,18 +17,32 @@ class CaseFees extends Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.setState({companies: companies});
+      companies = _.map(companies, function(company) {
+        return {
+          key: company.id,
+          value: company.name,
+          text: company.name,
+        };
+      });
+      this.setState({ companies: companies });
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.setState({countries: countries});
+      countries = _.map(countries , function (country) {
+        return {
+          key: country.id,
+          value: country.name,
+          text: country.value
+        };
+      });
+      this.setState({ countries: countries });
     });
   }
   handleDropDownChange(e, { id, value, options }) {
     ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
   }
-  handleSelectChange(e, { name, value, checked}) {
+  handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
   }
   render() {
@@ -101,7 +116,7 @@ class CaseFees extends Component {
 }
 
 CaseFees.propTypes = {
-  updateReceipt: React.PropTypes.func
+  activeStep: React.PropTypes.string
 };
 
 export default CaseFees;

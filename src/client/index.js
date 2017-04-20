@@ -4,7 +4,6 @@ import App from './components/App';
 import NewReceipt from './components/new/NewReceipt';
 import ReviewReceipts from './components/review/ReviewReceipts';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import DatePicker from 'react-datepicker/dist/react-datepicker.css';
 
 render(
   // TODO potentially drop this in a routes file

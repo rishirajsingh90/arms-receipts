@@ -19,8 +19,17 @@ class AirlineTickets extends Component {
   }
   getAirlines() {
     Client.getAirlines((airlines) => {
-      const charterAirlines = _.filter(airlines, function(airline) { return !airline.charter; });
-      this.setState({airlines: charterAirlines});
+      airlines = _.reduce(airlines, function(result, airline) {
+        if (!airline.charter) {
+          result.push({
+            key: airline.id,
+            value: airline.name,
+            text: airline.name
+          });
+        }
+        return result;
+      }, []);
+      this.setState({ airlines: airlines });
     });
   }
   handleSelectChange(e, { name, value, checked }) {
@@ -117,6 +126,7 @@ class AirlineTickets extends Component {
 }
 
 AirlineTickets.propTypes = {
+  activeStep: React.PropTypes.string,
   updateReceipt: React.PropTypes.func
 };
 

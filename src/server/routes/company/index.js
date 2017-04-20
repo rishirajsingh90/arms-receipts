@@ -1,18 +1,11 @@
 const db = require('../../db');
-const _ = require('lodash');
 
 exports.get = function() {
-  return db.query('select * from company', null)
+  return db.query('select * from company left join company_fees on company.id=company_fees.company_id', null)
     .then(function (result, err) {
       if (err) {
         throw err;
       }
-      return _.map(result.rows, function (row) {
-        return {
-          key: row.id,
-          value: row.name,
-          text: row.name
-        };
-      });
+      return result.rows;
     });
 };

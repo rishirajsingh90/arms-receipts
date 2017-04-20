@@ -3,6 +3,7 @@ import { Form, Input, Icon, Dropdown } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
+import _ from 'lodash';
 
 class CarTransport extends Component {
   constructor (props) {
@@ -19,7 +20,14 @@ class CarTransport extends Component {
   }
   getCarProviders() {
     Client.getCarProviders((carProviders) => {
-      this.setState({carProviders: carProviders});
+      carProviders = _.map(carProviders, function(providers) {
+        return {
+          key: providers.id,
+          value: providers.name,
+          text: providers.name
+        };
+      });
+      this.setState({ carProviders: carProviders });
     });
   }
   handleStartDate(date) {
@@ -106,7 +114,7 @@ class CarTransport extends Component {
 }
 
 CarTransport.propTypes = {
-  updateReceipt: React.PropTypes.func
+  activeStep: React.PropTypes.string
 };
 
 export default CarTransport;
