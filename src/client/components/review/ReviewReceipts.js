@@ -13,7 +13,6 @@ class ReviewReceipts extends Component {
     this.getReceipts();
   }
   getReceipts() {
-    console.log('get receipts');
     Client.search(null, (receipts) => {
       this.setState({ receipts: receipts });
     });
