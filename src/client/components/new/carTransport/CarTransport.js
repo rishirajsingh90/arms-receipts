@@ -3,7 +3,7 @@ import { Form, Input, Icon, Dropdown } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
-import _ from 'lodash';
+import map from 'lodash/map';
 
 class CarTransport extends Component {
   constructor (props) {
@@ -20,7 +20,7 @@ class CarTransport extends Component {
   }
   getCarProviders() {
     Client.getCarProviders((carProviders) => {
-      carProviders = _.map(carProviders, function(providers) {
+      carProviders = map(carProviders, function(providers) {
         return {
           key: providers.id,
           value: providers.name,
