@@ -22,7 +22,7 @@ function addCarTransport(carTransport) {
 }
 
 function addAirlineTickets(airlineTickets) {
-  return db.getClient().collection('airline_tickets').insertOne(airlineTickets);
+  return db.getClient().collection('airline_ticket').insertOne(airlineTickets);
 }
 
 function addAircraftCharter(aircraftCharter) {
