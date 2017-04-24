@@ -1,8 +1,9 @@
-const pg = require('pg');
-const utils = require('../utils/db-utils');
+var client;
 
-const config = utils.getDbConfig();
-const client = new pg.Client(config);
-client.connect();
+exports.setClient = function(dbClient) {
+  client = dbClient;
+};
 
-module.exports = client;
+exports.getClient = function() {
+  return client;
+};

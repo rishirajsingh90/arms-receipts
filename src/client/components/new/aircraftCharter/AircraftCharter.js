@@ -3,7 +3,7 @@ import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
-const _ = require('lodash');
+import reduce from 'lodash/reduce';
 
 class AircraftCharter extends Component {
   constructor(props) {
@@ -19,8 +19,17 @@ class AircraftCharter extends Component {
   }
   getAirlines() {
     Client.getAirlines((airlines) => {
-      const charterAirlines = _.filter(airlines, function(airline) { return airline.charter; });
-      this.setState({airlines: charterAirlines});
+      airlines = reduce(airlines, function(result, airline) {
+        if (airline.charter) {
+          result.push({
+            key: airline._id,
+            value: airline.name,
+            text: airline.name
+          });
+        }
+        return result;
+      }, []);
+      this.setState({ airlines: airlines });
     });
   }
   handleSelectChange(e, { name, value, checked }) {

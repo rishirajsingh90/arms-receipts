@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import map from 'lodash/map';
 
 class CaseFees extends Component {
   constructor (props) {
@@ -16,12 +17,25 @@ class CaseFees extends Component {
   }
   getCompanies() {
     Client.getCompanies((companies) => {
-      this.setState({companies: companies});
+      companies = map(companies, function(company) {
+        company.key = company._id;
+        company.value = company.name;
+        company.text = company.name;
+        return company;
+      });
+      this.setState({ companies: companies });
     });
   }
   getCountries() {
     Client.getCountries((countries) => {
-      this.setState({countries: countries});
+      countries = map(countries , function (country) {
+        return {
+          key: country._id,
+          value: country.name,
+          text: country.value
+        };
+      });
+      this.setState({ countries: countries });
     });
   }
   handleDropDownChange(e, { id, value, options }) {
