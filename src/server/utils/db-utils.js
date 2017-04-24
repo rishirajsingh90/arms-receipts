@@ -5,7 +5,7 @@ const getDbConfig = function() {
       // do stuff
   } catch (ex) {
     // Receive and parse DB URL from env var
-    return process.env.DATABASE_URL;
+    return process.env.MONGODB_URI;
   }
 };
 
