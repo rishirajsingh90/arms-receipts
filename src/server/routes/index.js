@@ -28,7 +28,7 @@ router.get('/api/receipt', (req, res) => {
 
 router.post('/api/receipt', (req, res) => {
   receipt.add(req.body);
-  res.send(200, 'Receipt created with id ');
+  res.status(200).send('Receipt created with id ');
 });
 
 router.get('/api/countries', (req, res) => {
