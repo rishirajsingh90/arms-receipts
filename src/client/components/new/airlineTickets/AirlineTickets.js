@@ -22,7 +22,7 @@ class AirlineTickets extends Component {
       airlines = reduce(airlines, function(result, airline) {
         if (!airline.charter) {
           result.push({
-            key: airline.id,
+            key: airline._id,
             value: airline.name,
             text: airline.name
           });

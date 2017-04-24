@@ -22,7 +22,7 @@ class CarTransport extends Component {
     Client.getCarProviders((carProviders) => {
       carProviders = map(carProviders, function(providers) {
         return {
-          key: providers.id,
+          key: providers._id,
           value: providers.name,
           text: providers.name
         };

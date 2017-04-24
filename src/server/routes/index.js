@@ -13,37 +13,42 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 router.get('/api/companies', (req, res) => {
-  company.get().then(function(response) {
-    res.send(JSON.stringify(response));
+  company.get().toArray(function(err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result));
   });
 });
 
 router.get('/api/receipt', (req, res) => {
-  receipt.get().then(function(response) {
-    res.send(JSON.stringify(response));
+  receipt.get().toArray(function(err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result));
   });
 });
 
 router.post('/api/receipt', (req, res) => {
   receipt.add(req.body);
-  res.send(200, 'Receipt created with id ');
+  res.status(200).send('Receipt created with id ');
 });
 
 router.get('/api/countries', (req, res) => {
-  countries.get().then(function(response) {
-    res.send(JSON.stringify(response));
+  countries.get().toArray(function(err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result));
   });
 });
 
 router.get('/api/car-providers', (req, res) => {
-  carProvider.get().then(function(response) {
-    res.send(JSON.stringify(response));
+  carProvider.get().toArray(function(err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result));
   });
 });
 
 router.get('/api/airlines', (req, res) => {
-  airline.get().then(function(response) {
-    res.send(JSON.stringify(response));
+  airline.get().toArray(function(err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result));
   });
 });
 

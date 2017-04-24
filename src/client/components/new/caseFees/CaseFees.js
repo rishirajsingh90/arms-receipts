@@ -18,7 +18,7 @@ class CaseFees extends Component {
   getCompanies() {
     Client.getCompanies((companies) => {
       companies = map(companies, function(company) {
-        company.key = company.id;
+        company.key = company._id;
         company.value = company.name;
         company.text = company.name;
         return company;
@@ -30,7 +30,7 @@ class CaseFees extends Component {
     Client.getCountries((countries) => {
       countries = map(countries , function (country) {
         return {
-          key: country.id,
+          key: country._id,
           value: country.name,
           text: country.value
         };
