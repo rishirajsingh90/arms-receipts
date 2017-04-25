@@ -1,0 +1,42 @@
+[
+  {
+    "name":"IN",
+    "value":"India"
+  },
+  {
+    "name":"FR",
+    "value":"France"
+  },
+  {
+    "name":"US",
+    "value":"United States of America"
+  },
+  {
+    "name":"UK",
+    "value":"United Kingdom"
+  },
+  {
+    "name":"LK",
+    "value":"Sri Lanka"
+  },
+  {
+    "name":"TH",
+    "value":"Thailand"
+  },
+  {
+    "name":"ES",
+    "value":"Spain"
+  },
+  {
+    "name":"PL",
+    "value":"Portugal"
+  },
+  {
+    "name":"PH",
+    "value":"Philippines"
+  },
+  {
+    "name":"MV",
+    "value":"Maldives"
+  }
+]

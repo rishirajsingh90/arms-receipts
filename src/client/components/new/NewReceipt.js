@@ -7,6 +7,7 @@ import AirlineTickets from './airlineTickets/AirlineTickets';
 import AircraftCharter from './aircraftCharter/AircraftCharter';
 import Client from '../Client';
 import TotalsService from './../../service/TotalsService';
+import { browserHistory } from 'react-router';
 
 class NewReceipt extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class NewReceipt extends Component {
   }
   handleSubmit() {
     Client.addReceipt(TotalsService.getTotals(), (response) => {
-      console.log(response);
+      browserHistory.push('/#/review');
     });
   }
   render() {

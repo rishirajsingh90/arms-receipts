@@ -1,0 +1,42 @@
+[
+  {
+    "name": "American",
+    "charter": false
+  },
+  {
+    "name": "United",
+    "charter": false
+  },
+  {
+    "name": "Emirates",
+    "charter": false
+  },
+  {
+    "name": "Qatar",
+    "charter": false
+  },
+  {
+    "name": "Spirit",
+    "charter": false
+  },
+  {
+    "name": "Thai",
+    "charter": false
+  },
+  {
+    "name": "Charter 1",
+    "charter": true
+  },
+  {
+    "name": "Charter 2",
+    "charter": true
+  },
+  {
+    "name": "Charter 3",
+    "charter": true
+  },
+  {
+    "name": "Charter 4",
+    "charter": true
+  }
+]
