@@ -3,8 +3,7 @@ import TotalsService from '../../service/TotalsService';
 
 function handleSelectChange(e, { name, value, checked }, ctx) {
   ctx.setState({ [name]: value ? value : checked }, () => {
-    updateTotals(ctx.state, ctx.props.activeStep);
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 function getValueFromKey(key, options) {
@@ -20,44 +19,40 @@ function handleDropDownChange(e, { id, value, options  }, ctx) {
     return option.value === value;
   }).key;
   return ctx.setState({ [id]: key }, () => {
-    updateTotals(ctx.state, ctx.props.activeStep);
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 function handleChange(input, value, ctx) {
   ctx.setState({ [input]: value }, () => {
-    updateTotals(ctx.state, ctx.props.activeStep);
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 
 function handleStartDate(date, ctx) {
   ctx.setState({ startDate: date }, () => {
-    updateTotals(ctx.state, ctx.props.activeStep);
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 
 function handleEndDate(date, ctx) {
   ctx.setState({ endDate: date }, () => {
-    updateTotals(ctx.state, ctx.props.activeStep);
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 
-function updateTotals(state, step) {
-  switch(step) {
+function updateTotals(ctx) {
+  switch(ctx.props.activeStep) {
     case "caseHandling":
-      TotalsService.calculateCaseFeeTotals(state);
+      TotalsService.calculateCaseFeeTotals(ctx.state);
       break;
     case "carTransport":
-      TotalsService.calculateCarTransportTotals(state);
+      TotalsService.calculateCarTransportTotals(ctx.state);
       break;
     case "airlineTickets":
-      TotalsService.calculateAirlineTicketTotals(state);
+      TotalsService.calculateAirlineTicketTotals(ctx.state);
       break;
     case "aircraftCharter":
-      TotalsService.calculateAirlineCharterTotals(state);
+      TotalsService.calculateAirlineCharterTotals(ctx.state);
       break;
     default:
       break;

@@ -28,6 +28,9 @@ function calculateCaseFeeTotals(caseFees) {
   const selectedCompany = find(caseFees.companies, function(company) {
     return caseFees.company === company.key;
   });
+  if (!selectedCompany) {
+    return;
+  }
   if (caseFees.caseType === 'simple') {
     caseFeeTotals.type = selectedCompany.simple_fee || 0;
   } else if (caseFees.caseType === 'complex') {
@@ -49,38 +52,32 @@ function calculateCaseFeeTotals(caseFees) {
 }
 
 function calculateCarTransportTotals(carTransport, mileageRate) {
-  carTransportTotals.mileagePrice = mileageRate * carTransport.distance;
-  carTransportTotals.providerRate = carTransport.amount;
-  carTransportTotals.total = carTransportTotals.providerRate + carTransportTotals.mileageRate;
+  carTransportTotals.mileagePrice = mileageRate * carTransport.distance || 0;
+  carTransportTotals.providerRate = carTransport.amount || 0;
+  carTransportTotals.total = carTransportTotals.providerRate + carTransportTotals.mileageRate || 0;
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
-  airlineTicketTotals.ticketPrice = airlineTicket.amount;
-  airlineTicketTotals.total = airlineTicketTotals.ticketPrice;
+  airlineTicketTotals.ticketPrice = airlineTicket.amount || 0;
+  airlineTicketTotals.total = airlineTicketTotals.ticketPrice || 0;
 }
 
 function calculateAirlineCharterTotals(airlineCharter) {
-  airlineCharterTotals.providerRate = airlineCharter.amount;
-  airlineCharterTotals.total = airlineCharterTotals.ticketPrice;
+  airlineCharterTotals.providerRate = airlineCharter.amount || 0;
+  airlineCharterTotals.total = airlineCharterTotals.ticketPrice || 0;
+
 }
 
-function getCaseFeeAmounts() {
-  return caseFeeTotals;
-}
-
-function getCarTransportTotals() {
-  return carTransportTotals;
-}
-
-function getAirlineTicketTotals() {
-  return airlineTicketTotals;
-}
-
-function getAirlineCharterTotals() {
-  return airlineCharterTotals;
+function getTotals() {
+  return {
+    caseFeeTotals: caseFeeTotals,
+    carTransportTotals: carTransportTotals,
+    airlineTicketTotals: airlineTicketTotals,
+    airlineCharterTotals: airlineCharterTotals
+  }
 }
 
 const TotalsService = { calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
-  calculateAirlineCharterTotals, getCaseFeeAmounts, getCarTransportTotals, getAirlineTicketTotals, getAirlineCharterTotals };
+  calculateAirlineCharterTotals, getTotals };
 export default TotalsService;
 

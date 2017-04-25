@@ -68,13 +68,16 @@ class CaseFees extends Component {
         <Form.Group inline>
           <label>Case Type</label>
           <Form.Field>
-            <Form.Radio name='caseType' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange} />
+            <Form.Radio name='caseType' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange}
+                        disabled={!this.state.company} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio name='caseType' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange} />
+            <Form.Radio name='caseType' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange}
+                        disabled={!this.state.company} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio name='caseType' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange} />
+            <Form.Radio name='caseType' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange}
+                        disabled={!this.state.company} />
           </Form.Field>
           <Form.Field>
             <Input
@@ -88,13 +91,16 @@ class CaseFees extends Component {
         <Form.Group inline>
           <label>Details</label>
           <Form.Field>
-            <Checkbox name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation} />
+            <Checkbox name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation}
+                      disabled={!this.state.company} />
           </Form.Field>
           <Form.Field>
-            <Checkbox name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort} />
+            <Checkbox name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort}
+                      disabled={!this.state.company} />
           </Form.Field>
           <Form.Field>
-            <Checkbox name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort} />
+            <Checkbox name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort}
+                      disabled={!this.state.company} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -106,7 +112,8 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Country'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.country, this.state.countries)} />
+              defaultValue={ReceiptHandler.getValueFromKey(this.state.country, this.state.countries)}
+              disabled={!this.state.company} />
           </Form.Field>
         </Form.Group>
       </div>
