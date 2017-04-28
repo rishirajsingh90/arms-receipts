@@ -1,24 +1,24 @@
 [
   {
-    "description" : "Air tickets to Uruguay",
+    "description" : "Receipts for Mutuade",
     "created" : "2017-01-05T06:00:00.000Z",
     "amount" : "$756.32",
     "email" : "rishis@arms.com"
   },
   {
-  "description" : "Air tickets to Uruguay",
+  "description" : "Receipts for IGAS",
   "created" : "2017-01-05T06:00:00.000Z",
   "amount" : "$756.32",
     "email" : "john@arms.com"
   },
   {
-    "description" : "Air tickets to Uruguay",
+    "description" : "Receipt for Aetna",
     "created" : "2017-01-05T06:00:00.000Z",
     "amount" : "$756.32",
     "email" : "jane@arms.com"
   },
   {
-    "description" : "Air tickets to Uruguay",
+    "description" : "Receipt for Blue Cross",
     "created" : "2017-01-05T06:00:00.000Z",
     "amount" : "$756.32",
     "email" : "anrajsingh@arms.com"

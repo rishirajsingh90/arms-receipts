@@ -31,15 +31,15 @@ class CaseFees extends Component {
       countries = map(countries , function (country) {
         return {
           key: country._id,
-          value: country.name,
+          value: country.value,
           text: country.value
         };
       });
       this.setState({ countries: countries });
     });
   }
-  handleDropDownChange(e, { id, value, options }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
+  handleDropDownChange(e, { id, value }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
@@ -62,7 +62,7 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Company'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.company, this.state.companies)} />
+              defaultValue={this.state.company} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -82,7 +82,8 @@ class CaseFees extends Component {
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}>
+              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}
+              pattern="[0-9]*">
               <Icon name='dollar' />
               <input />
             </Input>
@@ -112,7 +113,7 @@ class CaseFees extends Component {
               floating labeled button className='icon'
               placeholder='Select Country'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.country, this.state.countries)}
+              defaultValue={this.state.country}
               disabled={!this.state.company} />
           </Form.Field>
         </Form.Group>

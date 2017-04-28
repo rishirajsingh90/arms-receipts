@@ -1,4 +1,3 @@
-import find from 'lodash/find';
 import TotalsService from '../../service/TotalsService';
 
 function handleSelectChange(e, { name, value, checked }, ctx) {
@@ -6,23 +5,13 @@ function handleSelectChange(e, { name, value, checked }, ctx) {
     updateTotals(ctx);
   });
 }
-function getValueFromKey(key, options) {
-  if (!key || !options) {
-    return;
-  }
-  return find(options, function(option) {
-    return option.key === key;
-  }).value;
-}
-function handleDropDownChange(e, { id, value, options  }, ctx) {
-  const key = find(options, function(option) {
-    return option.value === value;
-  }).key;
-  return ctx.setState({ [id]: key }, () => {
+function handleDropDownChange(e, { id, value }, ctx) {
+  return ctx.setState({ [id]: value }, () => {
     updateTotals(ctx);
   });
 }
 function handleChange(input, value, ctx) {
+  value = value ? parseInt(value, 10) : 0;
   ctx.setState({ [input]: value }, () => {
     updateTotals(ctx);
   });
@@ -46,7 +35,9 @@ function updateTotals(ctx) {
       TotalsService.calculateCaseFeeTotals(ctx.state);
       break;
     case "carTransport":
-      TotalsService.calculateCarTransportTotals(ctx.state);
+      TotalsService.calculateCarTransportTotals(ctx.state, 1.5); // TODO fix this once you add in config,
+                                                                 // also pull out doc/nurse escort fees,
+                                                                 // default to 950 and 650 respectively
       break;
     case "airlineTickets":
       TotalsService.calculateAirlineTicketTotals(ctx.state);
@@ -59,5 +50,5 @@ function updateTotals(ctx) {
   }
 }
 
-const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, getValueFromKey };
+const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate };
 export default ReceiptHandler;

@@ -26,7 +26,7 @@ let airlineCharterTotals = {
 
 function calculateCaseFeeTotals(caseFees) {
   const selectedCompany = find(caseFees.companies, function(company) {
-    return caseFees.company === company.key;
+    return caseFees.company === company.name;
   });
   if (!selectedCompany) {
     return;
@@ -36,7 +36,7 @@ function calculateCaseFeeTotals(caseFees) {
   } else if (caseFees.caseType === 'complex') {
     caseFeeTotals.type = selectedCompany.complex_fee || 0;
   } else {
-    caseFeeTotals.type = selectedCompany.amount || 0;
+    caseFeeTotals.type = caseFees.amount || 0;
   }
   if (caseFees.repatriation) {
     caseFeeTotals.repatriation = selectedCompany.repatriation || 0;
@@ -54,7 +54,7 @@ function calculateCaseFeeTotals(caseFees) {
 function calculateCarTransportTotals(carTransport, mileageRate) {
   carTransportTotals.mileagePrice = mileageRate * carTransport.distance || 0;
   carTransportTotals.providerRate = carTransport.amount || 0;
-  carTransportTotals.total = carTransportTotals.providerRate + carTransportTotals.mileageRate || 0;
+  carTransportTotals.total = carTransportTotals.providerRate + carTransportTotals.mileagePrice || 0;
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
@@ -64,7 +64,7 @@ function calculateAirlineTicketTotals(airlineTicket) {
 
 function calculateAirlineCharterTotals(airlineCharter) {
   airlineCharterTotals.providerRate = airlineCharter.amount || 0;
-  airlineCharterTotals.total = airlineCharterTotals.ticketPrice || 0;
+  airlineCharterTotals.total = airlineCharterTotals.providerRate || 0;
 
 }
 

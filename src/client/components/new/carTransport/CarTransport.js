@@ -36,8 +36,8 @@ class CarTransport extends Component {
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
   }
-  handleDropDownChange(e, { id, value, options }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
+  handleDropDownChange(e, { id, value }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
   render() {
 
@@ -56,7 +56,7 @@ class CarTransport extends Component {
               floating labeled button className='icon'
               placeholder='Select Car Company'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.provider, this.state.carProviders)} />
+              defaultValue={this.state.provider} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -75,7 +75,8 @@ class CarTransport extends Component {
           <Form.Field>
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
-              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance} />
+              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
+              pattern="[0-9]*" />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -102,7 +103,7 @@ class CarTransport extends Component {
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount}>
+              defaultValue={this.state.amount} pattern="[0-9]*">
               <Icon name='dollar' />
               <input />
             </Input>

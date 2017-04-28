@@ -46,8 +46,8 @@ class AirlineTickets extends Component {
       this.props.updateReceipt(this.state);
     });
   }
-  handleDropDownChange(e, { id, value, options }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
+  handleDropDownChange(e, { id, value }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
   render() {
 
@@ -68,7 +68,7 @@ class AirlineTickets extends Component {
               floating labeled button className='icon'
               placeholder='Select Airline'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.provider, this.state.airlines)} />
+              defaultValue={this.state.provider} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -114,7 +114,7 @@ class AirlineTickets extends Component {
             <label>Amount</label>
             <Input
               iconPosition="left" placeholder="Amount" type="number" onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount}>
+              defaultValue={this.state.amount} pattern="[0-9]*">
               <Icon name="dollar" />
               <input />
             </Input>

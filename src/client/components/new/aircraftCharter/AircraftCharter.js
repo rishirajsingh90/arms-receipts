@@ -43,8 +43,8 @@ class AircraftCharter extends Component {
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
   }
-  handleDropDownChange(e, { id, value, options }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
+  handleDropDownChange(e, { id, value }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
 
   render() {
@@ -66,7 +66,7 @@ class AircraftCharter extends Component {
               floating labeled button className='icon'
               placeholder='Select Airline'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.provider, this.state.airlines)} />
+              defaultValue={this.state.provider} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -101,7 +101,7 @@ class AircraftCharter extends Component {
             <Input
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
               onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
-              defaultValue={this.state.flyingTime} />
+              defaultValue={this.state.flyingTime} pattern="[0-9]*" />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -127,7 +127,7 @@ class AircraftCharter extends Component {
             <Input
               iconPosition="left" placeholder="Amount" type="number"
               onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount}>
+              defaultValue={this.state.amount} pattern="[0-9]*">
               <Icon name="dollar" />
               <input />
             </Input>

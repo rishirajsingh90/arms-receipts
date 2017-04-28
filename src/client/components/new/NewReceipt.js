@@ -12,7 +12,9 @@ import { browserHistory } from 'react-router';
 class NewReceipt extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      receiptDescription: ""
+    };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

@@ -35,6 +35,7 @@ function addMockData() {
   client.collection('country').insertMany(countries);
   client.collection('company').insertMany(mockCompany);
   client.collection('company_fees').insertMany(mockCompanyFees);
+  client.collection('car_provider').insertMany(mockCarProvider);
   client.collection('receipt').insertMany(mockReceipt);
 }
 
