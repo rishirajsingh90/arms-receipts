@@ -1,3 +1,4 @@
+"use strict";
 const db = require('../../db');
 
 exports.get = function() {
@@ -5,26 +6,9 @@ exports.get = function() {
 };
 
 exports.add = function(receipt) {
-  return [
-    addCaseFee(receipt.caseFees),
-    addCarTransport(receipt.carTransport),
-    addAirlineTickets(receipt.airlineTickets),
-    addAircraftCharter(receipt.aircraftCharter)
-  ];
+  return addReceipt(receipt);
 };
 
-function addCaseFee(caseFees) {
-  return db.getClient().collection('case_fee').insertOne(caseFees);
-}
-
-function addCarTransport(carTransport) {
-  return db.getClient().collection('car_transport').insertOne(carTransport);
-}
-
-function addAirlineTickets(airlineTickets) {
-  return db.getClient().collection('airline_ticket').insertOne(airlineTickets);
-}
-
-function addAircraftCharter(aircraftCharter) {
-  return db.getClient().collection('aircraft_charter').insertOne(aircraftCharter);
+function addReceipt(receipt) {
+  return db.getClient().collection('receipt').insertOne(receipt);
 }

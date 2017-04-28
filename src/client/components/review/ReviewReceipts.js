@@ -20,6 +20,11 @@ class ReviewReceipts extends Component {
   render() {
     return (
       <div>
+        { this.props.location && this.props.location.receiptCreatedMessage ? <Message
+          success
+          header='Receipt Created'
+          content={this.state.receiptCreatedMessage}
+        /> : null }
         <Header as='h3'>Review Receipts</Header>
         <Table celled>
           <Table.Header>

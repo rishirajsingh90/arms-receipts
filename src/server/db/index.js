@@ -2,11 +2,11 @@ const MongoClient = require('mongodb').MongoClient;
 const dbUtils = require('../utils/db-utils');
 const mongodb = require('mongodb');
 const countries = require('./countries.json');
-const mockAirline = require('./mockAirline.json');
-const mockCarProvider = require('./mockCarProvider.json');
-const mockCompany = require('./mockCompany.json');
-const mockCompanyFees = require('./mockCompanyFees.json');
-const mockReceipt = require('./mockReceipt.json');
+const mockAirline = require('./mocks/airline.json');
+const mockCarProvider = require('./mocks/carProvider.json');
+const mockCompany = require('./mocks/company.json');
+const mockCompanyFees = require('./mocks/companyFees.json');
+const mockReceipt = require('./mocks/receipt.json');
 
 var client;
 

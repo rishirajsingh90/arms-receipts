@@ -22,8 +22,13 @@ class NewReceipt extends Component {
     this.setState({ activeStep: activeStep });
   }
   handleSubmit() {
-    Client.addReceipt(TotalsService.getTotals(), (response) => {
-      browserHistory.push('/#/review');
+    Client.addReceipt(TotalsService.getReceipt(this.state.receiptDescription), (response) => {
+      browserHistory.push({
+        pathName: '/#/review',
+        state: {
+          receiptCreatedMessage: response.message
+        }
+      });
     });
   }
   render() {
