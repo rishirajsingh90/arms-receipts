@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './common/Header';
 import { Container } from 'semantic-ui-react';
 import { styles } from './styles';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class App extends Component {
   render() {
@@ -15,5 +16,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  children: React.PropTypes.object
+};
 
 export default App;

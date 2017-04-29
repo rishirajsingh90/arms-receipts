@@ -43,13 +43,13 @@ class AircraftCharter extends Component {
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
   }
-  handleDropDownChange(e, { id, value, options }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value, options }, this);
+  handleDropDownChange(e, { id, value }) {
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
 
   render() {
 
-    const {aircraftType} = this.state;
+    const { aircraftType } = this.state;
 
     if (this.props.activeStep !== "aircraftCharter") {
       return null;
@@ -66,18 +66,20 @@ class AircraftCharter extends Component {
               floating labeled button className='icon'
               placeholder='Select Airline'
               onChange={this.handleDropDownChange}
-              defaultValue={ReceiptHandler.getValueFromKey(this.state.provider, this.state.airlines)} />
+              defaultValue={this.state.provider} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <label>Aircraft Type</label>
           <Form.Field>
-            <Form.Radio name="aircraftType" label='Jet' value='jet' checked={aircraftType === 'jet'}
-                        onChange={this.handleSelectChange}/>
+            <Form.Radio
+              name="aircraftType" label='Jet' value='jet' checked={aircraftType === 'jet'}
+              onChange={this.handleSelectChange} />
           </Form.Field>
           <Form.Field>
-            <Form.Radio name="aircraftType" label='Turboprop' value='turboprop'
-                        checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange}/>
+            <Form.Radio
+              name="aircraftType" label='Turboprop' value='turboprop'
+              checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -85,12 +87,12 @@ class AircraftCharter extends Component {
           <Form.Field>
             <Input
               placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-              defaultValue={this.state.fromCity}/>
+              defaultValue={this.state.fromCity} />
           </Form.Field>
           <Form.Field>
             <Input
               placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-              defaultValue={this.state.toCity}/>
+              defaultValue={this.state.toCity} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -99,7 +101,7 @@ class AircraftCharter extends Component {
             <Input
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
               onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
-              defaultValue={this.state.flyingTime}/>
+              defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -109,14 +111,14 @@ class AircraftCharter extends Component {
               placeholderText="Start Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.startDate}
-              onChange={this.handleStartDate}/>
+              onChange={this.handleStartDate} />
           </Form.Field>
           <Form.Field>
             <DatePicker
               placeholderText="End Date"
               dateFormat="DD/MM/YYYY"
               selected={this.state.endDate}
-              onChange={this.handleEndDate}/>
+              onChange={this.handleEndDate} />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -125,8 +127,8 @@ class AircraftCharter extends Component {
             <Input
               iconPosition="left" placeholder="Amount" type="number"
               onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount}>
-              <Icon name="dollar"/>
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
+              <Icon name="dollar" />
               <input />
             </Input>
           </Form.Field>
@@ -137,7 +139,7 @@ class AircraftCharter extends Component {
 }
 
 AircraftCharter.propTypes = {
-  updateReceipt: React.PropTypes.func
+  activeStep: React.PropTypes.string
 };
 
 export default AircraftCharter;

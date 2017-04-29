@@ -1,0 +1,26 @@
+[
+  {
+    "description" : "Receipts for Mutuade",
+    "created" : "2017-01-05T06:00:00.000Z",
+    "amount" : "$756.32",
+    "email" : "rishis@arms.com"
+  },
+  {
+  "description" : "Receipts for IGAS",
+  "created" : "2017-01-05T06:00:00.000Z",
+  "amount" : "$1503.43",
+    "email" : "john@arms.com"
+  },
+  {
+    "description" : "Receipt for Aetna",
+    "created" : "2017-01-05T06:00:00.000Z",
+    "amount" : "$9830.23",
+    "email" : "jane@arms.com"
+  },
+  {
+    "description" : "Receipt for Blue Cross",
+    "created" : "2017-01-05T06:00:00.000Z",
+    "amount" : "$11000.23",
+    "email" : "anrajsingh@arms.com"
+  }
+]

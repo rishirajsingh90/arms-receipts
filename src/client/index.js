@@ -3,12 +3,11 @@ import { render } from 'react-dom';
 import App from './components/App';
 import NewReceipt from './components/new/NewReceipt';
 import ReviewReceipts from './components/review/ReviewReceipts';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import DatePicker from 'react-datepicker/dist/react-datepicker.css';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 render(
   // TODO potentially drop this in a routes file
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={ReviewReceipts} />
       <Route path="/review" component={ReviewReceipts} />

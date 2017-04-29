@@ -3,12 +3,11 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
 const routes = require('./routes');
-const MongoClient = require('mongodb').MongoClient;
-const dbUtils = require('./utils/db-utils');
 const db = require('./db');
 
 // using webpack-dev-server and middleware in development environment
 if(process.env.NODE_ENV !== 'production') {
+  process.env.NODE_ENV = 'dev';
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const webpack = require('webpack');
@@ -19,22 +18,22 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler));
 }
 
+console.log('Environment set to ' + process.env.NODE_ENV);
+
 app.use(express.static(path.join(__dirname, '../../public')));
 
-app.get('/', function(request, response) {
+app.use('/api', routes);
+
+app.get('*', function(request, response) {
   response.sendFile('/index.html', {'root': './public'})
 });
 
-// Initialize connection once
-MongoClient.connect(dbUtils.getDbConfig(), function(err, database) {  if(err) throw err;
-  db.setClient(database);
-  app.listen(PORT, function(error) {
-    if (error) {
-      console.error(error);
-    } else {
-      console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
-    }
-  });
-});
+db.connect();
 
-app.use('/', routes);
+app.listen(PORT, function(error) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+  }
+});

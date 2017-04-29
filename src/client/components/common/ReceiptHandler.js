@@ -1,43 +1,54 @@
-const _ = require('lodash');
+import TotalsService from '../../service/TotalsService';
 
 function handleSelectChange(e, { name, value, checked }, ctx) {
   ctx.setState({ [name]: value ? value : checked }, () => {
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
-function getValueFromKey(key, options) {
-  if (!key || !options) {
-    return;
-  }
-  return _.find(options, function(option) {
-    return option.key === key;
-  }).value;
-}
-function handleDropDownChange(e, { id, value, options  }, ctx) {
-  const key = _.find(options, function(option) {
-    return option.value === value;
-  }).key;
-  return ctx.setState({ [id]: key }, () => {
-    ctx.props.updateReceipt(ctx.state);
+function handleDropDownChange(e, { id, value }, ctx) {
+  return ctx.setState({ [id]: value }, () => {
+    updateTotals(ctx);
   });
 }
 function handleChange(input, value, ctx) {
+  value = value ? parseInt(value, 10) : 0;
   ctx.setState({ [input]: value }, () => {
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 
 function handleStartDate(date, ctx) {
   ctx.setState({ startDate: date }, () => {
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 
 function handleEndDate(date, ctx) {
   ctx.setState({ endDate: date }, () => {
-    ctx.props.updateReceipt(ctx.state);
+    updateTotals(ctx);
   });
 }
 
-const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, getValueFromKey };
+function updateTotals(ctx) {
+  switch(ctx.props.activeStep) {
+    case "caseHandling":
+      TotalsService.calculateCaseFeeTotals(ctx.state);
+      break;
+    case "carTransport":
+      TotalsService.calculateCarTransportTotals(ctx.state, 1.5); // TODO fix this once you add in config,
+                                                                 // also pull out doc/nurse escort fees,
+                                                                 // default to 950 and 650 respectively
+      break;
+    case "airlineTickets":
+      TotalsService.calculateAirlineTicketTotals(ctx.state);
+      break;
+    case "aircraftCharter":
+      TotalsService.calculateAirlineCharterTotals(ctx.state);
+      break;
+    default:
+      break;
+  }
+}
+
+const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate };
 export default ReceiptHandler;

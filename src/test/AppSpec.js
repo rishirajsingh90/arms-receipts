@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { mount } from 'enzyme';
 import {describe, it} from "mocha";
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 import App from '../client/components/App';
 import Header from '../client/components/common/Header';

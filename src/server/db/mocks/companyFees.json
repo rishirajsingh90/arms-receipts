@@ -1,0 +1,38 @@
+[
+  {
+    "name" : "Company 1",
+    "simple_fee" : 200,
+    "complex_fee" : 325,
+    "repatriation" : 400,
+    "outside_india" : 350,
+    "doctor_escort" : 950,
+    "nurse_escort" : 650
+  },
+  {
+    "name" : "Company 2",
+    "simple_fee" : 100,
+    "complex_fee" : 325,
+    "repatriation" : 400,
+    "outside_india" : 450,
+    "doctor_escort" : 950,
+    "nurse_escort" : 650
+  },
+  {
+    "name" : "Company 3",
+    "simple_fee" : 250,
+    "complex_fee" : 325,
+    "repatriation" : 400,
+    "outside_india" : 350,
+    "doctor_escort" : 550,
+    "nurse_escort" : 650
+  },
+  {
+    "name" : "Company 4",
+    "simple_fee" : 200,
+    "complex_fee" : 325,
+    "repatriation" : 200,
+    "outside_india" : 350,
+    "doctor_escort" : 750,
+    "nurse_escort" : 650
+  }
+]
