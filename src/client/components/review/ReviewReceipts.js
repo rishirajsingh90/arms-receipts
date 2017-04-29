@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Client from '../Client';
-import { Table, Header } from 'semantic-ui-react';
+import { Table, Header, Message } from 'semantic-ui-react';
+import moment from 'moment';
 
 class ReviewReceipts extends Component {
   constructor() {
@@ -20,10 +21,10 @@ class ReviewReceipts extends Component {
   render() {
     return (
       <div>
-        { this.props.location && this.props.location.receiptCreatedMessage ? <Message
+        { this.props.location.state && this.props.location.state.receiptCreatedMessage ? <Message
           success
           header='Receipt Created'
-          content={this.state.receiptCreatedMessage}
+          content={this.props.location.state.receiptCreatedMessage}
         /> : null }
         <Header as='h3'>Review Receipts</Header>
         <Table celled>
@@ -41,8 +42,8 @@ class ReviewReceipts extends Component {
                 <Table.Row key={idx}>
                   <Table.Cell>{receipt.description}</Table.Cell>
                   <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
-                  <Table.Cell className='right aligned'>{receipt.amount}</Table.Cell>
-                  <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
+                  <Table.Cell className='right aligned'>${receipt.total}</Table.Cell>
+                  <Table.Cell className='right aligned'>{moment(receipt.created).format('DD/MM/YYYY')}</Table.Cell>
                 </Table.Row>
               ))
             }

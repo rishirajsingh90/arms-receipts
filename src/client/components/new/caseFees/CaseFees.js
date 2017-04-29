@@ -83,7 +83,7 @@ class CaseFees extends Component {
             <Input
               iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
               onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}
-              pattern="[0-9]*">
+              pattern="[0-9]*" name='amount'>
               <Icon name='dollar' />
               <input />
             </Input>

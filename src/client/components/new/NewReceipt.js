@@ -13,7 +13,8 @@ class NewReceipt extends Component {
   constructor() {
     super();
     this.state = {
-      receiptDescription: ""
+      receiptDescription: "",
+      isLoading: false
     };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,27 +22,30 @@ class NewReceipt extends Component {
   setStep(activeStep) {
     this.setState({ activeStep: activeStep });
   }
-  handleSubmit() {
-    Client.addReceipt(TotalsService.getReceipt(this.state.receiptDescription), (response) => {
-      browserHistory.push({
-        pathName: '/#/review',
-        state: {
-          receiptCreatedMessage: response.message
-        }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({ isLoading: true }, () => {
+      Client.addReceipt(TotalsService.getReceipt(this.state.receiptDescription)).then(function(response) {
+        browserHistory.push({
+          pathName: 'review',
+          state: {
+            receiptCreatedMessage: response.message
+          }
+        });
       });
     });
   }
   render() {
     return (
       <div>
-        <Form>
+        <Form loading={this.state.isLoading} onSubmit={this.handleSubmit}>
           <CreateReceiptSteps setStep={this.setStep} />
           <Form.Group inline>
             <label>Receipt Description</label>
             <Form.Field>
               <Input
                 placeholder='Receipt Description' type='text' value={this.state.receiptDescription}
-                onChange={e => this.setState({ receiptDescription: e.target.value })}>
+                onChange={e => this.setState({ receiptDescription: e.target.value })} name='description'>
               </Input>
             </Form.Field>
           </Form.Group>
@@ -49,7 +53,7 @@ class NewReceipt extends Component {
           <CarTransport activeStep={this.state.activeStep} />
           <AirlineTickets activeStep={this.state.activeStep} />
           <AircraftCharter activeStep={this.state.activeStep} />
-          <Button type='submit' onClick={this.handleSubmit}>Create receipt</Button>
+          <Form.Button content='Create receipt' />
         </Form>
       </div>
     );

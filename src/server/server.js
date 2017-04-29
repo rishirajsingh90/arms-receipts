@@ -7,6 +7,7 @@ const db = require('./db');
 
 // using webpack-dev-server and middleware in development environment
 if(process.env.NODE_ENV !== 'production') {
+  process.env.NODE_ENV = 'dev';
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const webpack = require('webpack');
@@ -17,9 +18,13 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler));
 }
 
+console.log('Environment set to ' + process.env.NODE_ENV);
+
 app.use(express.static(path.join(__dirname, '../../public')));
 
-app.get('/', function(request, response) {
+app.use('/api', routes);
+
+app.get('*', function(request, response) {
   response.sendFile('/index.html', {'root': './public'})
 });
 
@@ -32,5 +37,3 @@ app.listen(PORT, function(error) {
     console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   }
 });
-
-app.use('/', routes);

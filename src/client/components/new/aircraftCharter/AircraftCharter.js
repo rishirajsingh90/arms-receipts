@@ -101,7 +101,7 @@ class AircraftCharter extends Component {
             <Input
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
               onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
-              defaultValue={this.state.flyingTime} pattern="[0-9]*" />
+              defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' />
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
@@ -127,7 +127,7 @@ class AircraftCharter extends Component {
             <Input
               iconPosition="left" placeholder="Amount" type="number"
               onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*">
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
               <Icon name="dollar" />
               <input />
             </Input>

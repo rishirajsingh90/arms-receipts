@@ -12,21 +12,21 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-router.get('/api/companies', (req, res) => {
+router.get('/companies', (req, res) => {
   company.get().toArray(function(err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result));
   });
 });
 
-router.get('/api/receipt', (req, res) => {
+router.get('/receipt', (req, res) => {
   receipt.get().toArray(function(err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result));
   });
 });
 
-router.post('/api/receipt', (req, res) => {
+router.post('/receipt', (req, res) => {
   receipt.add(req.body).then(function(response) {
     res.status(200).send(JSON.stringify({
       message: 'Receipt created with id ' + response.insertedId.toHexString()
@@ -34,21 +34,21 @@ router.post('/api/receipt', (req, res) => {
   });
 });
 
-router.get('/api/countries', (req, res) => {
+router.get('/countries', (req, res) => {
   countries.get().toArray(function(err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result));
   });
 });
 
-router.get('/api/car-providers', (req, res) => {
+router.get('/car-providers', (req, res) => {
   carProvider.get().toArray(function(err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result));
   });
 });
 
-router.get('/api/airlines', (req, res) => {
+router.get('/airlines', (req, res) => {
   airline.get().toArray(function(err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result));

@@ -78,7 +78,9 @@ function getReceipt(description) {
     caseFee: caseFeeTotals,
     carTransport: carTransportTotals,
     airlineTicket: airlineTicketTotals,
-    airlineCharter: airlineCharterTotals
+    airlineCharter: airlineCharterTotals,
+    total: caseFeeTotals.total + carTransportTotals.total + airlineTicketTotals.total + airlineCharterTotals.total,
+    email: 'rishis@arms.com' // TODO fix this
   };
 }
 

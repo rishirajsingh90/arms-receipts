@@ -103,7 +103,7 @@ class CarTransport extends Component {
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*">
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
               <Icon name='dollar' />
               <input />
             </Input>
