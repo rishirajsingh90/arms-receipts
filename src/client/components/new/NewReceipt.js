@@ -38,7 +38,7 @@ class NewReceipt extends Component {
   render() {
     return (
       <div>
-        <Form loading={this.state.isLoading} onSubmit={this.handleSubmit}>
+        <Form class="ui form" loading={this.state.isLoading} onSubmit={this.handleSubmit}>
           <CreateReceiptSteps setStep={this.setStep} />
           <Form.Group inline>
             <label>Receipt Description</label>
