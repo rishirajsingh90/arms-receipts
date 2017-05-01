@@ -14,14 +14,18 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 router.get('/companies', (req, res) => {
   company.get().toArray(function(err, result) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
     res.send(JSON.stringify(result));
   });
 });
 
 router.get('/receipt', (req, res) => {
   receipt.get().toArray(function(err, result) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
     res.send(JSON.stringify(result));
   });
 });
@@ -36,21 +40,27 @@ router.post('/receipt', (req, res) => {
 
 router.get('/countries', (req, res) => {
   countries.get().toArray(function(err, result) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
     res.send(JSON.stringify(result));
   });
 });
 
 router.get('/car-providers', (req, res) => {
   carProvider.get().toArray(function(err, result) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
     res.send(JSON.stringify(result));
   });
 });
 
 router.get('/airlines', (req, res) => {
   airline.get().toArray(function(err, result) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
     res.send(JSON.stringify(result));
   });
 });

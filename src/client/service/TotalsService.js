@@ -50,26 +50,26 @@ function calculateCaseFeeTotals(caseFees) {
   }
   caseFeeTotals.total = caseFeeTotals.type + caseFeeTotals.repatriation +
     caseFeeTotals.doctorEscort + caseFeeTotals.nurseEscort || 0;
-  caseFeeTotals = update(caseFees, {$merge: caseFeeTotals});
+  caseFeeTotals = update(caseFees, { $merge: caseFeeTotals });
 }
 
 function calculateCarTransportTotals(carTransport, mileageRate) {
   carTransportTotals.mileagePrice = mileageRate * carTransport.distance || 0;
   carTransportTotals.providerRate = carTransport.amount || 0;
   carTransportTotals.total = carTransportTotals.providerRate + carTransportTotals.mileagePrice || 0;
-  carTransportTotals = update(carTransport, {$merge: carTransportTotals});
+  carTransportTotals = update(carTransport, { $merge: carTransportTotals });
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
   airlineTicketTotals.ticketPrice = airlineTicket.amount || 0;
   airlineTicketTotals.total = airlineTicketTotals.ticketPrice || 0;
-  airlineTicketTotals = update(airlineTicket, {$merge: airlineTicketTotals});
+  airlineTicketTotals = update(airlineTicket, { $merge: airlineTicketTotals });
 }
 
 function calculateAirlineCharterTotals(airlineCharter) {
   airlineCharterTotals.providerRate = airlineCharter.amount || 0;
   airlineCharterTotals.total = airlineCharterTotals.providerRate || 0;
-  airlineCharterTotals = update(airlineCharter, {$merge: airlineCharterTotals});
+  airlineCharterTotals = update(airlineCharter, { $merge: airlineCharterTotals });
 }
 
 function getReceipt(description) {

@@ -49,46 +49,48 @@ class CarTransport extends Component {
       <div>
         <h4>Service Provider</h4>
         <Form.Group widths="equal">
-            <Dropdown
-              id='provider'
-              options={this.state.carProviders}
-              fluid labeled search selection className='icon'
-              placeholder='Select Car Company'
-              onChange={this.handleDropDownChange}
-              defaultValue={this.state.provider}
-              name="provider" />
+          <Dropdown
+            id='provider'
+            options={this.state.carProviders}
+            fluid labeled search selection className='icon'
+            placeholder='Select Car Company'
+            onChange={this.handleDropDownChange}
+            defaultValue={this.state.provider}
+            name="provider" />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
-          <Form.Field placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-                      defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" />
-          <Form.Field placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-              defaultValue={this.state.toCity} label="To" control={Input} name="toCity" />
+          <Form.Field
+            placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" />
+          <Form.Field
+            placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
-            <Form.Field
-              name='startDate'
-              placeholderText='Start Date'
-              dateFormat='DD/MM/YYYY'
-              selected={this.state.startDate}
-              onChange={this.handleStartDate}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              selectsStart
-              control={DatePicker}
-              label="Start" />
-            <Form.Field
-              name='endDate'
-              placeholderText='End Date'
-              dateFormat='DD/MM/YYYY'
-              selected={this.state.endDate}
-              onChange={this.handleEndDate}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              selectsEnd
-              control={DatePicker}
-              label="End" />
+          <Form.Field
+            name='startDate'
+            placeholderText='Start Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.startDate}
+            onChange={this.handleStartDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsStart
+            control={DatePicker}
+            label="Start" />
+          <Form.Field
+            name='endDate'
+            placeholderText='End Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.endDate}
+            onChange={this.handleEndDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsEnd
+            control={DatePicker}
+            label="End" />
         </Form.Group>
         <h4>Transport Information</h4>
         <Form.Group widths="equal">

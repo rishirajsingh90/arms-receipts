@@ -43,9 +43,9 @@ class NewReceipt extends Component {
           <h4>Receipt Description</h4>
           <Form.Group widths="equal">
             <Form.Input
-                placeholder='Receipt Description' type='text'
-                value={this.state.receiptDescription} onChange={e => this.setState({ receiptDescription: e.target.value })}
-                name='description'>
+              placeholder='Receipt Description' type='text'
+              value={this.state.receiptDescription} onChange={e => this.setState({ receiptDescription: e.target.value })}
+              name='description'>
             </Form.Input>
           </Form.Group>
           <Divider />

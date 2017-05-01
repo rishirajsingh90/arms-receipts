@@ -6,7 +6,7 @@ const routes = require('./routes');
 const db = require('./db');
 
 // using webpack-dev-server and middleware in development environment
-if(process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   process.env.NODE_ENV = 'dev';
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, '../../public')));
 app.use('/api', routes);
 
 app.get('*', function(request, response) {
-  response.sendFile('/index.html', {'root': './public'})
+  response.sendFile('/index.html', { 'root': './public' });
 });
 
 db.connect();

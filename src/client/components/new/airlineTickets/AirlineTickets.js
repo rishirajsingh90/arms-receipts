@@ -61,27 +61,29 @@ class AirlineTickets extends Component {
       <div>
         <h4>Service Provider</h4>
         <Form.Group>
-            <Dropdown
-              id='provider'
-              options={this.state.airlines}
-              fluid labeled search selection className='icon'
-              placeholder='Select Airline'
-              onChange={this.handleDropDownChange}
-              defaultValue={this.state.provider}
-              name="provider" />
+          <Dropdown
+            id='provider'
+            options={this.state.airlines}
+            fluid labeled search selection className='icon'
+            placeholder='Select Airline'
+            onChange={this.handleDropDownChange}
+            defaultValue={this.state.provider}
+            name="provider" />
         </Form.Group>
         <h4>Ticket Class</h4>
         <Form.Group>
-            <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
-            <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
-            <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
+          <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
+          <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
+          <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
-          <Form.Field placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-                      defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" />
-          <Form.Field placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-                      defaultValue={this.state.toCity} label="To" control="input" name="toCity" />
+          <Form.Field
+            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" />
+          <Form.Field
+            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+            defaultValue={this.state.toCity} label="To" control="input" name="toCity" />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
