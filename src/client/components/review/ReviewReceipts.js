@@ -54,4 +54,8 @@ class ReviewReceipts extends Component {
   }
 }
 
+ReviewReceipts.propTypes = {
+  location: React.PropTypes.object
+};
+
 export default ReviewReceipts;

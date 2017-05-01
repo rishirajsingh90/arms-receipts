@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Dropdown, Input, Icon, Checkbox } from 'semantic-ui-react';
+import { Form, Dropdown, Icon } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import map from 'lodash/map';
@@ -7,7 +7,10 @@ import map from 'lodash/map';
 class CaseFees extends Component {
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = {
+      companies: [],
+      countries: []
+    };
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
@@ -53,69 +56,56 @@ class CaseFees extends Component {
     const { caseType } = this.state;
     return (
       <div>
-        <Form.Group inline>
-          <label>Company Name</label>
-          <Form.Field>
-            <Dropdown
-              id='company'
-              options={this.state.companies}
-              floating labeled button className='icon'
-              placeholder='Select Company'
-              onChange={this.handleDropDownChange}
-              defaultValue={this.state.company} />
-          </Form.Field>
+        <h4>Company Information</h4>
+        <Form.Group widths="equal">
+          <Dropdown
+            id='company'
+            options={this.state.companies}
+            fluid labeled search selection className='icon'
+            placeholder='Company'
+            onChange={this.handleDropDownChange}
+            defaultValue={this.state.company}
+            name="company" />
+          <Dropdown
+            id="country"
+            options={this.state.countries}
+            fluid labeled search selection className='icon'
+            placeholder='Country'
+            onChange={this.handleDropDownChange}
+            defaultValue={this.state.country}
+            disabled={!this.state.company}
+            name="country" />
         </Form.Group>
-        <Form.Group inline>
-          <label>Case Type</label>
-          <Form.Field>
-            <Form.Radio name='caseType' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange}
-                        disabled={!this.state.company} />
-          </Form.Field>
-          <Form.Field>
-            <Form.Radio name='caseType' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange}
-                        disabled={!this.state.company} />
-          </Form.Field>
-          <Form.Field>
-            <Form.Radio name='caseType' label='Custom' value='custom' checked={caseType === 'custom'} onChange={this.handleSelectChange}
-                        disabled={!this.state.company} />
-          </Form.Field>
-          <Form.Field>
-            <Input
-              iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}
-              pattern="[0-9]*" name='amount'>
-              <Icon name='dollar' />
-              <input />
-            </Input>
-          </Form.Field>
+        <h4>Case Type</h4>
+        <Form.Group>
+          <Form.Radio
+            name='caseType' label='Simple' value='simple' checked={caseType === 'simple'}
+            onChange={this.handleSelectChange} disabled={!this.state.company} />
+          <Form.Radio
+            name='caseType' label='Complex' value='complex' checked={caseType === 'complex'}
+            onChange={this.handleSelectChange} disabled={!this.state.company} />
+          <Form.Radio
+            name='caseType' label='Custom' value='custom' checked={caseType === 'custom'}
+            onChange={this.handleSelectChange} disabled={!this.state.company} />
+          <Form.Input
+            iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
+            onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}
+            pattern="[0-9]*" name='amount'>
+            <Icon name='dollar' />
+            <input />
+          </Form.Input>
         </Form.Group>
-        <Form.Group inline>
-          <label>Details</label>
-          <Form.Field>
-            <Checkbox name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation}
-                      disabled={!this.state.company} />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort}
-                      disabled={!this.state.company} />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort}
-                      disabled={!this.state.company} />
-          </Form.Field>
-        </Form.Group>
-        <Form.Group inline>
-          <label>Insurance Company Country</label>
-          <Form.Field>
-            <Dropdown
-              id="country"
-              options={this.state.countries}
-              floating labeled button className='icon'
-              placeholder='Select Country'
-              onChange={this.handleDropDownChange}
-              defaultValue={this.state.country}
-              disabled={!this.state.company} />
-          </Form.Field>
+        <h4>Case Details</h4>
+        <Form.Group>
+          <Form.Checkbox
+            name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation}
+            disabled={!this.state.company} />
+          <Form.Checkbox
+            name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort}
+            disabled={!this.state.company} />
+          <Form.Checkbox
+            name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort}
+            disabled={!this.state.company} />
         </Form.Group>
       </div>
     );

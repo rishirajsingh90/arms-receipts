@@ -19,7 +19,9 @@ exports.connect = function() {
     const MongoInMemory = require('mongo-in-memory');
     const mongoServerInstance = new MongoInMemory();
     return mongoServerInstance.start((error, config) => {
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
       const uri = mongoServerInstance.getMongouri("arms");
       mongodb.connect(uri, function (error, db) {
         client = db;

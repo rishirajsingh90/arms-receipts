@@ -30,7 +30,7 @@ function handleEndDate(date, ctx) {
 }
 
 function updateTotals(ctx) {
-  switch(ctx.props.activeStep) {
+  switch (ctx.props.activeStep) {
     case "caseHandling":
       TotalsService.calculateCaseFeeTotals(ctx.state);
       break;

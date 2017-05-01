@@ -9,7 +9,7 @@ class CarTransport extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      activeStep: null
+      carProviders: []
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -47,59 +47,59 @@ class CarTransport extends Component {
 
     return (
       <div>
-        <Form.Group inline>
-          <label>Service Provider</label>
-          <Form.Field>
-            <Dropdown
-              id='provider'
-              options={this.state.carProviders}
-              floating labeled button className='icon'
-              placeholder='Select Car Company'
-              onChange={this.handleDropDownChange}
-              defaultValue={this.state.provider} />
-          </Form.Field>
+        <h4>Service Provider</h4>
+        <Form.Group widths="equal">
+          <Dropdown
+            id='provider'
+            options={this.state.carProviders}
+            fluid labeled search selection className='icon'
+            placeholder='Select Car Company'
+            onChange={this.handleDropDownChange}
+            defaultValue={this.state.provider}
+            name="provider" />
         </Form.Group>
-        <Form.Group inline>
-          <label>City</label>
-          <Form.Field>
-            <Input placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)} defaultValue={this.state.fromCity} />
-          </Form.Field>
-          <Form.Field>
-            <Input
-              placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-              defaultValue={this.state.toCity} />
-          </Form.Field>
+        <h4>Cities</h4>
+        <Form.Group widths="equal">
+          <Form.Field
+            placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" />
+          <Form.Field
+            placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" />
         </Form.Group>
-        <Form.Group inline>
-          <label>Distance</label>
+        <h4>Dates</h4>
+        <Form.Group widths="equal">
+          <Form.Field
+            name='startDate'
+            placeholderText='Start Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.startDate}
+            onChange={this.handleStartDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsStart
+            control={DatePicker}
+            label="Start" />
+          <Form.Field
+            name='endDate'
+            placeholderText='End Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.endDate}
+            onChange={this.handleEndDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsEnd
+            control={DatePicker}
+            label="End" />
+        </Form.Group>
+        <h4>Transport Information</h4>
+        <Form.Group widths="equal">
           <Form.Field>
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
               onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
-              pattern="[0-9]*" />
+              pattern="[0-9]*" name="distance" />
           </Form.Field>
-        </Form.Group>
-        <Form.Group inline>
-          <label>Dates</label>
-          <Form.Field>
-            <DatePicker
-              name='startDate'
-              placeholderText='Start Date'
-              dateFormat='DD/MM/YYYY'
-              selected={this.state.startDate}
-              onChange={this.handleStartDate} />
-          </Form.Field>
-          <Form.Field>
-            <DatePicker
-              name='endDate'
-              placeholderText='End Date'
-              dateFormat='DD/MM/YYYY'
-              selected={this.state.endDate}
-              onChange={this.handleEndDate} />
-          </Form.Field>
-        </Form.Group>
-        <Form.Group inline>
-          <label>Amount</label>
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
