@@ -57,72 +57,66 @@ class AircraftCharter extends Component {
 
     return (
       <div>
-        <Form.Group inline>
-          <label>Service Provider</label>
-          <Form.Field>
+        <h4>Service Provider</h4>
+        <Form.Group>
             <Dropdown
               id='provider'
               options={this.state.airlines}
-              floating labeled button className='icon'
+              fluid labeled search selection className='icon'
               placeholder='Select Airline'
               onChange={this.handleDropDownChange}
               defaultValue={this.state.provider} />
-          </Form.Field>
         </Form.Group>
-        <Form.Group inline>
-          <label>Aircraft Type</label>
-          <Form.Field>
+        <h4>Aircraft Type</h4>
+        <Form.Group>
             <Form.Radio
               name="aircraftType" label='Jet' value='jet' checked={aircraftType === 'jet'}
               onChange={this.handleSelectChange} />
-          </Form.Field>
-          <Form.Field>
             <Form.Radio
               name="aircraftType" label='Turboprop' value='turboprop'
               checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange} />
-          </Form.Field>
         </Form.Group>
-        <Form.Group inline>
-          <label>City</label>
-          <Form.Field>
-            <Input
+        <h4>Cities</h4>
+        <Form.Group widths="equal">
+          <Form.Field
               placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-              defaultValue={this.state.fromCity} />
-          </Form.Field>
-          <Form.Field>
-            <Input
+              defaultValue={this.state.fromCity} label="From" control="input" />
+          <Form.Field
               placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-              defaultValue={this.state.toCity} />
-          </Form.Field>
+              defaultValue={this.state.toCity} label="to" control="input" />
         </Form.Group>
-        <Form.Group inline>
-          <label>Flying Time</label>
-          <Form.Field>
-            <Input
-              placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
-              onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
-              defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' />
-          </Form.Field>
+        <h4>Dates</h4>
+        <Form.Group widths="equal">
+          <Form.Field
+            name='startDate'
+            placeholderText='Start Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.startDate}
+            onChange={this.handleStartDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsStart
+            control={DatePicker}
+            label="Start" />
+          <Form.Field
+            name='endDate'
+            placeholderText='End Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.endDate}
+            onChange={this.handleEndDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsEnd
+            control={DatePicker}
+            label="End" />
         </Form.Group>
-        <Form.Group inline>
-          <label>Dates</label>
+        <h4>Charter Information</h4>
+        <Form.Group widths="equal">
           <Form.Field>
-            <DatePicker
-              placeholderText="Start Date"
-              dateFormat="DD/MM/YYYY"
-              selected={this.state.startDate}
-              onChange={this.handleStartDate} />
+            <Input placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
+            onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
+            defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' />
           </Form.Field>
-          <Form.Field>
-            <DatePicker
-              placeholderText="End Date"
-              dateFormat="DD/MM/YYYY"
-              selected={this.state.endDate}
-              onChange={this.handleEndDate} />
-          </Form.Field>
-        </Form.Group>
-        <Form.Group inline>
-          <label>Amount</label>
           <Form.Field>
             <Input
               iconPosition="left" placeholder="Amount" type="number"

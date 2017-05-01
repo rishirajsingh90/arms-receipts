@@ -92,18 +92,18 @@ class CarTransport extends Component {
         <h4>Transport Information</h4>
         <Form.Group widths="equal">
           <Form.Field>
-          <Input
-            placeholder='Distance' type='number' labelPosition='right' label='km'
-            onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
-            pattern="[0-9]*" />
+            <Input
+              placeholder='Distance' type='number' labelPosition='right' label='km'
+              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
+              pattern="[0-9]*" />
           </Form.Field>
           <Form.Field>
-          <Input
-            iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-            defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
-            <Icon name='dollar' />
-            <input />
-          </Input>
+            <Input
+              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
+              <Icon name='dollar' />
+              <input />
+            </Input>
           </Form.Field>
         </Form.Group>
       </div>
