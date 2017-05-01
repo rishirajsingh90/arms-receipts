@@ -62,10 +62,10 @@ class CarTransport extends Component {
         <Form.Group widths="equal">
           <Form.Field
             placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" />
+            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" disabled={!this.state.provider} />
           <Form.Field
             placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" />
+            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -79,7 +79,8 @@ class CarTransport extends Component {
             endDate={this.state.endDate}
             selectsStart
             control={DatePicker}
-            label="Start" />
+            label="Start"
+            disabled={!this.state.provider} />
           <Form.Field
             name='endDate'
             placeholderText='End Date'
@@ -90,7 +91,8 @@ class CarTransport extends Component {
             endDate={this.state.endDate}
             selectsEnd
             control={DatePicker}
-            label="End" />
+            label="End"
+            disabled={!this.state.provider} />
         </Form.Group>
         <h4>Transport Information</h4>
         <Form.Group widths="equal">
@@ -98,12 +100,12 @@ class CarTransport extends Component {
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
               onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
-              pattern="[0-9]*" name="distance" />
+              pattern="[0-9]*" name="distance" disabled={!this.state.provider} />
           </Form.Field>
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount' disabled={!this.state.provider}>
               <Icon name='dollar' />
               <input />
             </Input>

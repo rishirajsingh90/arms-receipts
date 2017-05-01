@@ -72,18 +72,21 @@ class AirlineTickets extends Component {
         </Form.Group>
         <h4>Ticket Class</h4>
         <Form.Group>
-          <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
-          <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
-          <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
+          <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange}
+            disabled={!this.state.provider} />
+          <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange}
+            disabled={!this.state.provider} />
+          <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange}
+            disabled={!this.state.provider} />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
             placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" />
+            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" disabled={!this.state.provider} />
           <Form.Field
             placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-            defaultValue={this.state.toCity} label="To" control="input" name="toCity" />
+            defaultValue={this.state.toCity} label="To" control="input" name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -97,7 +100,8 @@ class AirlineTickets extends Component {
             endDate={this.state.endDate}
             selectsStart
             control={DatePicker}
-            label="Start" />
+            label="Start"
+            disabled={!this.state.provider} />
           <Form.Field
             name='endDate'
             placeholderText='End Date'
@@ -108,14 +112,15 @@ class AirlineTickets extends Component {
             endDate={this.state.endDate}
             selectsEnd
             control={DatePicker}
-            label="End" />
+            label="End"
+            disabled={!this.state.provider} />
         </Form.Group>
         <h4>Travel Information</h4>
         <Form.Group widths="equal">
           <Form.Field>
             <Input
               iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount' disabled={!this.state.provider}>
               <Icon name='dollar' />
               <input />
             </Input>

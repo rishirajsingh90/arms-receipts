@@ -45,7 +45,7 @@ class NewReceipt extends Component {
             <Form.Input
               placeholder='Receipt Description' type='text'
               value={this.state.receiptDescription} onChange={e => this.setState({ receiptDescription: e.target.value })}
-              name='description'>
+              name='description' error={!this.state.receiptDescription}>
             </Form.Input>
           </Form.Group>
           <Divider />
