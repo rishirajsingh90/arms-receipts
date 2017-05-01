@@ -55,14 +55,15 @@ class CarTransport extends Component {
               fluid labeled search selection className='icon'
               placeholder='Select Car Company'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.provider} />
+              defaultValue={this.state.provider}
+              name="provider" />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-                      defaultValue={this.state.fromCity} label="From" control={Input} />
+                      defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" />
           <Form.Field placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-              defaultValue={this.state.toCity} label="To" control={Input} />
+              defaultValue={this.state.toCity} label="To" control={Input} name="toCity" />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -95,7 +96,7 @@ class CarTransport extends Component {
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
               onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
-              pattern="[0-9]*" />
+              pattern="[0-9]*" name="distance" />
           </Form.Field>
           <Form.Field>
             <Input

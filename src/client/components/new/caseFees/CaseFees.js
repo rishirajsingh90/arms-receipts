@@ -64,7 +64,8 @@ class CaseFees extends Component {
               fluid labeled search selection className='icon'
               placeholder='Company'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.company} />
+              defaultValue={this.state.company}
+              name="company" />
           <Dropdown
             id="country"
             options={this.state.countries}
@@ -72,7 +73,8 @@ class CaseFees extends Component {
             placeholder='Country'
             onChange={this.handleDropDownChange}
             defaultValue={this.state.country}
-            disabled={!this.state.company} />
+            disabled={!this.state.company}
+            name="country" />
         </Form.Group>
         <h4>Case Type</h4>
         <Form.Group>

@@ -67,7 +67,8 @@ class AirlineTickets extends Component {
               fluid labeled search selection className='icon'
               placeholder='Select Airline'
               onChange={this.handleDropDownChange}
-              defaultValue={this.state.provider} />
+              defaultValue={this.state.provider}
+              name="provider" />
         </Form.Group>
         <h4>Ticket Class</h4>
         <Form.Group>
@@ -78,9 +79,9 @@ class AirlineTickets extends Component {
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-                      defaultValue={this.state.fromCity} label="From" control="input" />
+                      defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" />
           <Form.Field placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-                      defaultValue={this.state.toCity} label="To" control="input" />
+                      defaultValue={this.state.toCity} label="To" control="input" name="toCity" />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
