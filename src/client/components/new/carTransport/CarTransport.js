@@ -4,12 +4,13 @@ import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
+import { styles } from '../../styles';
 
 class CarTransport extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      activeStep: null
+      carProviders: []
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -47,66 +48,63 @@ class CarTransport extends Component {
 
     return (
       <div>
-        <Form.Group inline>
-          <label>Service Provider</label>
-          <Form.Field>
+        <h4>Service Provider</h4>
+        <Form.Group widths="equal">
             <Dropdown
               id='provider'
               options={this.state.carProviders}
-              floating labeled button className='icon'
+              fluid labeled search selection className='icon'
               placeholder='Select Car Company'
               onChange={this.handleDropDownChange}
               defaultValue={this.state.provider} />
-          </Form.Field>
         </Form.Group>
-        <Form.Group inline>
-          <label>City</label>
-          <Form.Field>
-            <Input placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)} defaultValue={this.state.fromCity} />
-          </Form.Field>
-          <Form.Field>
-            <Input
-              placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-              defaultValue={this.state.toCity} />
-          </Form.Field>
+        <h4>Cities</h4>
+        <Form.Group widths="equal">
+          <Form.Field placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+                      defaultValue={this.state.fromCity} label="From" control={Input} />
+          <Form.Field placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+              defaultValue={this.state.toCity} label="To" control={Input} />
         </Form.Group>
-        <Form.Group inline>
-          <label>Distance</label>
-          <Form.Field>
-            <Input
-              placeholder='Distance' type='number' labelPosition='right' label='km'
-              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
-              pattern="[0-9]*" />
-          </Form.Field>
-        </Form.Group>
-        <Form.Group inline>
-          <label>Dates</label>
-          <Form.Field>
-            <DatePicker
+        <h4>Dates</h4>
+        <Form.Group widths="equal">
+            <Form.Field
               name='startDate'
               placeholderText='Start Date'
               dateFormat='DD/MM/YYYY'
               selected={this.state.startDate}
-              onChange={this.handleStartDate} />
-          </Form.Field>
-          <Form.Field>
-            <DatePicker
+              onChange={this.handleStartDate}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              selectsStart
+              control={DatePicker}
+              label="Start" />
+            <Form.Field
               name='endDate'
               placeholderText='End Date'
               dateFormat='DD/MM/YYYY'
               selected={this.state.endDate}
-              onChange={this.handleEndDate} />
-          </Form.Field>
+              onChange={this.handleEndDate}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              selectsEnd
+              control={DatePicker}
+              label="End" />
         </Form.Group>
-        <Form.Group inline>
-          <label>Amount</label>
+        <h4>Transport Information</h4>
+        <Form.Group widths="equal">
           <Form.Field>
-            <Input
-              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
-              <Icon name='dollar' />
-              <input />
-            </Input>
+          <Input
+            placeholder='Distance' type='number' labelPosition='right' label='km'
+            onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
+            pattern="[0-9]*" />
+          </Form.Field>
+          <Form.Field>
+          <Input
+            iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
+            defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
+            <Icon name='dollar' />
+            <input />
+          </Input>
           </Form.Field>
         </Form.Group>
       </div>

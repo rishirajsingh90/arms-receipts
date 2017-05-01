@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Dropdown, Input, Icon, Checkbox, Divider } from 'semantic-ui-react';
+import { Form, Dropdown, Icon } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import map from 'lodash/map';
@@ -57,7 +57,7 @@ class CaseFees extends Component {
     return (
       <div>
         <h4>Company Information</h4>
-        <Form.Group width="equal">
+        <Form.Group widths="equal">
           <Dropdown
               id='company'
               options={this.state.companies}
@@ -75,7 +75,7 @@ class CaseFees extends Component {
             disabled={!this.state.company} />
         </Form.Group>
         <h4>Case Type</h4>
-        <Form.Group width="equal">
+        <Form.Group>
           <Form.Radio name='caseType' label='Simple' value='simple' checked={caseType === 'simple'} onChange={this.handleSelectChange}
                         disabled={!this.state.company} />
           <Form.Radio name='caseType' label='Complex' value='complex' checked={caseType === 'complex'} onChange={this.handleSelectChange}
@@ -91,7 +91,7 @@ class CaseFees extends Component {
           </Form.Input>
         </Form.Group>
         <h4>Case Details</h4>
-        <Form.Group width="equal">
+        <Form.Group>
           <Form.Checkbox name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation}
                       disabled={!this.state.company} />
           <Form.Checkbox name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort}
