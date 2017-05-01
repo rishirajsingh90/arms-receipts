@@ -13,6 +13,7 @@ class AircraftCharter extends Component {
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
+    this.displayError = this.displayError.bind(this);
   }
   componentDidMount() {
     this.getAirlines();
@@ -39,7 +40,6 @@ class AircraftCharter extends Component {
   handleStartDate(date) {
     ReceiptHandler.handleStartDate(date, this);
   }
-
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
   }
@@ -72,19 +72,19 @@ class AircraftCharter extends Component {
         <Form.Group>
           <Form.Radio
             name="aircraftType" label='Jet' value='jet' checked={aircraftType === 'jet'}
-            onChange={this.handleSelectChange} />
+            onChange={this.handleSelectChange} error={!!this.state.provider && !value} />
           <Form.Radio
             name="aircraftType" label='Turboprop' value='turboprop'
-            checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange} />
+            checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange} error={this.displayError} />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
             placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" />
+            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" error={this.displayError} />
           <Form.Field
             placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-            defaultValue={this.state.toCity} label="To" control="input" name="toCity" />
+            defaultValue={this.state.toCity} label="To" control="input" name="toCity" error={this.displayError} />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -98,7 +98,8 @@ class AircraftCharter extends Component {
             endDate={this.state.endDate}
             selectsStart
             control={DatePicker}
-            label="Start" />
+            label="Start"
+            error={this.displayError}/>
           <Form.Field
             name='endDate'
             placeholderText='End Date'
@@ -109,7 +110,8 @@ class AircraftCharter extends Component {
             endDate={this.state.endDate}
             selectsEnd
             control={DatePicker}
-            label="End" />
+            label="End"
+            error={this.displayError}/>
         </Form.Group>
         <h4>Charter Information</h4>
         <Form.Group widths="equal">
@@ -117,13 +119,13 @@ class AircraftCharter extends Component {
             <Input
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
               onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
-              defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' />
+              defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' error={this.displayError} />
           </Form.Field>
           <Form.Field>
             <Input
               iconPosition="left" placeholder="Amount" type="number"
               onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
+              defaultValue={this.state.amount} pattern="[0-9]*" name='amount' error={this.displayError}>
               <Icon name="dollar" />
               <input />
             </Input>
