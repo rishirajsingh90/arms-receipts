@@ -59,63 +59,61 @@ class AirlineTickets extends Component {
 
     return (
       <div>
-        <Form.Group inline>
-          <label>Service Provider</label>
-          <Form.Field>
+        <h4>Service Provider</h4>
+        <Form.Group>
             <Dropdown
               id='provider'
               options={this.state.airlines}
-              floating labeled button className='icon'
+              fluid labeled search selection className='icon'
               placeholder='Select Airline'
               onChange={this.handleDropDownChange}
               defaultValue={this.state.provider} />
-          </Form.Field>
         </Form.Group>
-        <Form.Group inline>
-          <label>Ticket Class</label>
-          <Form.Field>
+        <h4>Ticket Class</h4>
+        <Form.Group>
             <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
-          </Form.Field>
-          <Form.Field>
             <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
-          </Form.Field>
-          <Form.Field>
             <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
-          </Form.Field>
         </Form.Group>
-        <Form.Group inline>
-          <label>City</label>
-          <Form.Field>
-            <Input placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)} defaultValue={this.state.fromCity} />
-          </Form.Field>
-          <Form.Field>
-            <Input placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)} defaultValue={this.state.toCity} />
-          </Form.Field>
+        <h4>Cities</h4>
+        <Form.Group widths="equal">
+          <Form.Field placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+                      defaultValue={this.state.fromCity} label="From" control="input" />
+          <Form.Field placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+                      defaultValue={this.state.toCity} label="To" control="input" />
         </Form.Group>
-        <Form.Group inline>
-          <label>Dates</label>
-          <Form.Field>
-            <DatePicker
-              placeholderText="Start Date"
-              dateFormat="DD/MM/YYYY"
-              selected={this.state.startDate}
-              onChange={this.handleStartDate} />
-          </Form.Field>
-          <Form.Field>
-            <DatePicker
-              placeholderText="End Date"
-              dateFormat="DD/MM/YYYY"
-              selected={this.state.endDate}
-              onChange={this.handleEndDate} />
-          </Form.Field>
+        <h4>Dates</h4>
+        <Form.Group widths="equal">
+          <Form.Field
+            name='startDate'
+            placeholderText='Start Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.startDate}
+            onChange={this.handleStartDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsStart
+            control={DatePicker}
+            label="Start" />
+          <Form.Field
+            name='endDate'
+            placeholderText='End Date'
+            dateFormat='DD/MM/YYYY'
+            selected={this.state.endDate}
+            onChange={this.handleEndDate}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            selectsEnd
+            control={DatePicker}
+            label="End" />
         </Form.Group>
-        <Form.Group inline>
+        <h4>Travel Information</h4>
+        <Form.Group widths="equal">
           <Form.Field>
-            <label>Amount</label>
             <Input
-              iconPosition="left" placeholder="Amount" type="number" onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
+              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
               defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
-              <Icon name="dollar" />
+              <Icon name='dollar' />
               <input />
             </Input>
           </Form.Field>

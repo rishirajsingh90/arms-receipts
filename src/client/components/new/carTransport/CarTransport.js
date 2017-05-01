@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
-import { styles } from '../../styles';
 
 class CarTransport extends Component {
   constructor (props) {
