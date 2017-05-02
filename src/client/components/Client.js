@@ -42,6 +42,17 @@ function getCarProviders(cb) {
     .then(cb);
 }
 
+function getAmbulanceProviders(cb) {
+  return fetch(`api/ambulance-providers`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function getAirlines(cb) {
   return fetch(`api/airlines`, {
     headers: {
@@ -82,5 +93,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, addReceipt };
+const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, addReceipt };
 export default Client;

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Divider } from 'semantic-ui-react';
-import CaseFees from './caseFees/CaseFees';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
-import CarTransport from './carTransport/CarTransport';
-import AirlineTickets from './airlineTickets/AirlineTickets';
-import AircraftCharter from './aircraftCharter/AircraftCharter';
+import CaseFees from './caseFees';
+import CarTransport from './carTransport';
+import AirlineTickets from './airlineTickets';
+import AircraftCharter from './aircraftCharter';
+import AmbulanceFees from './ambulanceFees';
 import Client from '../Client';
 import TotalsService from './../../service/TotalsService';
 import { browserHistory } from 'react-router';
@@ -53,6 +54,7 @@ class NewReceipt extends Component {
           <CarTransport activeStep={this.state.activeStep} />
           <AirlineTickets activeStep={this.state.activeStep} />
           <AircraftCharter activeStep={this.state.activeStep} />
+          <AmbulanceFees activeStep={this.state.activeStep} />
           <Form.Button content='Create receipt' />
         </Form>
       </div>

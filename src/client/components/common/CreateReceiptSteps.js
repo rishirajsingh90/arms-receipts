@@ -44,6 +44,12 @@ class CreateReceiptSteps extends Component {
             <Step.Title>Aircraft Charter</Step.Title>
           </Step.Content>
         </Step>
+        <Step name="ambulanceFees"  active={activeStep === "ambulanceFees"} onClick={this.handleStepChange}>
+          <Icon name="ambulance" />
+          <Step.Content>
+            <Step.Title>Ambulance Fees</Step.Title>
+          </Step.Content>
+        </Step>
       </Step.Group>
     );
   }
