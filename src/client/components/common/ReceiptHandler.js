@@ -10,8 +10,10 @@ function handleDropDownChange(e, { id, value }, ctx) {
     updateTotals(ctx);
   });
 }
-function handleChange(input, value, ctx) {
-  value = value ? parseInt(value, 10) : 0;
+function handleChange(input, value, ctx, isText) {
+  if (!isText) {
+    value = value ? parseInt(value, 10) : 0;
+  }
   ctx.setState({ [input]: value }, () => {
     updateTotals(ctx);
   });
@@ -27,6 +29,10 @@ function handleEndDate(date, ctx) {
   ctx.setState({ endDate: date }, () => {
     updateTotals(ctx);
   });
+}
+
+function handleDOB(date, ctx) {
+  ctx.setState({ dob: date });
 }
 
 function updateTotals(ctx) {
@@ -50,5 +56,5 @@ function updateTotals(ctx) {
   }
 }
 
-const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate };
+const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, handleDOB };
 export default ReceiptHandler;

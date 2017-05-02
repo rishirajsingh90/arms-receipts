@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Divider } from 'semantic-ui-react';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
+import PatientDetails from './patientDetails';
 import CaseFees from './caseFees';
 import CarTransport from './carTransport';
 import AirlineTickets from './airlineTickets';
@@ -50,6 +51,7 @@ class NewReceipt extends Component {
             </Form.Input>
           </Form.Group>
           <Divider />
+          <PatientDetails activeStep={this.state.activeStep} />
           <CaseFees activeStep={this.state.activeStep} />
           <CarTransport activeStep={this.state.activeStep} />
           <AirlineTickets activeStep={this.state.activeStep} />

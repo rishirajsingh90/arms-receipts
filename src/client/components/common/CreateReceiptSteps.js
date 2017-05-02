@@ -5,7 +5,7 @@ class CreateReceiptSteps extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      activeStep: "caseHandling"
+      activeStep: "patientDetails"
     };
     this.handleStepChange = this.handleStepChange.bind(this);
   }
@@ -19,7 +19,13 @@ class CreateReceiptSteps extends Component {
   render () {
     const { activeStep } = this.state;
     return (
-      <Step.Group>
+      <Step.Group size="mini">
+        <Step name="patientDetails"  active={activeStep === "patientDetails"} onClick={this.handleStepChange}>
+          <Icon name="user" />
+          <Step.Content>
+            <Step.Title>Patient Details</Step.Title>
+          </Step.Content>
+        </Step>
         <Step name="caseHandling" active={activeStep === "caseHandling"} onClick={this.handleStepChange}>
           <Icon name="money" />
           <Step.Content>
