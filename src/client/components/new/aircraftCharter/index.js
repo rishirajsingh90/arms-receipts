@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
+import { Form, Input, Icon, Dropdown } from "formsy-semantic-ui-react";
 import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
@@ -79,10 +79,10 @@ class AircraftCharter extends Component {
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
-            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
             defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" disabled={!this.state.provider} />
           <Form.Field
-            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
             defaultValue={this.state.toCity} label="To" control="input" name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
@@ -119,15 +119,6 @@ class AircraftCharter extends Component {
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
               onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
               defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' disabled={!this.state.provider} />
-          </Form.Field>
-          <Form.Field>
-            <Input
-              iconPosition="left" placeholder="Amount" type="number"
-              onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount' disabled={!this.state.provider} >
-              <Icon name="dollar" />
-              <input />
-            </Input>
           </Form.Field>
         </Form.Group>
       </div>

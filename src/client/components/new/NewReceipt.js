@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Divider } from 'semantic-ui-react';
+import { Form, Divider } from 'formsy-semantic-ui-react';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
 import PatientDetails from './patientDetails';
 import CaseFees from './caseFees';

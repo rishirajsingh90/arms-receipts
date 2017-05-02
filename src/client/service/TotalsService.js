@@ -1,6 +1,8 @@
 import find from 'lodash/find';
 import update from 'immutability-helper';
 
+let patientDetails = {};
+
 let caseFeeTotals = {
   type: 0,
   repatriation: 0,
@@ -24,6 +26,16 @@ let airlineCharterTotals = {
   providerRate: 0,
   total: 0
 };
+
+let ambulanceFeeTotals = {
+  providerRate: 0,
+  mileagePrice: 0,
+  total: 0
+};
+
+function setPatientDetails(details) {
+  patientDetails = details;
+}
 
 function calculateCaseFeeTotals(caseFees) {
   const selectedCompany = find(caseFees.companies, function(company) {
@@ -55,8 +67,7 @@ function calculateCaseFeeTotals(caseFees) {
 
 function calculateCarTransportTotals(carTransport, mileageRate) {
   carTransportTotals.mileagePrice = mileageRate * carTransport.distance || 0;
-  carTransportTotals.providerRate = carTransport.amount || 0;
-  carTransportTotals.total = carTransportTotals.providerRate + carTransportTotals.mileagePrice || 0;
+  carTransportTotals.total = carTransportTotals.mileagePrice || 0;
   carTransportTotals = update(carTransport, { $merge: carTransportTotals });
 }
 
@@ -66,25 +77,38 @@ function calculateAirlineTicketTotals(airlineTicket) {
   airlineTicketTotals = update(airlineTicket, { $merge: airlineTicketTotals });
 }
 
-function calculateAirlineCharterTotals(airlineCharter) {
-  airlineCharterTotals.providerRate = airlineCharter.amount || 0;
-  airlineCharterTotals.total = airlineCharterTotals.providerRate || 0;
-  airlineCharterTotals = update(airlineCharter, { $merge: airlineCharterTotals });
+function calculateAircraftCharterTotals(aircraftCharter) {
+  const selectedAircraft = find(aircraftCharter.airlines, function(provider) {
+    return aircraftCharter.provider === provider.name;
+  });
+  if (!selectedAircraft) {
+    return;
+  }
+  airlineCharterTotals.total = aircraftCharter.flyingTime * selectedAircraft.rate || 0;
+  airlineCharterTotals = update(aircraftCharter, { $merge: airlineCharterTotals });
+}
+
+function calculateAmbulanceFeeTotals(ambulanceFee, mileageRate) {
+  ambulanceFeeTotals.mileagePrice = mileageRate * ambulanceFee.distance || 0;
+  ambulanceFeeTotals.total = carTransportTotals.mileagePrice || 0;
+  ambulanceFeeTotals = update(ambulanceFee, { $merge: carTransportTotals });
 }
 
 function getReceipt(description) {
   return {
     description: description,
+    patientDetails: patientDetails,
     caseFee: caseFeeTotals,
     carTransport: carTransportTotals,
     airlineTicket: airlineTicketTotals,
     airlineCharter: airlineCharterTotals,
-    total: caseFeeTotals.total + carTransportTotals.total + airlineTicketTotals.total + airlineCharterTotals.total,
+    ambulanceFee: ambulanceFeeTotals,
+    total: caseFeeTotals.total + carTransportTotals.total + airlineTicketTotals.total + airlineCharterTotals.total + ambulanceFeeTotals.total,
     email: 'rishis@arms.com' // TODO fix this
   };
 }
 
-const TotalsService = { calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
-  calculateAirlineCharterTotals, getReceipt };
+const TotalsService = { setPatientDetails, calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
+  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, getReceipt };
 export default TotalsService;
 

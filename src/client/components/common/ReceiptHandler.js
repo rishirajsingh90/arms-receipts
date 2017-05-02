@@ -32,11 +32,15 @@ function handleEndDate(date, ctx) {
 }
 
 function handleDOB(date, ctx) {
-  ctx.setState({ dob: date });
-}
+  ctx.setState({ dob: date }, () => {
+    updateTotals(ctx);
+  });}
 
 function updateTotals(ctx) {
   switch (ctx.props.activeStep) {
+    case "patientDetails":
+      TotalsService.setPatientDetails(ctx.state);
+      break;
     case "caseHandling":
       TotalsService.calculateCaseFeeTotals(ctx.state);
       break;
@@ -49,7 +53,12 @@ function updateTotals(ctx) {
       TotalsService.calculateAirlineTicketTotals(ctx.state);
       break;
     case "aircraftCharter":
-      TotalsService.calculateAirlineCharterTotals(ctx.state);
+      TotalsService.calculateAircraftCharterTotals(ctx.state);
+      break;
+    case "ambulanceFees":
+      TotalsService.calculateAmbulanceFeeTotals(ctx.state, 4.5); // TODO fix this once you add in config,
+                                                                 // also pull out doc/nurse escort fees,
+                                                                 // default to 950 and 650 respectively
       break;
     default:
       break;
