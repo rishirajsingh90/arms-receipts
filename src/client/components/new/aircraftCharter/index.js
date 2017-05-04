@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
+import PropTypes from 'prop-types';
 
 class AircraftCharter extends Component {
   constructor(props) {
@@ -127,7 +128,7 @@ class AircraftCharter extends Component {
 }
 
 AircraftCharter.propTypes = {
-  activeStep: React.PropTypes.string
+  activeStep: PropTypes.string
 };
 
 export default AircraftCharter;

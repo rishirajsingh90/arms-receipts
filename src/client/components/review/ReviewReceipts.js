@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Client from '../Client';
 import { Table, Header, Message } from 'semantic-ui-react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 class ReviewReceipts extends Component {
   constructor() {
@@ -55,7 +56,7 @@ class ReviewReceipts extends Component {
 }
 
 ReviewReceipts.propTypes = {
-  location: React.PropTypes.object
+  location: PropTypes.object
 };
 
 export default ReviewReceipts;
