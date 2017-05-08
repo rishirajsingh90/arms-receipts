@@ -132,8 +132,8 @@ class AirlineTickets extends Component {
 }
 
 AirlineTickets.propTypes = {
-  activeStep: PropTypes.string,
-  updateReceipt: React.React.PropTypes.func
+  activeStep: React.PropTypes.string,
+  updateReceipt: React.PropTypes.func
 };
 
 export default AirlineTickets;
