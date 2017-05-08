@@ -3,7 +3,6 @@ import { Form, Dropdown, Icon } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import map from 'lodash/map';
-import PropTypes from 'prop-types';
 
 class CaseFees extends Component {
   constructor (props) {
@@ -114,7 +113,7 @@ class CaseFees extends Component {
 }
 
 CaseFees.propTypes = {
-  activeStep: PropTypes.string
+  activeStep: React.PropTypes.string
 };
 
 export default CaseFees;

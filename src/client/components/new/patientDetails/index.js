@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import DatePicker from 'react-datepicker';
-import PropTypes from 'prop-types';
 
 class PatientDetails extends Component {
   constructor (props) {
@@ -48,7 +47,7 @@ class PatientDetails extends Component {
 }
 
 PatientDetails.propTypes = {
-  activeStep: PropTypes.string
+  activeStep: React.PropTypes.string
 };
 
 export default PatientDetails;

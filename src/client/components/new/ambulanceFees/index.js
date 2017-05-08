@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
-import PropTypes from 'prop-types';
 
 class AmbulanceFees extends Component {
   constructor (props) {
@@ -110,7 +109,7 @@ class AmbulanceFees extends Component {
 }
 
 AmbulanceFees.propTypes = {
-  activeStep: PropTypes.string
+  activeStep: React.PropTypes.string
 };
 
 export default AmbulanceFees;

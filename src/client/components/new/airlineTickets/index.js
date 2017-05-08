@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
-import PropTypes from 'prop-types';
 
 class AirlineTickets extends Component {
   constructor (props) {
@@ -134,7 +133,7 @@ class AirlineTickets extends Component {
 
 AirlineTickets.propTypes = {
   activeStep: PropTypes.string,
-  updateReceipt: PropTypes.func
+  updateReceipt: React.React.PropTypes.func
 };
 
 export default AirlineTickets;
