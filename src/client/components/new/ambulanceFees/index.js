@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon, Dropdown } from 'formsy-semantic-ui-react';
+import { Form, Input, Dropdown } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';

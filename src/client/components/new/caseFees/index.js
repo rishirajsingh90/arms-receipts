@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Dropdown, Icon } from 'formsy-semantic-ui-react';
+import { Form, Dropdown, Icon } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import map from 'lodash/map';
