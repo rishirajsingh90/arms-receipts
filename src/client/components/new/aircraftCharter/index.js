@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
+import { Form, Input, Dropdown } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
 
-class AirlineTickets extends Component {
-  constructor (props) {
+class AircraftCharter extends Component {
+  constructor(props) {
     super(props);
     this.state = {};
     this.handleStartDate = this.handleStartDate.bind(this);
@@ -20,7 +20,7 @@ class AirlineTickets extends Component {
   getAirlines() {
     Client.getAirlines((airlines) => {
       airlines = reduce(airlines, function(result, airline) {
-        if (!airline.charter) {
+        if (airline.charter) {
           result.push({
             key: airline._id,
             value: airline.name,
@@ -35,25 +35,22 @@ class AirlineTickets extends Component {
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
   }
+
   handleStartDate(date) {
     ReceiptHandler.handleStartDate(date, this);
   }
   handleEndDate(date) {
     ReceiptHandler.handleEndDate(date, this);
   }
-  handleChange(input, value) {
-    this.setState({ [input]: value }, () => {
-      this.props.updateReceipt(this.state);
-    });
-  }
   handleDropDownChange(e, { id, value }) {
     ReceiptHandler.handleDropDownChange(e, { id, value }, this);
   }
+
   render() {
 
-    const { flightClass } = this.state;
+    const { aircraftType } = this.state;
 
-    if (this.props.activeStep !== "airlineTickets") {
+    if (this.props.activeStep !== "aircraftCharter") {
       return null;
     }
 
@@ -70,20 +67,23 @@ class AirlineTickets extends Component {
             defaultValue={this.state.provider}
             name="provider" />
         </Form.Group>
-        <h4>Ticket Class</h4>
+        <h4>Aircraft Type</h4>
         <Form.Group>
-          <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange} />
-          <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange} />
-          <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange} />
+          <Form.Radio
+            name="aircraftType" label='Jet' value='jet' checked={aircraftType === 'jet'}
+            onChange={this.handleSelectChange} disabled={!this.state.provider} />
+          <Form.Radio
+            name="aircraftType" label='Turboprop' value='turboprop'
+            checked={aircraftType === 'turboprop'} onChange={this.handleSelectChange} disabled={!this.state.provider} />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
-            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" />
+            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
+            defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" disabled={!this.state.provider} />
           <Form.Field
-            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-            defaultValue={this.state.toCity} label="To" control="input" name="toCity" />
+            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
+            defaultValue={this.state.toCity} label="To" control="input" name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -97,7 +97,8 @@ class AirlineTickets extends Component {
             endDate={this.state.endDate}
             selectsStart
             control={DatePicker}
-            label="Start" />
+            label="Start"
+            disabled={!this.state.provider} />
           <Form.Field
             name='endDate'
             placeholderText='End Date'
@@ -108,17 +109,16 @@ class AirlineTickets extends Component {
             endDate={this.state.endDate}
             selectsEnd
             control={DatePicker}
-            label="End" />
+            label="End"
+            disabled={!this.state.provider} />
         </Form.Group>
-        <h4>Travel Information</h4>
+        <h4>Charter Information</h4>
         <Form.Group widths="equal">
           <Form.Field>
             <Input
-              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
-              <Icon name='dollar' />
-              <input />
-            </Input>
+              placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
+              onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this)}
+              defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' disabled={!this.state.provider} />
           </Form.Field>
         </Form.Group>
       </div>
@@ -126,9 +126,8 @@ class AirlineTickets extends Component {
   }
 }
 
-AirlineTickets.propTypes = {
-  activeStep: React.PropTypes.string,
-  updateReceipt: React.PropTypes.func
+AircraftCharter.propTypes = {
+  activeStep: React.PropTypes.string
 };
 
-export default AirlineTickets;
+export default AircraftCharter;

@@ -4,6 +4,7 @@ const mongodb = require('mongodb');
 const countries = require('./mocks/countries.json');
 const mockAirline = require('./mocks/airline.json');
 const mockCarProvider = require('./mocks/carProvider.json');
+const mockAmbulanceProvider = require('./mocks/ambulanceProvider.json');
 const mockCompany = require('./mocks/company.json');
 const mockCompanyFees = require('./mocks/companyFees.json');
 const mockReceipt = require('./mocks/receipt.json');
@@ -38,6 +39,7 @@ function addMockData() {
   client.collection('company').insertMany(mockCompany);
   client.collection('company_fees').insertMany(mockCompanyFees);
   client.collection('car_provider').insertMany(mockCarProvider);
+  client.collection('ambulance_provider').insertMany(mockAmbulanceProvider);
   client.collection('receipt').insertMany(mockReceipt);
 }
 

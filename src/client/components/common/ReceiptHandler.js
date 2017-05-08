@@ -10,8 +10,10 @@ function handleDropDownChange(e, { id, value }, ctx) {
     updateTotals(ctx);
   });
 }
-function handleChange(input, value, ctx) {
-  value = value ? parseInt(value, 10) : 0;
+function handleChange(input, value, ctx, isText) {
+  if (!isText) {
+    value = value ? parseInt(value, 10) : 0;
+  }
   ctx.setState({ [input]: value }, () => {
     updateTotals(ctx);
   });
@@ -29,8 +31,16 @@ function handleEndDate(date, ctx) {
   });
 }
 
+function handleDOB(date, ctx) {
+  ctx.setState({ dob: date }, () => {
+    updateTotals(ctx);
+  });}
+
 function updateTotals(ctx) {
   switch (ctx.props.activeStep) {
+    case "patientDetails":
+      TotalsService.setPatientDetails(ctx.state);
+      break;
     case "caseHandling":
       TotalsService.calculateCaseFeeTotals(ctx.state);
       break;
@@ -43,12 +53,17 @@ function updateTotals(ctx) {
       TotalsService.calculateAirlineTicketTotals(ctx.state);
       break;
     case "aircraftCharter":
-      TotalsService.calculateAirlineCharterTotals(ctx.state);
+      TotalsService.calculateAircraftCharterTotals(ctx.state);
+      break;
+    case "ambulanceFees":
+      TotalsService.calculateAmbulanceFeeTotals(ctx.state, 4.5); // TODO fix this once you add in config,
+                                                                 // also pull out doc/nurse escort fees,
+                                                                 // default to 950 and 650 respectively
       break;
     default:
       break;
   }
 }
 
-const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate };
+const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, handleDOB };
 export default ReceiptHandler;

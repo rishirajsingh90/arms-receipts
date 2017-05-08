@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Form, Divider } from 'semantic-ui-react';
-import CaseFees from './caseFees/CaseFees';
 import CreateReceiptSteps from '../common/CreateReceiptSteps';
-import CarTransport from './carTransport/CarTransport';
-import AirlineTickets from './airlineTickets/AirlineTickets';
-import AircraftCharter from './aircraftCharter/AircraftCharter';
+import PatientDetails from './patientDetails';
+import CaseFees from './caseFees';
+import CarTransport from './carTransport';
+import AirlineTickets from './airlineTickets';
+import AircraftCharter from './aircraftCharter';
+import AmbulanceFees from './ambulanceFees';
 import Client from '../Client';
 import TotalsService from './../../service/TotalsService';
 import { browserHistory } from 'react-router';
@@ -45,14 +47,16 @@ class NewReceipt extends Component {
             <Form.Input
               placeholder='Receipt Description' type='text'
               value={this.state.receiptDescription} onChange={e => this.setState({ receiptDescription: e.target.value })}
-              name='description'>
+              name='description' error={!this.state.receiptDescription}>
             </Form.Input>
           </Form.Group>
           <Divider />
+          <PatientDetails activeStep={this.state.activeStep} />
           <CaseFees activeStep={this.state.activeStep} />
           <CarTransport activeStep={this.state.activeStep} />
           <AirlineTickets activeStep={this.state.activeStep} />
           <AircraftCharter activeStep={this.state.activeStep} />
+          <AmbulanceFees activeStep={this.state.activeStep} />
           <Form.Button content='Create receipt' />
         </Form>
       </div>

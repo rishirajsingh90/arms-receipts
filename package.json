@@ -13,7 +13,7 @@
     "postinstall": "webpack -p --config webpack.prod.config.js"
   },
   "author": "Rishiraj Singh",
-  "license": "ISC",
+  "license": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/rishirajsingh90/arms-receipts.git"

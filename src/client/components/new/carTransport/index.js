@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon, Dropdown } from 'semantic-ui-react';
+import { Form, Input, Dropdown } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
@@ -61,11 +61,11 @@ class CarTransport extends Component {
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
-            placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
-            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" />
+            placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
+            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" disabled={!this.state.provider} />
           <Form.Field
-            placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
-            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" />
+            placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
+            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -79,7 +79,8 @@ class CarTransport extends Component {
             endDate={this.state.endDate}
             selectsStart
             control={DatePicker}
-            label="Start" />
+            label="Start"
+            disabled={!this.state.provider} />
           <Form.Field
             name='endDate'
             placeholderText='End Date'
@@ -90,7 +91,8 @@ class CarTransport extends Component {
             endDate={this.state.endDate}
             selectsEnd
             control={DatePicker}
-            label="End" />
+            label="End"
+            disabled={!this.state.provider} />
         </Form.Group>
         <h4>Transport Information</h4>
         <Form.Group widths="equal">
@@ -98,15 +100,7 @@ class CarTransport extends Component {
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
               onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
-              pattern="[0-9]*" name="distance" />
-          </Form.Field>
-          <Form.Field>
-            <Input
-              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
-              defaultValue={this.state.amount} pattern="[0-9]*" name='amount'>
-              <Icon name='dollar' />
-              <input />
-            </Input>
+              pattern="[0-9]*" name="distance" disabled={!this.state.provider} />
           </Form.Field>
         </Form.Group>
       </div>

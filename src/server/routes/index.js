@@ -3,6 +3,7 @@ const receipt = require('./receipt');
 const company = require('./company');
 const countries = require('./country');
 const carProvider = require('./carProvider');
+const ambulanceProvider = require('./ambulanceProvider');
 const airline = require('./airline');
 const bodyParser = require('body-parser');
 
@@ -49,6 +50,15 @@ router.get('/countries', (req, res) => {
 
 router.get('/car-providers', (req, res) => {
   carProvider.get().toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    res.send(JSON.stringify(result));
+  });
+});
+
+router.get('/ambulance-providers', (req, res) => {
+  ambulanceProvider.get().toArray(function(err, result) {
     if (err) {
       throw err;
     }
