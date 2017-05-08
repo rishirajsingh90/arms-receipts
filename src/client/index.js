@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App';
-import NewReceipt from './components/new/NewReceipt';
-import ReviewReceipts from './components/review/ReviewReceipts';
+import NewReceipt from './components/new';
+import ReviewReceipts from './components/review';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 render(

@@ -1,26 +1,237 @@
 [
   {
-    "description" : "Receipts for Mutuade",
-    "created" : "2017-01-05T06:00:00.000Z",
-    "amount" : "$756.32",
-    "email" : "rishis@arms.com"
+    "_id":"590fd60b7d1df01a2d4ece5f",
+    "description":"Rishiraj Singh, 17/03/1990, IGAS",
+    "patientDetails":{
+      "firstName":"Rishiraj",
+      "lastName":"Singh",
+      "dob":"2017-04-23T05:00:00.000Z"
+    },
+    "caseFee":{
+      "company":"Company 1",
+      "country":"United States of America",
+      "caseType":"simple",
+      "doctorEscort":950,
+      "nurseEscort":0,
+      "type":325,
+      "repatriation":0,
+      "total":1275
+    },
+    "carTransport":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "airlineTicket":{
+      "provider":"American",
+      "flightClass":"business",
+      "fromCity":null,
+      "toCity":null,
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-08T05:00:00.000Z",
+      "amount":2,
+      "ticketPrice":2000,
+      "total":2000
+    },
+    "airlineCharter":{
+      "providerRate":0,
+      "total":0
+    },
+    "ambulanceFee":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "total":3575,
+    "email":"rishis@arms.com"
   },
+
   {
-  "description" : "Receipts for IGAS",
-  "created" : "2017-01-05T06:00:00.000Z",
-  "amount" : "$1503.43",
-    "email" : "john@arms.com"
+    "_id":"590fd60b7d1df01a2d4ece51",
+    "description":"John Doe, 17/03/1990, IGAS",
+    "patientDetails":{
+      "firstName":"Rishiraj",
+      "lastName":"Singh",
+      "dob":"2017-04-23T05:00:00.000Z"
+    },
+    "caseFee":{
+      "company":"Company 1",
+      "country":"United States of America",
+      "caseType":"simple",
+      "doctorEscort":950,
+      "nurseEscort":0,
+      "type":325,
+      "repatriation":0,
+      "total":1275
+    },
+    "carTransport":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "airlineTicket":{
+      "provider":"American",
+      "flightClass":"business",
+      "fromCity":null,
+      "toCity":null,
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-08T05:00:00.000Z",
+      "amount":2,
+      "ticketPrice":2000,
+      "total":2000
+    },
+    "airlineCharter":{
+      "providerRate":0,
+      "total":100
+    },
+    "ambulanceFee":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "total":3675,
+    "email":"johnd@arms.com"
   },
+
   {
-    "description" : "Receipt for Aetna",
-    "created" : "2017-01-05T06:00:00.000Z",
-    "amount" : "$9830.23",
-    "email" : "jane@arms.com"
+    "_id":"590fd60b7d1df01a2d4ece52",
+    "description":"Jane Doe, 17/03/1990, IGAS",
+    "patientDetails":{
+      "firstName":"Rishiraj",
+      "lastName":"Singh",
+      "dob":"2017-04-23T05:00:00.000Z"
+    },
+    "caseFee":{
+      "company":"Company 1",
+      "country":"United States of America",
+      "caseType":"simple",
+      "doctorEscort":950,
+      "nurseEscort":0,
+      "type":325,
+      "repatriation":0,
+      "total":1275
+    },
+    "carTransport":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "airlineTicket":{
+      "provider":"American",
+      "flightClass":"business",
+      "fromCity":null,
+      "toCity":null,
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-08T05:00:00.000Z",
+      "amount":2,
+      "ticketPrice":2000,
+      "total":2000
+    },
+    "airlineCharter":{
+      "providerRate":0,
+      "total":200
+    },
+    "ambulanceFee":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "total":3775,
+    "email":"janed@arms.com"
   },
+
   {
-    "description" : "Receipt for Blue Cross",
-    "created" : "2017-01-05T06:00:00.000Z",
-    "amount" : "$11000.23",
-    "email" : "anrajsingh@arms.com"
+    "_id":"590fd60b7d1df01a2d4ece53",
+    "description":"Anraj Singh, 17/03/1990, IGAS",
+    "patientDetails":{
+      "firstName":"Rishiraj",
+      "lastName":"Singh",
+      "dob":"2017-04-23T05:00:00.000Z"
+    },
+    "caseFee":{
+      "company":"Company 1",
+      "country":"United States of America",
+      "caseType":"simple",
+      "doctorEscort":950,
+      "nurseEscort":0,
+      "type":325,
+      "repatriation":0,
+      "total":1275
+    },
+    "carTransport":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "airlineTicket":{
+      "provider":"American",
+      "flightClass":"business",
+      "fromCity":null,
+      "toCity":null,
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-08T05:00:00.000Z",
+      "amount":2,
+      "ticketPrice":2000,
+      "total":2000
+    },
+    "airlineCharter":{
+      "providerRate":0,
+      "total":300
+    },
+    "ambulanceFee":{
+      "provider":"Transport 2",
+      "fromCity":"Chicago",
+      "toCity":"I",
+      "startDate":"2017-05-07T05:00:00.000Z",
+      "endDate":"2017-05-09T05:00:00.000Z",
+      "distance":1,
+      "providerRate":0,
+      "mileagePrice":150,
+      "total":150
+    },
+    "total":3875,
+    "email":"anrajs@arms.com"
   }
 ]
