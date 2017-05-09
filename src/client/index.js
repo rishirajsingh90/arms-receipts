@@ -12,6 +12,7 @@ render(
       <IndexRoute component={ReviewReceipts} />
       <Route path="/review" component={ReviewReceipts} />
       <Route path="/new" component={NewReceipt} />
+      <Route path="/edit/:receiptId" component={NewReceipt} />
       <Route path="*" component={ReviewReceipts} />
     </Route>
   </Router>, document.getElementById('root'));

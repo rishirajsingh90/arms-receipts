@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Client from '../Client';
 import { Table, Header, Message, Button, Icon } from 'semantic-ui-react';
 import moment from 'moment';
-import { browserHistory } from 'react-router';
 
 class ReviewReceipts extends Component {
   constructor() {
@@ -16,20 +15,10 @@ class ReviewReceipts extends Component {
   componentDidMount() {
     this.getReceipts();
   }
-  getReceipts(receipt) {
-    if (receipt) {
-      const r = receipt.receipt;
-      browserHistory.push({
-        pathName: 'new',
-        state: {
-          r
-        }
-      });
-    } else {
-      Client.search((receipts) => {
-        this.setState({ receipts: receipts });
-      });
-    }
+  getReceipts() {
+    Client.search(null, (receipts) => {
+      this.setState({ receipts: receipts });
+    });
   }
   finalizeReceipt() {
     console.log('finalize');
@@ -60,7 +49,9 @@ class ReviewReceipts extends Component {
             {
               this.state.receipts.map((receipt, idx) => (
                 <Table.Row key={idx}>
-                  <Table.Cell>{receipt.description}</Table.Cell>
+                  <Table.Cell>
+                    <a href={'edit/' + receipt._id}>{receipt.description}</a>
+                  </Table.Cell>
                   <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
                   <Table.Cell positive className='right aligned'>${receipt.total}</Table.Cell>
                   <Table.Cell className='right aligned'>{moment(receipt.created).format('DD/MM/YYYY')}</Table.Cell>

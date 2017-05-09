@@ -12,6 +12,13 @@ class PatientDetails extends Component {
   handleDOB(date) {
     ReceiptHandler.handleDOB(date, this);
   }
+  componentWillReceiveProps() {
+    if (this.props.existingPatientDetails) {
+      this.setState({ firstName: this.props.existingPatientDetails.firstName });
+      this.setState({ lastName: this.props.existingPatientDetails.lastName });
+      this.setState({ dob: this.props.existingPatientDetails.dob });
+    }
+  }
   render() {
 
     if (this.props.activeStep !== 'patientDetails') {

@@ -16,13 +16,22 @@ class NewReceipt extends Component {
     super();
     this.state = {
       receiptDescription: "",
-      isLoading: false
+      isLoading: false,
+      existingReceipt: {}
     };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   setStep(activeStep) {
     this.setState({ activeStep: activeStep });
+  }
+  componentDidMount() {
+    if (this.props.routeParams.receiptId) {
+      Client.search(this.props.routeParams.receiptId, (receipts) => {
+        const existingReceipt = receipts[0];
+        this.setState({ existingReceipt });
+      });
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -51,12 +60,12 @@ class NewReceipt extends Component {
             </Form.Input>
           </Form.Group>
           <Divider />
-          <PatientDetails activeStep={this.state.activeStep} />
-          <CaseFees activeStep={this.state.activeStep} />
-          <CarTransport activeStep={this.state.activeStep} />
-          <AirlineTickets activeStep={this.state.activeStep} />
-          <AircraftCharter activeStep={this.state.activeStep} />
-          <AmbulanceFees activeStep={this.state.activeStep} />
+          <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
+          <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFees} />
+          <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} />
+          <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTickets} />
+          <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
+          <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFees} />
           <Form.Button content='Create receipt' />
         </Form>
       </div>

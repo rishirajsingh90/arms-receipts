@@ -23,7 +23,7 @@ router.get('/companies', (req, res) => {
 });
 
 router.get('/receipt', (req, res) => {
-  receipt.get().toArray(function(err, result) {
+  receipt.get(req.query.receiptId).toArray(function(err, result) {
     if (err) {
       throw err;
     }

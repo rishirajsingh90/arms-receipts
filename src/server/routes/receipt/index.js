@@ -1,8 +1,9 @@
 "use strict";
 const db = require('../../db');
 
-exports.get = function() {
-  return db.getClient().collection('receipt').find({});
+exports.get = function(receiptId) {
+  let query = receiptId ? { "_id": receiptId } : {};
+  return db.getClient().collection('receipt').find(query);
 };
 
 exports.add = function(receipt) {
