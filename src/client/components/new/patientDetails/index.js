@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
-import DatePicker from 'react-datepicker';
+import SingleDate from '../../common/SingleDate';
 
 class PatientDetails extends Component {
   constructor (props) {
@@ -9,8 +9,10 @@ class PatientDetails extends Component {
     this.state = {};
     this.handleDOB = this.handleDOB.bind(this);
   }
-  handleDOB(date) {
-    ReceiptHandler.handleDOB(date, this);
+  handleDOB(day, { selected }) {
+    if (selected) {
+      ReceiptHandler.handleDOB(day, this);
+    }
   }
   componentWillReceiveProps() {
     if (this.props.existingPatientDetails) {
@@ -40,13 +42,7 @@ class PatientDetails extends Component {
         </Form.Group>
         <h4>Date of Birth</h4>
         <Form.Group>
-          <Form.Field
-            name='dateOfBirth'
-            placeholderText='Date of Birth'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.dob}
-            onChange={this.handleDOB}
-            control={DatePicker} />
+          <SingleDate/>
         </Form.Group>
       </div>
     );

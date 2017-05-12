@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';

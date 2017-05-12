@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Client from '../Client';
 import { Table, Header, Message, Button, Icon } from 'semantic-ui-react';
-import moment from 'moment';
 
 class ReviewReceipts extends Component {
   constructor() {
@@ -54,7 +53,7 @@ class ReviewReceipts extends Component {
                   </Table.Cell>
                   <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
                   <Table.Cell positive className='right aligned'>${receipt.total}</Table.Cell>
-                  <Table.Cell className='right aligned'>{moment(receipt.created).format('DD/MM/YYYY')}</Table.Cell>
+                  <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
                   <Table.Cell>
                     <Button animated='vertical' positive onClick={this.finalizeReceipt} >
                       <Button.Content hidden>Finalize</Button.Content>
