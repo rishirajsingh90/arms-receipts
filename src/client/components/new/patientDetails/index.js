@@ -9,10 +9,8 @@ class PatientDetails extends Component {
     this.state = {};
     this.handleDOB = this.handleDOB.bind(this);
   }
-  handleDOB(day, { selected }) {
-    if (selected) {
-      ReceiptHandler.handleDOB(day, this);
-    }
+  handleDOB(day) {
+    ReceiptHandler.handleDOB(day, this);
   }
   componentWillReceiveProps() {
     if (this.props.existingPatientDetails) {
@@ -42,7 +40,7 @@ class PatientDetails extends Component {
         </Form.Group>
         <h4>Date of Birth</h4>
         <Form.Group>
-          <SingleDate/>
+          <SingleDate placeholder="Date of birth" handleDayClick={this.handleDOB} selectedDay={this.state.dob} />
         </Form.Group>
       </div>
     );

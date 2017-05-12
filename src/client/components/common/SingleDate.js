@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 import DayPicker from 'react-day-picker';
 
 class SingleDate extends Component {
@@ -8,36 +8,39 @@ class SingleDate extends Component {
     super(props);
     this.state = {
       selectedDay: undefined,
-      inputClicked: false
+      hideInput: false
     };
-    this.handleDayClick = this.handleDayClick.bind(this);
     this.handleInputClick = this.handleInputClick.bind(this);
+    this.handleDayClick = this.handleDayClick.bind(this);
   }
-  handleDayClick(day, { selected }) {
-    this.setState({
-      selectedDay: selected ? undefined : day,
-    });
-    this.setState({ inputClicked: false });
-  };
-  handleInputClick() {
-    this.setState({ inputClicked: true });
+  handleInputClick(hideInput) {
+    this.setState({ hideInput: hideInput });
+  }
+  handleDayClick(day) {
+    this.handleInputClick(false);
+    this.setState({ selectedDay: day });
+    this.props.handleDayClick(day);
   }
   render() {
     let datePicker;
-    if (this.state.inputClicked) {
+    let displayDate;
+    if (this.state.hideInput) {
       datePicker = <DayPicker
         selectedDays={this.state.selectedDay}
-        onDayClick={this.handleDayClick}/>;
+        onDayClick={(day) => this.handleDayClick(day)} />;
     } else {
       datePicker = null;
     }
+    if (this.state.selectedDay) {
+      displayDate = this.state.selectedDay.toLocaleDateString('en-GB');
+    } else if (this.props.selectedDay) {
+      displayDate = this.props.selectedDay.toLocaleDateString('en-GB');
+    }
     return (
-      <div>
-        <Input onClick={this.handleInputClick} defaultValue={this.state.selectedDay}
-          placeholder={this.props.placeholder ? this.props.placeholder : 'Date'}
-          value={this.state.selectedDay} />
+      <Form.Input onClick={() => this.handleInputClick(true)} placeholder={this.props.placeholder ? this.props.placeholder : 'Date'}
+        value={displayDate} readOnly>
         {datePicker}
-      </div>
+      </Form.Input>
     );
   }
 }
