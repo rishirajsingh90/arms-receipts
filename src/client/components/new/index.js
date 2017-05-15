@@ -61,7 +61,7 @@ class NewReceipt extends Component {
           </Form.Group>
           <Divider />
           <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
-          <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFees} />
+          <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee} />
           <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} />
           <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTickets} />
           <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
