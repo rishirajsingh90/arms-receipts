@@ -5,7 +5,9 @@ import ReceiptHandler from '../../common/ReceiptHandler';
 class PatientDetails extends Component {
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: {}
+    };
   }
   componentWillReceiveProps() {
     if (this.props.existingPatientDetails) {
@@ -38,8 +40,9 @@ class PatientDetails extends Component {
             name='dob'
             placeholder='DD/MM/YYYY'
             label='Date of birth'
+            defaultValue={this.state.dob}
             onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this, true)}
-            error={this.state.error} />
+            error={this.state.error.dob} />
         </Form.Group>
       </div>
     );

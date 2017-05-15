@@ -5,7 +5,7 @@
     "patientDetails":{
       "firstName":"Rishiraj",
       "lastName":"Singh",
-      "dob":"2017-04-23T05:00:00.000Z"
+      "dob":"17-03-1990"
     },
     "caseFee":{
       "company":"Company 1",
@@ -64,7 +64,7 @@
     "patientDetails":{
       "firstName":"Rishiraj",
       "lastName":"Singh",
-      "dob":"2017-04-23T05:00:00.000Z"
+      "dob":"1990-03-17"
     },
     "caseFee":{
       "company":"Company 1",
@@ -123,7 +123,7 @@
     "patientDetails":{
       "firstName":"Rishiraj",
       "lastName":"Singh",
-      "dob":"2017-04-23T05:00:00.000Z"
+      "dob":"1990-03-17"
     },
     "caseFee":{
       "company":"Company 1",
@@ -182,7 +182,7 @@
     "patientDetails":{
       "firstName":"Rishiraj",
       "lastName":"Singh",
-      "dob":"2017-04-23T05:00:00.000Z"
+      "dob":"1990-03-17"
     },
     "caseFee":{
       "company":"Company 1",
