@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
-// import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
@@ -92,28 +91,20 @@ class AirlineTickets extends Component {
         <Form.Group widths="equal">
           <Form.Field
             name='startDate'
-            placeholderText='Start Date'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.startDate}
-            onChange={this.handleStartDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selectsStart
-            control={DatePicker}
+            placeholder='DD/MM/YYYY'
+            control={Input}
             label="Start"
-            disabled={!this.state.provider} />
+            disabled={!this.state.provider}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
+            error={this.state.error} />
           <Form.Field
             name='endDate'
-            placeholderText='End Date'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.endDate}
-            onChange={this.handleEndDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selectsEnd
-            control={DatePicker}
+            placeholder='DD/MM/YYYY'
+            control={Input}
             label="End"
-            disabled={!this.state.provider} />
+            disabled={!this.state.provider}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
+            error={this.state.error} />
         </Form.Group>
         <h4>Travel Information</h4>
         <Form.Group widths="equal">
