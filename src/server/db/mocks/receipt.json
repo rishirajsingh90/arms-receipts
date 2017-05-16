@@ -40,11 +40,18 @@
       "total":2000
     },
     "aircraftCharter":{
-      "providerRate":0,
-      "total":0
+      "provider":"Charter 1",
+      "aircraftType":"jet",
+      "fromCity":"Delhi",
+      "toCity":"Kolkata",
+      "startDate":"05-05-2017",
+      "endDate":"07-05-2017",
+      "amount":2,
+      "flyingTime":3,
+      "total":2000
     },
     "ambulanceFee":{
-      "provider":"Transport 2",
+      "provider":"Ambulance 2",
       "fromCity":"Chicago",
       "toCity":"I",
       "startDate":"05-05-2017",
@@ -98,12 +105,19 @@
       "ticketPrice":2000,
       "total":2000
     },
-    "airlineCharter":{
-      "providerRate":0,
-      "total":100
+    "aircraftCharter":{
+      "provider":"Charter 1",
+      "aircraftType":"jet",
+      "fromCity":"Delhi",
+      "toCity":"Kolkata",
+      "startDate":"05-05-2017",
+      "endDate":"07-05-2017",
+      "amount":2,
+      "flyingTime":3,
+      "total":2000
     },
     "ambulanceFee":{
-      "provider":"Transport 2",
+      "provider":"Ambulance 2",
       "fromCity":"Chicago",
       "toCity":"I",
       "startDate":"05-05-2017",
@@ -157,12 +171,19 @@
       "ticketPrice":2000,
       "total":2000
     },
-    "airlineCharter":{
-      "providerRate":0,
-      "total":200
+    "aircraftCharter":{
+      "provider":"Charter 1",
+      "aircraftType":"jet",
+      "fromCity":"Delhi",
+      "toCity":"Kolkata",
+      "startDate":"05-05-2017",
+      "endDate":"07-05-2017",
+      "amount":2,
+      "flyingTime":3,
+      "total":2000
     },
     "ambulanceFee":{
-      "provider":"Transport 2",
+      "provider":"Ambulance 2",
       "fromCity":"Chicago",
       "toCity":"I",
       "startDate":"05-05-2017",
@@ -216,12 +237,19 @@
       "ticketPrice":2000,
       "total":2000
     },
-    "airlineCharter":{
-      "providerRate":0,
-      "total":300
+    "aircraftCharter":{
+      "provider":"Charter 1",
+      "aircraftType":"jet",
+      "fromCity":"Delhi",
+      "toCity":"Kolkata",
+      "startDate":"05-05-2017",
+      "endDate":"07-05-2017",
+      "amount":2,
+      "flyingTime":3,
+      "total":2000
     },
     "ambulanceFee":{
-      "provider":"Transport 2",
+      "provider":"Ambulance 2",
       "fromCity":"Chicago",
       "toCity":"I",
       "startDate":"05-05-2017",

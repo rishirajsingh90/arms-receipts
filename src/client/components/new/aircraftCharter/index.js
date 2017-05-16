@@ -7,7 +7,9 @@ import reduce from 'lodash/reduce';
 class AircraftCharter extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: {}
+    };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -15,6 +17,17 @@ class AircraftCharter extends Component {
   }
   componentDidMount() {
     this.getAirlines();
+  }
+  componentWillReceiveProps() {
+    if (this.props.existingAircraftCharter) {
+      this.setState({ provider: this.props.existingAircraftCharter.provider });
+      this.setState({ aircraftType: this.props.existingAircraftCharter.aircraftType });
+      this.setState({ fromCity: this.props.existingAircraftCharter.fromCity });
+      this.setState({ toCity: this.props.existingAircraftCharter.toCity });
+      this.setState({ startDate: this.props.existingAircraftCharter.startDate });
+      this.setState({ endDate: this.props.existingAircraftCharter.endDate });
+      this.setState({ flyingTime: this.props.existingAircraftCharter.flyingTime });
+    }
   }
   getAirlines() {
     Client.getAirlines((airlines) => {
@@ -86,22 +99,20 @@ class AircraftCharter extends Component {
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
-          <Form.Field
+          <Form.Input
             name='startDate'
             placeholder='DD/MM/YYYY'
-            control={Input}
-            label="Start"
-            disabled={!this.state.provider}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
-            error={this.state.error} />
-          <Form.Field
+            label='Start'
+            defaultValue={this.state.startDate}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            error={this.state.error.startDate} />
+          <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
-            control={Input}
-            label="End"
-            disabled={!this.state.provider}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
-            error={this.state.error} />
+            label='End'
+            defaultValue={this.state.endDate}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            error={this.state.error.endDate} />
         </Form.Group>
         <h4>Charter Information</h4>
         <Form.Group widths="equal">
