@@ -9,7 +9,8 @@ class CaseFees extends Component {
     super(props);
     this.state = {
       companies: [],
-      countries: []
+      countries: [],
+      error: {}
     };
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -17,6 +18,17 @@ class CaseFees extends Component {
   componentDidMount() {
     this.getCompanies();
     this.getCountries();
+  }
+  componentWillReceiveProps() {
+    if (this.props.existingCaseFees) {
+      this.setState({ company: this.props.existingCaseFees.company });
+      this.setState({ country: this.props.existingCaseFees.country });
+      this.setState({ caseType: this.props.existingCaseFees.caseType });
+      this.setState({ amount: this.props.existingCaseFees.amount });
+      this.setState({ repatriation: this.props.existingCaseFees.repatriation });
+      this.setState({ doctorEscort: this.props.existingCaseFees.doctorEscort });
+      this.setState({ nurseEscort: this.props.existingCaseFees.nurseEscort });
+    }
   }
   getCompanies() {
     Client.getCompanies((companies) => {
@@ -98,13 +110,13 @@ class CaseFees extends Component {
         <h4>Case Details</h4>
         <Form.Group>
           <Form.Checkbox
-            name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={this.state.repatriation}
+            name='repatriation' label='Repatriation' onChange={this.handleSelectChange} checked={!!this.state.repatriation}
             disabled={!this.state.company} />
           <Form.Checkbox
-            name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={this.state.doctorEscort}
+            name='doctorEscort' label='Doctor Escort' onChange={this.handleSelectChange} checked={!!this.state.doctorEscort}
             disabled={!this.state.company} />
           <Form.Checkbox
-            name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={this.state.nurseEscort}
+            name='nurseEscort' label='Nurse Escort' onChange={this.handleSelectChange}  checked={!!this.state.nurseEscort}
             disabled={!this.state.company} />
         </Form.Group>
       </div>

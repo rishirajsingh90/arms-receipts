@@ -5,11 +5,13 @@ function handleSelectChange(e, { name, value, checked }, ctx) {
     updateTotals(ctx);
   });
 }
+
 function handleDropDownChange(e, { id, value }, ctx) {
   return ctx.setState({ [id]: value }, () => {
     updateTotals(ctx);
   });
 }
+
 function handleChange(input, value, ctx, isText) {
   if (!isText) {
     value = value ? parseInt(value, 10) : 0;
@@ -34,7 +36,27 @@ function handleEndDate(date, ctx) {
 function handleDOB(date, ctx) {
   ctx.setState({ dob: date }, () => {
     updateTotals(ctx);
-  });}
+  });
+}
+
+function handleDate(name, date, ctx) {
+  const tokens = date.split('/');
+  let error = null;
+  if (!tokens || tokens.length !== 3 || tokens[2].length !== 4 || tokens[1].length !== 2 || tokens[0].length !== 2) {
+    error = true;
+  }
+  try {
+    new Date(tokens[2], tokens[1], tokens[0]);
+  } catch (ex) {
+    error = true;
+  }
+  let errorObj = ctx.state.error;
+  errorObj[name] = error;
+  ctx.setState({ error: errorObj });
+  ctx.setState({ [name]: date }, () => {
+    updateTotals(ctx);
+  });
+}
 
 function updateTotals(ctx) {
   switch (ctx.props.activeStep) {
@@ -65,5 +87,6 @@ function updateTotals(ctx) {
   }
 }
 
-const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, handleDOB };
+const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, handleDOB,
+  handleDate };
 export default ReceiptHandler;

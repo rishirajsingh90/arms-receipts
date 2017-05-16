@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
-import DatePicker from 'react-datepicker';
 
 class PatientDetails extends Component {
   constructor (props) {
     super(props);
-    this.state = {};
-    this.handleDOB = this.handleDOB.bind(this);
+    this.state = {
+      error: {}
+    };
   }
-  handleDOB(date) {
-    ReceiptHandler.handleDOB(date, this);
+  componentWillReceiveProps() {
+    if (this.props.existingPatientDetails) {
+      this.setState({ firstName: this.props.existingPatientDetails.firstName });
+      this.setState({ lastName: this.props.existingPatientDetails.lastName });
+      this.setState({ dob: this.props.existingPatientDetails.dob });
+    }
   }
   render() {
 
@@ -23,23 +27,22 @@ class PatientDetails extends Component {
         <h4>Patient Information</h4>
         <Form.Group widths="equal">
           <Form.Input
-            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true)}
+            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this)}
             defaultValue={this.state.firstName} name='firstName' label="First name">
           </Form.Input>
           <Form.Input
-            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true)}
+            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this)}
             defaultValue={this.state.lastName} name='lastName' label="Last name">
           </Form.Input>
         </Form.Group>
-        <h4>Date of Birth</h4>
-        <Form.Group>
-          <Form.Field
-            name='dateOfBirth'
-            placeholderText='Date of Birth'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.dob}
-            onChange={this.handleDOB}
-            control={DatePicker} />
+        <Form.Group widths="equal">
+          <Form.Input
+            name='dob'
+            placeholder='DD/MM/YYYY'
+            label='Date of birth'
+            defaultValue={this.state.dob}
+            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this, true)}
+            error={this.state.error.dob} />
         </Form.Group>
       </div>
     );

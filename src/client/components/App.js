@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Header from './common/Header';
 import { Container } from 'semantic-ui-react';
 import { styles } from './styles';
-import 'react-datepicker/dist/react-datepicker.min.js';
-import 'react-datepicker/dist/react-datepicker.css';
 
 class App extends Component {
   render() {

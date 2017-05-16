@@ -16,13 +16,23 @@ class NewReceipt extends Component {
     super();
     this.state = {
       receiptDescription: "",
-      isLoading: false
+      isLoading: false,
+      existingReceipt: {}
     };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   setStep(activeStep) {
     this.setState({ activeStep: activeStep });
+  }
+  componentDidMount() {
+    if (this.props.routeParams.receiptId) {
+      Client.search(this.props.routeParams.receiptId, (receipts) => {
+        const existingReceipt = receipts[0];
+        this.setState({ existingReceipt });
+        this.setState({ description: existingReceipt.description });
+      });
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -45,18 +55,17 @@ class NewReceipt extends Component {
           <h4>Receipt Description</h4>
           <Form.Group widths="equal">
             <Form.Input
-              placeholder='Receipt Description' type='text'
-              value={this.state.receiptDescription} onChange={e => this.setState({ receiptDescription: e.target.value })}
-              name='description' error={!this.state.receiptDescription}>
+              placeholder='Receipt Description' type='text' value={this.state.description}
+              onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description}>
             </Form.Input>
           </Form.Group>
           <Divider />
-          <PatientDetails activeStep={this.state.activeStep} />
-          <CaseFees activeStep={this.state.activeStep} />
-          <CarTransport activeStep={this.state.activeStep} />
-          <AirlineTickets activeStep={this.state.activeStep} />
-          <AircraftCharter activeStep={this.state.activeStep} />
-          <AmbulanceFees activeStep={this.state.activeStep} />
+          <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
+          <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee} />
+          <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} />
+          <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} />
+          <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
+          <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} />
           <Form.Button content='Create receipt' />
         </Form>
       </div>

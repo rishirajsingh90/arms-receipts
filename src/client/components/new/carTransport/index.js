@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown } from 'semantic-ui-react';
-import DatePicker from 'react-datepicker';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
@@ -9,7 +8,8 @@ class CarTransport extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      carProviders: []
+      carProviders: [],
+      error: {}
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -17,6 +17,16 @@ class CarTransport extends Component {
   }
   componentDidMount() {
     this.getCarProviders();
+  }
+  componentWillReceiveProps() {
+    if (this.props.existingCarTransport) {
+      this.setState({ provider: this.props.existingCarTransport.provider });
+      this.setState({ fromCity: this.props.existingCarTransport.fromCity });
+      this.setState({ toCity: this.props.existingCarTransport.toCity });
+      this.setState({ startDate: this.props.existingCarTransport.startDate });
+      this.setState({ endDate: this.props.existingCarTransport.endDate });
+      this.setState({ distance: this.props.existingCarTransport.distance });
+    }
   }
   getCarProviders() {
     Client.getCarProviders((carProviders) => {
@@ -69,30 +79,20 @@ class CarTransport extends Component {
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
-          <Form.Field
+          <Form.Input
             name='startDate'
-            placeholderText='Start Date'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.startDate}
-            onChange={this.handleStartDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selectsStart
-            control={DatePicker}
-            label="Start"
-            disabled={!this.state.provider} />
-          <Form.Field
+            placeholder='DD/MM/YYYY'
+            label='Start'
+            defaultValue={this.state.startDate}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            error={this.state.error.startDate} />
+          <Form.Input
             name='endDate'
-            placeholderText='End Date'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.endDate}
-            onChange={this.handleEndDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selectsEnd
-            control={DatePicker}
-            label="End"
-            disabled={!this.state.provider} />
+            placeholder='DD/MM/YYYY'
+            label='End'
+            defaultValue={this.state.endDate}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            error={this.state.error.endDate} />
         </Form.Group>
         <h4>Transport Information</h4>
         <Form.Group widths="equal">

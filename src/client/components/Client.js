@@ -2,8 +2,8 @@
 import 'whatwg-fetch';
 
 function search(query, cb) {
-  query = query ? query : "";
-  return fetch(`api/receipt?q=${query}`, {
+  query = query ? query : '';
+  return fetch(`/api/receipt?receiptId=${query}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -14,14 +14,14 @@ function search(query, cb) {
 }
 
 function getCompanies(cb) {
-  return fetch(`api/companies`, {
+  return fetch(`/api/companies`, {
   }).then(checkStatus)
     .then(parseJSON)
     .then(cb);
 }
 
 function getCountries(cb) {
-  return fetch(`api/countries`, {
+  return fetch(`/api/countries`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function getCountries(cb) {
 }
 
 function getCarProviders(cb) {
-  return fetch(`api/car-providers`, {
+  return fetch(`/api/car-providers`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function getCarProviders(cb) {
 }
 
 function getAmbulanceProviders(cb) {
-  return fetch(`api/ambulance-providers`, {
+  return fetch(`/api/ambulance-providers`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function getAmbulanceProviders(cb) {
 }
 
 function getAirlines(cb) {
-  return fetch(`api/airlines`, {
+  return fetch(`/api/airlines`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function getAirlines(cb) {
 }
 
 function addReceipt(receipt, cb) {
-  return fetch(`api/receipt`, {
+  return fetch(`/api/receipt`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

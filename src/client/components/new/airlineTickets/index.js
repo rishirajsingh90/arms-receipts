@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
-import DatePicker from "react-datepicker";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
@@ -8,7 +7,9 @@ import reduce from 'lodash/reduce';
 class AirlineTickets extends Component {
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: {}
+    };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -16,6 +17,17 @@ class AirlineTickets extends Component {
   }
   componentDidMount() {
     this.getAirlines();
+  }
+  componentWillReceiveProps() {
+    if (this.props.existingAirlineTickets) {
+      this.setState({ provider: this.props.existingAirlineTickets.provider });
+      this.setState({ flightClass: this.props.existingAirlineTickets.flightClass });
+      this.setState({ fromCity: this.props.existingAirlineTickets.fromCity });
+      this.setState({ toCity: this.props.existingAirlineTickets.toCity });
+      this.setState({ startDate: this.props.existingAirlineTickets.startDate });
+      this.setState({ endDate: this.props.existingAirlineTickets.endDate });
+      this.setState({ amount: this.props.existingAirlineTickets.amount });
+    }
   }
   getAirlines() {
     Client.getAirlines((airlines) => {
@@ -90,30 +102,20 @@ class AirlineTickets extends Component {
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
-          <Form.Field
+          <Form.Input
             name='startDate'
-            placeholderText='Start Date'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.startDate}
-            onChange={this.handleStartDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selectsStart
-            control={DatePicker}
-            label="Start"
-            disabled={!this.state.provider} />
-          <Form.Field
+            placeholder='DD/MM/YYYY'
+            label='Start'
+            defaultValue={this.state.startDate}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            error={this.state.error.startDate} />
+          <Form.Input
             name='endDate'
-            placeholderText='End Date'
-            dateFormat='DD/MM/YYYY'
-            selected={this.state.endDate}
-            onChange={this.handleEndDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selectsEnd
-            control={DatePicker}
-            label="End"
-            disabled={!this.state.provider} />
+            placeholder='DD/MM/YYYY'
+            label='End'
+            defaultValue={this.state.endDate}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            error={this.state.error.endDate} />
         </Form.Group>
         <h4>Travel Information</h4>
         <Form.Group widths="equal">
