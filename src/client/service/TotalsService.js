@@ -86,11 +86,18 @@ function calculateAircraftCharterTotals(aircraftCharter) {
 
 function calculateAmbulanceFeeTotals(ambulanceFee, mileageRate) {
   ambulanceFeeTotals.mileagePrice = mileageRate * ambulanceFee.distance || 0;
-  ambulanceFeeTotals.total = carTransportTotals.mileagePrice || 0;
-  ambulanceFeeTotals = update(ambulanceFee, { $merge: carTransportTotals });
+  ambulanceFeeTotals.total = ambulanceFeeTotals.mileagePrice || 0;
+  ambulanceFeeTotals = update(ambulanceFee, { $merge: ambulanceFeeTotals });
 }
 
 function getReceipt(description) {
+  // scrub unneeded data
+  aircraftCharterTotals.airlines = undefined;
+  airlineTicketTotals.airlines = undefined;
+  ambulanceFeeTotals.ambulanceProviders = undefined;
+  carTransportTotals.carProviders = undefined;
+  caseFeeTotals.companies = undefined;
+  caseFeeTotals.countries = undefined;
   return {
     description: description,
     patientDetails: patientDetails,

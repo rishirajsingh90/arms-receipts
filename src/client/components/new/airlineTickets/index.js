@@ -84,12 +84,15 @@ class AirlineTickets extends Component {
         </Form.Group>
         <h4>Ticket Class</h4>
         <Form.Group>
-          <Form.Radio name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'} onChange={this.handleSelectChange}
-            disabled={!this.state.provider} />
-          <Form.Radio name='flightClass' label='Business' value='business' checked={flightClass === 'business'} onChange={this.handleSelectChange}
-            disabled={!this.state.provider} />
-          <Form.Radio name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'} onChange={this.handleSelectChange}
-            disabled={!this.state.provider} />
+          <Form.Radio
+            name='flightClass' label='Economy' value='economy' checked={flightClass === 'economy'}
+            onChange={this.handleSelectChange} disabled={!this.state.provider} />
+          <Form.Radio
+            name='flightClass' label='Business' value='business' checked={flightClass === 'business'}
+            onChange={this.handleSelectChange} disabled={!this.state.provider} />
+          <Form.Radio
+            name='flightClass' label='Stretcher' value='stretcher' checked={flightClass === 'stretcher'}
+            onChange={this.handleSelectChange} disabled={!this.state.provider} />
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
@@ -135,6 +138,7 @@ class AirlineTickets extends Component {
 
 AirlineTickets.propTypes = {
   activeStep: React.PropTypes.string,
+  existingAirlineTickets: React.PropTypes.object,
   updateReceipt: React.PropTypes.func
 };
 

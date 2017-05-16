@@ -70,12 +70,12 @@ class CarTransport extends Component {
         </Form.Group>
         <h4>Cities</h4>
         <Form.Group widths="equal">
-          <Form.Field
+          <Form.Input
             placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
-            defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" disabled={!this.state.provider} />
-          <Form.Field
+            defaultValue={this.state.fromCity} label="From" name="fromCity" disabled={!this.state.provider} />
+          <Form.Input
             placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
-            defaultValue={this.state.toCity} label="To" control={Input} name="toCity" disabled={!this.state.provider} />
+            defaultValue={this.state.toCity} label="To" name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
@@ -84,14 +84,14 @@ class CarTransport extends Component {
             placeholder='DD/MM/YYYY'
             label='Start'
             defaultValue={this.state.startDate}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
             error={this.state.error.startDate} />
           <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
             label='End'
             defaultValue={this.state.endDate}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
             error={this.state.error.endDate} />
         </Form.Group>
         <h4>Transport Information</h4>
@@ -109,7 +109,8 @@ class CarTransport extends Component {
 }
 
 CarTransport.propTypes = {
-  activeStep: React.PropTypes.string
+  activeStep: React.PropTypes.string,
+  existingCarTransport: React.PropTypes.object
 };
 
 export default CarTransport;

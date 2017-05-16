@@ -8,8 +8,8 @@ class ReviewReceipts extends Component {
     this.state = {
       receipts: []
     };
-    this.finalizeReceipt = this.finalizeReceipt.bind(this);
-    this.deleteReceipt = this.deleteReceipt.bind(this);
+    this.handleFinalizeReceipt = this.handleFinalizeReceipt.bind(this);
+    this.handleDeleteReceipt = this.handleDeleteReceipt.bind(this);
   }
   componentDidMount() {
     this.getReceipts();
@@ -19,10 +19,10 @@ class ReviewReceipts extends Component {
       this.setState({ receipts: receipts });
     });
   }
-  finalizeReceipt() {
+  handleFinalizeReceipt() {
     console.log('finalize');
   }
-  deleteReceipt() {
+  handleDeleteReceipt() {
     console.log('delete');
   }
   render() {
@@ -55,13 +55,13 @@ class ReviewReceipts extends Component {
                   <Table.Cell positive className='right aligned'>${receipt.total}</Table.Cell>
                   <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
                   <Table.Cell>
-                    <Button animated='vertical' positive onClick={this.finalizeReceipt} >
+                    <Button animated='vertical' positive onClick={this.handleFinalizeReceipt} >
                       <Button.Content hidden>Finalize</Button.Content>
                       <Button.Content visible>
                         <Icon name='check' />
                       </Button.Content>
                     </Button>
-                    <Button animated='vertical' negative onClick={this.deleteReceipt}>
+                    <Button animated='vertical' negative onClick={this.handleDeleteReceipt}>
                       <Button.Content hidden>Delete</Button.Content>
                       <Button.Content visible>
                         <Icon name='delete' />

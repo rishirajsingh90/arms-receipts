@@ -125,7 +125,8 @@ class CaseFees extends Component {
 }
 
 CaseFees.propTypes = {
-  activeStep: React.PropTypes.string
+  activeStep: React.PropTypes.string,
+  existingCaseFees: React.PropTypes.object
 };
 
 export default CaseFees;

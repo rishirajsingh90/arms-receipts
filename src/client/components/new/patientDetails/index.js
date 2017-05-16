@@ -27,13 +27,11 @@ class PatientDetails extends Component {
         <h4>Patient Information</h4>
         <Form.Group widths="equal">
           <Form.Input
-            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this)}
-            defaultValue={this.state.firstName} name='firstName' label="First name">
-          </Form.Input>
+            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true)}
+            defaultValue={this.state.firstName} name='firstName' label="First name" />
           <Form.Input
-            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this)}
-            defaultValue={this.state.lastName} name='lastName' label="Last name">
-          </Form.Input>
+            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true)}
+            defaultValue={this.state.lastName} name='lastName' label="Last name" />
         </Form.Group>
         <Form.Group widths="equal">
           <Form.Input
@@ -41,7 +39,7 @@ class PatientDetails extends Component {
             placeholder='DD/MM/YYYY'
             label='Date of birth'
             defaultValue={this.state.dob}
-            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this)}
             error={this.state.error.dob} />
         </Form.Group>
       </div>
@@ -50,7 +48,8 @@ class PatientDetails extends Component {
 }
 
 PatientDetails.propTypes = {
-  activeStep: React.PropTypes.string
+  activeStep: React.PropTypes.string,
+  existingPatientDetails: React.PropTypes.object
 };
 
 export default PatientDetails;

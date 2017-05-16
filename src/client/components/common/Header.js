@@ -21,38 +21,38 @@ class Header extends Component {
 
     return (
       <div>
-         <Menu style={styles.armsRed}>
-           <Menu.Item
-             id='newReceipt'
-             active={activeItem === 'new'}
-             as={Link}
-             name='new'
-             onClick={this.handleItemClick}
-             to="/new">
-             <Icon name='plus' />
-             New
-           </Menu.Item>
-           <Menu.Item
-             id='reviewReceipts'
-             active={activeItem === 'review'}
-             as={Link}
-             name='review'
-             onClick={this.handleItemClick}
-             to="/review" >
-             <Icon name='checkmark box' />
-             Review
-           </Menu.Item>
-           <Menu.Item
-             id='findReceipt'
-             active={activeItem === 'search'}
-             as={Link}
-             name='search'
-             onClick={this.handleItemClick}
-             to="/search" >
-             <Icon name='search' />
-             Search
-           </Menu.Item>
-         </Menu>
+        <Menu style={styles.armsRed}>
+          <Menu.Item
+            id='newReceipt'
+            active={activeItem === 'new'}
+            as={Link}
+            name='new'
+            onClick={this.handleItemClick}
+            to="/new">
+            <Icon name='plus' />
+            New
+          </Menu.Item>
+          <Menu.Item
+            id='reviewReceipts'
+            active={activeItem === 'review'}
+            as={Link}
+            name='review'
+            onClick={this.handleItemClick}
+            to="/review" >
+            <Icon name='checkmark box' />
+            Review
+          </Menu.Item>
+          <Menu.Item
+            id='findReceipt'
+            active={activeItem === 'search'}
+            as={Link}
+            name='search'
+            onClick={this.handleItemClick}
+            to="/search" >
+            <Icon name='search' />
+            Search
+          </Menu.Item>
+        </Menu>
       </div>
     );
   }

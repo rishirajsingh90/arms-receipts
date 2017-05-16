@@ -15,15 +15,12 @@ class NewReceipt extends Component {
   constructor() {
     super();
     this.state = {
-      receiptDescription: "",
+      description: "",
       isLoading: false,
       existingReceipt: {}
     };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  setStep(activeStep) {
-    this.setState({ activeStep: activeStep });
   }
   componentDidMount() {
     if (this.props.routeParams.receiptId) {
@@ -34,10 +31,13 @@ class NewReceipt extends Component {
       });
     }
   }
+  setStep(activeStep) {
+    this.setState({ activeStep: activeStep });
+  }
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ isLoading: true }, () => {
-      Client.addReceipt(TotalsService.getReceipt(this.state.receiptDescription)).then(function(response) {
+      Client.addReceipt(TotalsService.getReceipt(this.state.description)).then(function(response) {
         browserHistory.push({
           pathName: 'review',
           state: {
@@ -56,8 +56,7 @@ class NewReceipt extends Component {
           <Form.Group widths="equal">
             <Form.Input
               placeholder='Receipt Description' type='text' value={this.state.description}
-              onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description}>
-            </Form.Input>
+              onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description} />
           </Form.Group>
           <Divider />
           <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
@@ -72,5 +71,9 @@ class NewReceipt extends Component {
     );
   }
 }
+
+NewReceipt.propTypes = {
+  routeParams: React.PropTypes.object
+};
 
 export default NewReceipt;
