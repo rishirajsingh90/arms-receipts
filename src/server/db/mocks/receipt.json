@@ -20,7 +20,7 @@
     "carTransport":{
       "provider":"Transport 2",
       "fromCity":"Chicago",
-      "toCity":"I",
+      "toCity":"Indianapolis",
       "startDate":"05-05-2017",
       "endDate":"08-05-2017",
       "distance":1,
@@ -31,15 +31,15 @@
     "airlineTicket":{
       "provider":"American",
       "flightClass":"business",
-      "fromCity":null,
-      "toCity":null,
+      "fromCity":"Delhi",
+      "toCity":"Kolkata",
       "startDate":"05-05-2017",
       "endDate":"07-05-2017",
       "amount":2,
       "ticketPrice":2000,
       "total":2000
     },
-    "airlineCharter":{
+    "aircraftCharter":{
       "providerRate":0,
       "total":0
     },
@@ -90,8 +90,8 @@
     "airlineTicket":{
       "provider":"American",
       "flightClass":"business",
-      "fromCity":null,
-      "toCity":null,
+      "fromCity":"Delhi",
+      "toCity":"Kolkata",
       "startDate":"05-05-2017",
       "endDate":"06-05-2017",
       "amount":2,

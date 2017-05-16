@@ -30,6 +30,7 @@ class NewReceipt extends Component {
       Client.search(this.props.routeParams.receiptId, (receipts) => {
         const existingReceipt = receipts[0];
         this.setState({ existingReceipt });
+        this.setState({ description: existingReceipt.description });
       });
     }
   }
@@ -54,8 +55,7 @@ class NewReceipt extends Component {
           <h4>Receipt Description</h4>
           <Form.Group widths="equal">
             <Form.Input
-              placeholder='Receipt Description' type='text'
-              value={this.state.existingReceipt.description ? this.state.existingReceipt.description : this.state.description}
+              placeholder='Receipt Description' type='text' value={this.state.description}
               onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description}>
             </Form.Input>
           </Form.Group>
@@ -63,9 +63,9 @@ class NewReceipt extends Component {
           <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
           <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee} />
           <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} />
-          <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTickets} />
+          <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} />
           <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
-          <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFees} />
+          <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} />
           <Form.Button content='Create receipt' />
         </Form>
       </div>

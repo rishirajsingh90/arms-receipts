@@ -18,11 +18,9 @@ let carTransportTotals = {
 };
 
 let airlineTicketTotals = {
-  ticketPrice: 0,
-  total: 0
 };
 
-let airlineCharterTotals = {
+let aircraftCharterTotals = {
   providerRate: 0,
   total: 0
 };
@@ -72,9 +70,7 @@ function calculateCarTransportTotals(carTransport, mileageRate) {
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
-  airlineTicketTotals.ticketPrice = airlineTicket.amount || 0;
-  airlineTicketTotals.total = airlineTicketTotals.ticketPrice || 0;
-  airlineTicketTotals = update(airlineTicket, { $merge: airlineTicketTotals });
+  airlineTicketTotals = airlineTicket;
 }
 
 function calculateAircraftCharterTotals(aircraftCharter) {
@@ -84,8 +80,8 @@ function calculateAircraftCharterTotals(aircraftCharter) {
   if (!selectedAircraft) {
     return;
   }
-  airlineCharterTotals.total = aircraftCharter.flyingTime * selectedAircraft.rate || 0;
-  airlineCharterTotals = update(aircraftCharter, { $merge: airlineCharterTotals });
+  aircraftCharterTotals.total = aircraftCharter.flyingTime * selectedAircraft.rate || 0;
+  aircraftCharterTotals = update(aircraftCharter, { $merge: aircraftCharterTotals });
 }
 
 function calculateAmbulanceFeeTotals(ambulanceFee, mileageRate) {
@@ -101,9 +97,9 @@ function getReceipt(description) {
     caseFee: caseFeeTotals,
     carTransport: carTransportTotals,
     airlineTicket: airlineTicketTotals,
-    airlineCharter: airlineCharterTotals,
+    aircraftCharter: aircraftCharterTotals,
     ambulanceFee: ambulanceFeeTotals,
-    total: caseFeeTotals.total + carTransportTotals.total + airlineTicketTotals.total + airlineCharterTotals.total + ambulanceFeeTotals.total,
+    total: caseFeeTotals.total + carTransportTotals.total + airlineTicketTotals.total + aircraftCharterTotals.total + ambulanceFeeTotals.total,
     email: 'rishis@arms.com' // TODO fix this
   };
 }
