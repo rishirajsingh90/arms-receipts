@@ -8,7 +8,8 @@ class CarTransport extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      carProviders: []
+      carProviders: [],
+      error: {}
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -16,6 +17,16 @@ class CarTransport extends Component {
   }
   componentDidMount() {
     this.getCarProviders();
+  }
+  componentWillReceiveProps() {
+    if (this.props.existingCarTransport) {
+      this.setState({ provider: this.props.existingCarTransport.provider });
+      this.setState({ fromCity: this.props.existingCarTransport.fromCity });
+      this.setState({ toCity: this.props.existingCarTransport.toCity });
+      this.setState({ startDate: this.props.existingCarTransport.startDate });
+      this.setState({ endDate: this.props.existingCarTransport.endDate });
+      this.setState({ distance: this.props.existingCarTransport.distance });
+    }
   }
   getCarProviders() {
     Client.getCarProviders((carProviders) => {
@@ -68,22 +79,20 @@ class CarTransport extends Component {
         </Form.Group>
         <h4>Dates</h4>
         <Form.Group widths="equal">
-          <Form.Field
+          <Form.Input
             name='startDate'
             placeholder='DD/MM/YYYY'
-            control={Input}
-            label="Start"
-            disabled={!this.state.provider}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
-            error={this.state.error} />
-          <Form.Field
+            label='Start'
+            defaultValue={this.state.startDate}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            error={this.state.error.startDate} />
+          <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
-            control={Input}
-            label="End"
-            disabled={!this.state.provider}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
-            error={this.state.error} />
+            label='End'
+            defaultValue={this.state.endDate}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            error={this.state.error.endDate} />
         </Form.Group>
         <h4>Transport Information</h4>
         <Form.Group widths="equal">

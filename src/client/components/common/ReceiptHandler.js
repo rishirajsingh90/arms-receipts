@@ -50,11 +50,9 @@ function handleDate(name, date, ctx) {
   } catch (ex) {
     error = true;
   }
-  ctx.setState({
-    error: {
-      [name]: error
-    }
-  });
+  let errorObj = ctx.state.error;
+  errorObj[name] = error;
+  ctx.setState({ error: errorObj });
   ctx.setState({ [name]: date }, () => {
     updateTotals(ctx);
   });
