@@ -37,7 +37,7 @@ class NewReceipt extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ isLoading: true }, () => {
-      Client.addReceipt(TotalsService.getReceipt(this.state.description)).then(function(response) {
+      Client.addReceipt(TotalsService.buildReceipt(this.state.description)).then(function(response) {
         browserHistory.push({
           pathName: 'review',
           state: {

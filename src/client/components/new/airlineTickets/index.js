@@ -97,10 +97,10 @@ class AirlineTickets extends Component {
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
-            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this)}
+            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
             defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" disabled={!this.state.provider} />
           <Form.Field
-            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this)}
+            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
             defaultValue={this.state.toCity} label="To" control="input" name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
@@ -110,14 +110,14 @@ class AirlineTickets extends Component {
             placeholder='DD/MM/YYYY'
             label='Start'
             defaultValue={this.state.startDate}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
             error={this.state.error.startDate} />
           <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
             label='End'
             defaultValue={this.state.endDate}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
             error={this.state.error.endDate} />
         </Form.Group>
         <h4>Travel Information</h4>

@@ -104,14 +104,14 @@ class AircraftCharter extends Component {
             placeholder='DD/MM/YYYY'
             label='Start'
             defaultValue={this.state.startDate}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
             error={this.state.error.startDate} />
           <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
             label='End'
             defaultValue={this.state.endDate}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
             error={this.state.error.endDate} />
         </Form.Group>
         <h4>Charter Information</h4>

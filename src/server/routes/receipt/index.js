@@ -2,7 +2,7 @@
 const db = require('../../db');
 
 exports.get = function(receiptId) {
-  let query = receiptId ? { "_id": receiptId } : {};
+  let query = receiptId ? { "_id": new db.createObjectId(receiptId) } : {};
   return db.getClient().collection('receipt').find(query);
 };
 
