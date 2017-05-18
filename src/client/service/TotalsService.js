@@ -84,9 +84,10 @@ function calculateAmbulanceFeeTotals(ambulanceFee, mileageRate) {
   ambulanceFeeTotals = ambulanceFee;
 }
 
-function buildReceipt(description) {
+function buildReceipt(_id, description) {
   // scrub unneeded data
   return {
+    _id: _id || undefined,
     description: description,
     patientDetails: {
       dob: patientDetails.dob,

@@ -32,9 +32,9 @@ router.get('/receipt', (req, res) => {
 });
 
 router.post('/receipt', (req, res) => {
-  receipt.add(req.body).then(function(response) {
+  receipt.upsert(req.body).then(function(response) {
     res.status(200).send(JSON.stringify({
-      message: 'Receipt created with id ' + response.insertedId.toHexString()
+      message: 'Receipt upserted with id ' + response.insertedId ? req.body._id : response.updatedId.toHexString()
     }));
   });
 });
