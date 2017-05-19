@@ -29,13 +29,8 @@ class ReviewReceipts extends Component {
   }
   handleDeleteReceipt() {
     Client.deleteReceipt(this.state.receiptToDelete, (response) => {
-      this.setState({ receiptToDelete: undefined });
-      browserHistory.push({
-        pathName: 'review',
-        state: {
-          receiptMessage: response.message
-        }
-      });
+      this.setState({ receiptMessage: response.message });
+      this.getReceipts();
     });
     this.handleDismissModal();
   }
