@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Divider } from 'semantic-ui-react';
-import CreateReceiptSteps from '../common/CreateReceiptSteps';
+import CreateReceiptSteps from './createReceiptSteps';
 import PatientDetails from './patientDetails';
 import CaseFees from './caseFees';
 import CarTransport from './carTransport';
@@ -42,7 +42,7 @@ class NewReceipt extends Component {
         browserHistory.push({
           pathName: 'review',
           state: {
-            receiptCreatedMessage: response.message
+            receiptMessage: response.message
           }
         });
       });

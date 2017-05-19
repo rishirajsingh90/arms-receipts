@@ -64,7 +64,7 @@ function calculateCarTransportTotals(carTransport, mileageRate) {
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
-  airlineTicketTotals = airlineTicket && airlineTicket.amount ? airlineTicket : {amount: 0};
+  airlineTicketTotals = airlineTicket && airlineTicket.amount ? airlineTicket : { amount: 0 };
 }
 
 function calculateAircraftCharterTotals(aircraftCharter) {

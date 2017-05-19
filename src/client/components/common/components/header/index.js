@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router';
-import { styles } from '../styles';
+import { styles } from '../../../styles';
 
 class Header extends Component {
   constructor() {

@@ -77,6 +77,19 @@ function upsertReceipt(receipt, cb) {
     .then(cb);
 }
 
+function deleteReceipt(query, cb) {
+  query = query ? query : '';
+  return fetch(`/api/receipt?receiptId=${query}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -93,5 +106,6 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, upsertReceipt };
+const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, upsertReceipt,
+  deleteReceipt };
 export default Client;

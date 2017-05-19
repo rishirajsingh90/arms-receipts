@@ -31,6 +31,14 @@ router.get('/receipt', (req, res) => {
   });
 });
 
+router.delete('/receipt', (req, res) => {
+  receipt.delete(req.query.receiptId).then(function(response) {
+    res.status(200).send(JSON.stringify({
+      message: 'Receipt deleted with id ' + req.query.receiptId
+    }));
+  });
+});
+
 router.post('/receipt', (req, res) => {
   receipt.upsert(req.body).then(function(response) {
     res.status(200).send(JSON.stringify({

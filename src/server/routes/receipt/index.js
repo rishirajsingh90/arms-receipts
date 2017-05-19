@@ -10,6 +10,11 @@ exports.upsert = function(receipt) {
   return receipt._id ? updateReceipt(receipt) : insertReceipt(receipt);
 };
 
+exports.delete = function(receiptId) {
+  let query = { "_id": new db.createObjectId(receiptId) };
+  return db.getClient().collection('receipt').deleteOne(query);
+};
+
 function insertReceipt(receipt) {
   return db.getClient().collection('receipt').insertOne(receipt);
 }
