@@ -3,6 +3,7 @@ import { Form, Dropdown, Icon } from 'semantic-ui-react';
 import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import map from 'lodash/map';
+import TotalsService from '../../../service/TotalsService'
 
 class CaseFees extends Component {
   constructor (props) {
@@ -10,7 +11,8 @@ class CaseFees extends Component {
     this.state = {
       companies: [],
       countries: [],
-      error: {}
+      error: {},
+      amount: 0
     };
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -21,13 +23,15 @@ class CaseFees extends Component {
   }
   componentWillReceiveProps() {
     if (this.props.existingCaseFees) {
-      this.setState({ company: this.props.existingCaseFees.company });
-      this.setState({ country: this.props.existingCaseFees.country });
-      this.setState({ caseType: this.props.existingCaseFees.caseType });
-      this.setState({ amount: this.props.existingCaseFees.amount });
-      this.setState({ repatriation: this.props.existingCaseFees.repatriation });
-      this.setState({ doctorEscort: this.props.existingCaseFees.doctorEscort });
-      this.setState({ nurseEscort: this.props.existingCaseFees.nurseEscort });
+      this.setState({
+        company: this.props.existingCaseFees.company,
+        country: this.props.existingCaseFees.country,
+        caseType: this.props.existingCaseFees.caseType,
+        amount: this.props.existingCaseFees.amount,
+        repatriation: this.props.existingCaseFees.repatriation,
+        doctorEscort: this.props.existingCaseFees.doctorEscort,
+        nurseEscort: this.props.existingCaseFees.nurseEscort
+      }, () => TotalsService.calculateCaseFeeTotals(this.props.existingCaseFees));
     }
   }
   getCompanies() {
@@ -101,7 +105,7 @@ class CaseFees extends Component {
             onChange={this.handleSelectChange} disabled={!this.state.company} />
           <Form.Input
             iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-            onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} defaultValue={this.state.amount}
+            onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} value={this.state.amount}
             pattern="[0-9]*" name='amount'>
             <Icon name='dollar' />
             <input />

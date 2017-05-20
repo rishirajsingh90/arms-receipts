@@ -66,7 +66,7 @@ class NewReceipt extends Component {
           <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} />
           <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
           <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} />
-          <Form.Button content='Create receipt' />
+          <Form.Button content={this.props.routeParams.receiptId ? 'Update receipt' : 'Create receipt'} />
         </Form>
       </div>
     );

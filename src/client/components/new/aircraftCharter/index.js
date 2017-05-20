@@ -3,6 +3,7 @@ import { Form, Input, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
+import TotalsService from '../../../service/TotalsService'
 
 class AircraftCharter extends Component {
   constructor(props) {
@@ -20,13 +21,15 @@ class AircraftCharter extends Component {
   }
   componentWillReceiveProps() {
     if (this.props.existingAircraftCharter) {
-      this.setState({ provider: this.props.existingAircraftCharter.provider });
-      this.setState({ aircraftType: this.props.existingAircraftCharter.aircraftType });
-      this.setState({ fromCity: this.props.existingAircraftCharter.fromCity });
-      this.setState({ toCity: this.props.existingAircraftCharter.toCity });
-      this.setState({ startDate: this.props.existingAircraftCharter.startDate });
-      this.setState({ endDate: this.props.existingAircraftCharter.endDate });
-      this.setState({ flyingTime: this.props.existingAircraftCharter.flyingTime });
+      this.setState({
+        provider: this.props.existingAircraftCharter.provider,
+        aircraftType: this.props.existingAircraftCharter.aircraftType,
+        fromCity: this.props.existingAircraftCharter.fromCity,
+        toCity: this.props.existingAircraftCharter.toCity,
+        startDate: this.props.existingAircraftCharter.startDate,
+        endDate: this.props.existingAircraftCharter.endDate,
+        flyingTime: this.props.existingAircraftCharter.flyingTime
+      }, () => TotalsService.calculateAircraftCharterTotals(this.props.existingAircraftCharter));
     }
   }
   getAirlines() {

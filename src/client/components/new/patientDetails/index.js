@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import TotalsService from '../../../service/TotalsService'
 
 class PatientDetails extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      error: {}
+      error: {},
+      firstName: "",
+      lastName: "",
+      dob: ""
     };
   }
   componentWillReceiveProps() {
     if (this.props.existingPatientDetails) {
-      this.setState({ firstName: this.props.existingPatientDetails.firstName });
-      this.setState({ lastName: this.props.existingPatientDetails.lastName });
-      this.setState({ dob: this.props.existingPatientDetails.dob });
+      this.setState({
+        firstName: this.props.existingPatientDetails.firstName,
+        lastName: this.props.existingPatientDetails.lastName,
+        dob: this.props.existingPatientDetails.dob
+      }, () => TotalsService.setPatientDetails(this.props.existingPatientDetails));
     }
   }
   render() {
@@ -28,17 +34,17 @@ class PatientDetails extends Component {
         <Form.Group widths="equal">
           <Form.Input
             placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true)}
-            defaultValue={this.state.firstName} name='firstName' label="First name" />
+            value={this.state.firstName} name='firstName' label="First name" />
           <Form.Input
             placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true)}
-            defaultValue={this.state.lastName} name='lastName' label="Last name" />
+            value={this.state.lastName} name='lastName' label="Last name" />
         </Form.Group>
         <Form.Group widths="equal">
           <Form.Input
             name='dob'
             placeholder='DD/MM/YYYY'
             label='Date of birth'
-            defaultValue={this.state.dob}
+            value={this.state.dob}
             onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this)}
             error={this.state.error.dob} />
         </Form.Group>

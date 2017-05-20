@@ -3,6 +3,7 @@ import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
+import TotalsService from '../../../service/TotalsService'
 
 class AirlineTickets extends Component {
   constructor (props) {
@@ -20,13 +21,15 @@ class AirlineTickets extends Component {
   }
   componentWillReceiveProps() {
     if (this.props.existingAirlineTickets) {
-      this.setState({ provider: this.props.existingAirlineTickets.provider });
-      this.setState({ flightClass: this.props.existingAirlineTickets.flightClass });
-      this.setState({ fromCity: this.props.existingAirlineTickets.fromCity });
-      this.setState({ toCity: this.props.existingAirlineTickets.toCity });
-      this.setState({ startDate: this.props.existingAirlineTickets.startDate });
-      this.setState({ endDate: this.props.existingAirlineTickets.endDate });
-      this.setState({ amount: this.props.existingAirlineTickets.amount });
+      this.setState({
+        provider: this.props.existingAirlineTickets.provider,
+        flightClass: this.props.existingAirlineTickets.flightClass,
+        fromCity: this.props.existingAirlineTickets.fromCity,
+        toCity: this.props.existingAirlineTickets.toCity,
+        startDate: this.props.existingAirlineTickets.startDate,
+        endDate: this.props.existingAirlineTickets.endDate,
+        amount: this.props.existingAirlineTickets.amount
+      }, () => TotalsService.calculateAirlineTicketTotals(this.props.existingAirlineTickets));
     }
   }
   getAirlines() {

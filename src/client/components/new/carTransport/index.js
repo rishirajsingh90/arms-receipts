@@ -3,6 +3,7 @@ import { Form, Input, Dropdown } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
+import TotalsService from '../../../service/TotalsService'
 
 class CarTransport extends Component {
   constructor (props) {
@@ -20,12 +21,14 @@ class CarTransport extends Component {
   }
   componentWillReceiveProps() {
     if (this.props.existingCarTransport) {
-      this.setState({ provider: this.props.existingCarTransport.provider });
-      this.setState({ fromCity: this.props.existingCarTransport.fromCity });
-      this.setState({ toCity: this.props.existingCarTransport.toCity });
-      this.setState({ startDate: this.props.existingCarTransport.startDate });
-      this.setState({ endDate: this.props.existingCarTransport.endDate });
-      this.setState({ distance: this.props.existingCarTransport.distance });
+      this.setState({
+        provider: this.props.existingCarTransport.provider,
+        fromCity: this.props.existingCarTransport.fromCity,
+        toCity: this.props.existingCarTransport.toCity,
+        startDate: this.props.existingCarTransport.startDate,
+        endDate: this.props.existingCarTransport.endDate,
+        distance: this.props.existingCarTransport.distance
+      }, () => TotalsService.calculateCarTransportTotals(this.props.existingCarTransport));
     }
   }
   getCarProviders() {
