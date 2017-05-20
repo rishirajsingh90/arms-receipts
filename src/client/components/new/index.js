@@ -29,6 +29,8 @@ class NewReceipt extends Component {
         this.setState({ existingReceipt });
         this.setState({ description: existingReceipt.description });
       });
+    } else {
+      TotalsService.initTotals();
     }
   }
   setStep(activeStep) {

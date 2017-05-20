@@ -1,35 +1,45 @@
 import find from 'lodash/find';
 
 let patientDetails = {};
+let caseFeesTotals = {};
+let carTransportTotals = {};
+let airlineTicketTotals = {};
+let aircraftCharterTotals = {};
+let ambulanceFeeTotals = {};
 
-let caseFeesTotals = {
-  type: 0,
-  repatriation: 0,
-  doctorEscort: 0,
-  nurseEscort: 0,
-  total: 0
-};
+function initTotals() {
 
-let carTransportTotals = {
-  providerRate: 0,
-  mileagePrice: 0,
-  total: 0
-};
+  patientDetails = {};
 
-let airlineTicketTotals = {
-  amount: 0
-};
+  caseFeesTotals = {
+    type: 0,
+    repatriation: 0,
+    doctorEscort: 0,
+    nurseEscort: 0,
+    total: 0
+  };
 
-let aircraftCharterTotals = {
-  providerRate: 0,
-  total: 0
-};
+  carTransportTotals = {
+    providerRate: 0,
+    mileagePrice: 0,
+    total: 0
+  };
 
-let ambulanceFeeTotals = {
-  providerRate: 0,
-  mileagePrice: 0,
-  total: 0
-};
+  airlineTicketTotals = {
+    amount: 0
+  };
+
+  aircraftCharterTotals = {
+    providerRate: 0,
+    total: 0
+  };
+
+  ambulanceFeeTotals = {
+    providerRate: 0,
+    mileagePrice: 0,
+    total: 0
+  };
+}
 
 function setPatientDetails(details) {
   patientDetails = details;
@@ -51,7 +61,7 @@ function calculateCaseFeeTotals(caseFees) {
   }
   caseFees.repatriation = caseFees.repatriation ? selectedCompany.repatriation : 0;
   caseFees.doctorEscort = caseFees.doctorEscort ? selectedCompany.doctor_escort : 0;
-  caseFees.nurseEscort = caseFees.nurseEscort ? selectedCompany.nurse_scort : 0;
+  caseFees.nurseEscort = caseFees.nurseEscort ? selectedCompany.nurse_escort : 0;
   caseFees.total = caseFees.type + caseFees.repatriation +
     caseFees.doctorEscort + caseFees.nurseEscort || 0;
   caseFeesTotals = caseFees;
@@ -149,6 +159,6 @@ function buildReceipt(_id, description) {
 }
 
 const TotalsService = { setPatientDetails, calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
-  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt };
+  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt, initTotals };
 export default TotalsService;
 

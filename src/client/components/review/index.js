@@ -75,7 +75,7 @@ class ReviewReceipts extends Component {
                   </Table.Cell>
                   <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
                   <Table.Cell positive className='right aligned'>${receipt.total}</Table.Cell>
-                  <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
+                  <Table.Cell className='right aligned'>{receipt.creationDate}</Table.Cell>
                   <Table.Cell>
                     <Button animated='vertical' positive onClick={this.handleFinalizeReceipt} >
                       <Button.Content hidden>Finalize</Button.Content>
