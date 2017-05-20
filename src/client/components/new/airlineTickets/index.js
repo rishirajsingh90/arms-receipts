@@ -3,7 +3,7 @@ import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
-import TotalsService from '../../../service/TotalsService'
+import TotalsService from '../../../service/TotalsService';
 
 class AirlineTickets extends Component {
   constructor (props) {

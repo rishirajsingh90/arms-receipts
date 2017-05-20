@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
 class YesNoModal extends Component {
-  constructor() {
-    super();
-  }
   render() {
     return (
       <Modal open={this.props.showModal} basic size='small'>
@@ -13,24 +10,24 @@ class YesNoModal extends Component {
           <p>{this.props.content}</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button basic color='red' inverted onClick={this.props.cancel}>
+          <Button basic color='red' inverted onClick={this.props.handleCancel}>
             <Icon name='remove' /> No
           </Button>
-          <Button color='green' inverted onClick={this.props.submit}>
+          <Button color='green' inverted onClick={this.props.handleSubmit}>
             <Icon name='checkmark' /> Yes
           </Button>
         </Modal.Actions>
       </Modal>
-    )
+    );
   }
 }
 
 YesNoModal.propTypes = {
-  showModal: React.PropTypes.bool,
-  title: React.PropTypes.string,
   content: React.PropTypes.string,
-  cancel: React.PropTypes.func,
-  submit: React.PropTypes.func,
+  handleCancel: React.PropTypes.func,
+  handleSubmit: React.PropTypes.func,
+  showModal: React.PropTypes.bool,
+  title: React.PropTypes.string
 };
 
-export default YesNoModal
+export default YesNoModal;

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Client from '../Client';
 import { Table, Header, Message, Button, Icon } from 'semantic-ui-react';
 import YesNoModal from '../common/components/yesNoModal';
-import { browserHistory } from 'react-router';
 
 class ReviewReceipts extends Component {
   constructor() {
@@ -54,7 +53,7 @@ class ReviewReceipts extends Component {
         /> : null }
         <YesNoModal
           title='Delete receipt?' content='Are you sure you want to delete this receipt?'
-          showModal={this.state.showModal} submit={this.handleDeleteReceipt} cancel={this.handleDismissModal} />
+          showModal={this.state.showModal} handleSubmit={this.handleDeleteReceipt} handleCancel={this.handleDismissModal} />
         <Header as='h3'>Review Receipts</Header>
         <Table celled selectable>
           <Table.Header>

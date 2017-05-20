@@ -3,7 +3,7 @@ import { Form, Input, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
-import TotalsService from '../../../service/TotalsService'
+import TotalsService from '../../../service/TotalsService';
 
 class AircraftCharter extends Component {
   constructor(props) {

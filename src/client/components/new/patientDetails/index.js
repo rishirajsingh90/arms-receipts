@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
-import TotalsService from '../../../service/TotalsService'
+import TotalsService from '../../../service/TotalsService';
 
 class PatientDetails extends Component {
   constructor (props) {

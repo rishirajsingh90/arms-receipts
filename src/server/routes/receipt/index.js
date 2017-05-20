@@ -33,7 +33,7 @@ function updateReceipt(receipt) {
 function getDate() {
   const date = new Date().toLocaleString('en-GB').split(',')[0];
   const tokens = date.split(',');
-  if (tokens && tokens.length == 2) {
+  if (tokens && tokens.length === 2) {
     return tokens[0];
   } else {
     return date;

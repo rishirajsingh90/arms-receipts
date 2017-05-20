@@ -3,7 +3,7 @@ import { Form, Input, Dropdown } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
-import TotalsService from '../../../service/TotalsService'
+import TotalsService from '../../../service/TotalsService';
 
 class AmbulanceFees extends Component {
   constructor (props) {
