@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Divider } from 'semantic-ui-react';
-import CreateReceiptSteps from '../common/CreateReceiptSteps';
+import CreateReceiptSteps from './createReceiptSteps';
 import PatientDetails from './patientDetails';
 import CaseFees from './caseFees';
 import CarTransport from './carTransport';
@@ -15,15 +15,12 @@ class NewReceipt extends Component {
   constructor() {
     super();
     this.state = {
-      receiptDescription: "",
+      description: "",
       isLoading: false,
       existingReceipt: {}
     };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  setStep(activeStep) {
-    this.setState({ activeStep: activeStep });
   }
   componentDidMount() {
     if (this.props.routeParams.receiptId) {
@@ -32,16 +29,22 @@ class NewReceipt extends Component {
         this.setState({ existingReceipt });
         this.setState({ description: existingReceipt.description });
       });
+    } else {
+      TotalsService.initTotals();
     }
+  }
+  setStep(activeStep) {
+    this.setState({ activeStep: activeStep });
   }
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ isLoading: true }, () => {
-      Client.addReceipt(TotalsService.getReceipt(this.state.receiptDescription)).then(function(response) {
+      const existingId = this.state.existingReceipt._id;
+      Client.upsertReceipt(TotalsService.buildReceipt(existingId, this.state.description)).then(function(response) {
         browserHistory.push({
           pathName: 'review',
           state: {
-            receiptCreatedMessage: response.message
+            receiptMessage: response.message
           }
         });
       });
@@ -56,8 +59,7 @@ class NewReceipt extends Component {
           <Form.Group widths="equal">
             <Form.Input
               placeholder='Receipt Description' type='text' value={this.state.description}
-              onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description}>
-            </Form.Input>
+              onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description} />
           </Form.Group>
           <Divider />
           <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
@@ -66,11 +68,15 @@ class NewReceipt extends Component {
           <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} />
           <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
           <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} />
-          <Form.Button content='Create receipt' />
+          <Form.Button content={this.props.routeParams.receiptId ? 'Update receipt' : 'Create receipt'} />
         </Form>
       </div>
     );
   }
 }
+
+NewReceipt.propTypes = {
+  routeParams: React.PropTypes.object
+};
 
 export default NewReceipt;

@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Client from '../Client';
 import { Table, Header, Message, Button, Icon } from 'semantic-ui-react';
+import YesNoModal from '../common/components/yesNoModal';
 
 class ReviewReceipts extends Component {
   constructor() {
     super();
     this.state = {
-      receipts: []
+      receipts: [],
+      showModal: false
     };
-    this.finalizeReceipt = this.finalizeReceipt.bind(this);
-    this.deleteReceipt = this.deleteReceipt.bind(this);
+    this.handleFinalizeReceipt = this.handleFinalizeReceipt.bind(this);
+    this.handleDeleteReceipt = this.handleDeleteReceipt.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
+    this.handleDismissModal = this.handleDismissModal.bind(this);
   }
   componentDidMount() {
     this.getReceipts();
@@ -19,20 +23,37 @@ class ReviewReceipts extends Component {
       this.setState({ receipts: receipts });
     });
   }
-  finalizeReceipt() {
+  handleFinalizeReceipt() {
     console.log('finalize');
   }
-  deleteReceipt() {
-    console.log('delete');
+  handleDeleteReceipt() {
+    Client.deleteReceipt(this.state.receiptToDelete, (response) => {
+      this.setState({ receiptMessage: response.message });
+      this.getReceipts();
+    });
+    this.handleDismissModal();
+  }
+  handleShowModal(receipt) {
+    this.setState({ showModal: true });
+    if (receipt) {
+      this.setState({ receiptToDelete: receipt._id });
+    }
+  }
+  handleDismissModal() {
+    this.setState({ showModal: false });
+    this.setState({ receiptToDelete: undefined });
   }
   render() {
     return (
       <div>
-        { this.props.location.state && this.props.location.state.receiptCreatedMessage ? <Message
+        { this.props.location.state && this.props.location.state.receiptMessage ? <Message
           success
           header='Receipt Created'
-          content={this.props.location.state.receiptCreatedMessage}
+          content={this.props.location.state.receiptMessage}
         /> : null }
+        <YesNoModal
+          title='Delete receipt?' content='Are you sure you want to delete this receipt?'
+          showModal={this.state.showModal} handleSubmit={this.handleDeleteReceipt} handleCancel={this.handleDismissModal} />
         <Header as='h3'>Review Receipts</Header>
         <Table celled selectable>
           <Table.Header>
@@ -53,15 +74,15 @@ class ReviewReceipts extends Component {
                   </Table.Cell>
                   <Table.Cell className='right aligned'>{receipt.email}</Table.Cell>
                   <Table.Cell positive className='right aligned'>${receipt.total}</Table.Cell>
-                  <Table.Cell className='right aligned'>{receipt.created}</Table.Cell>
+                  <Table.Cell className='right aligned'>{receipt.creationDate}</Table.Cell>
                   <Table.Cell>
-                    <Button animated='vertical' positive onClick={this.finalizeReceipt} >
+                    <Button animated='vertical' positive onClick={this.handleFinalizeReceipt} >
                       <Button.Content hidden>Finalize</Button.Content>
                       <Button.Content visible>
                         <Icon name='check' />
                       </Button.Content>
                     </Button>
-                    <Button animated='vertical' negative onClick={this.deleteReceipt}>
+                    <Button animated='vertical' negative onClick={() => this.handleShowModal(receipt)}>
                       <Button.Content hidden>Delete</Button.Content>
                       <Button.Content visible>
                         <Icon name='delete' />

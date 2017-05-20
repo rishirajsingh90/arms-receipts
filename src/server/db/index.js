@@ -50,3 +50,7 @@ exports.setClient = function(database) {
 exports.getClient = function() {
   return client;
 };
+
+exports.createObjectId = function(id) {
+  return new mongodb.ObjectID(id);
+};

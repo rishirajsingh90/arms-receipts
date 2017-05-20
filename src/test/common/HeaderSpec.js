@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { mount } from 'enzyme';
 import { describe, it } from "mocha";
 import { expect } from 'chai';
 
-import Header from '../../client/components/common/Header';
+import Header from '../../client/components/common/components/header/index';
 import { Menu } from 'semantic-ui-react';
 
 let wrapper;

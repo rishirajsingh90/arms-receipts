@@ -3,6 +3,7 @@ import { Form, Input, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import reduce from 'lodash/reduce';
+import TotalsService from '../../../service/TotalsService';
 
 class AircraftCharter extends Component {
   constructor(props) {
@@ -20,13 +21,15 @@ class AircraftCharter extends Component {
   }
   componentWillReceiveProps() {
     if (this.props.existingAircraftCharter) {
-      this.setState({ provider: this.props.existingAircraftCharter.provider });
-      this.setState({ aircraftType: this.props.existingAircraftCharter.aircraftType });
-      this.setState({ fromCity: this.props.existingAircraftCharter.fromCity });
-      this.setState({ toCity: this.props.existingAircraftCharter.toCity });
-      this.setState({ startDate: this.props.existingAircraftCharter.startDate });
-      this.setState({ endDate: this.props.existingAircraftCharter.endDate });
-      this.setState({ flyingTime: this.props.existingAircraftCharter.flyingTime });
+      this.setState({
+        provider: this.props.existingAircraftCharter.provider,
+        aircraftType: this.props.existingAircraftCharter.aircraftType,
+        fromCity: this.props.existingAircraftCharter.fromCity,
+        toCity: this.props.existingAircraftCharter.toCity,
+        startDate: this.props.existingAircraftCharter.startDate,
+        endDate: this.props.existingAircraftCharter.endDate,
+        flyingTime: this.props.existingAircraftCharter.flyingTime
+      }, () => TotalsService.calculateAircraftCharterTotals(this.props.existingAircraftCharter));
     }
   }
   getAirlines() {
@@ -104,14 +107,14 @@ class AircraftCharter extends Component {
             placeholder='DD/MM/YYYY'
             label='Start'
             defaultValue={this.state.startDate}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
             error={this.state.error.startDate} />
           <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
             label='End'
             defaultValue={this.state.endDate}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, true)}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
             error={this.state.error.endDate} />
         </Form.Group>
         <h4>Charter Information</h4>
@@ -129,7 +132,8 @@ class AircraftCharter extends Component {
 }
 
 AircraftCharter.propTypes = {
-  activeStep: React.PropTypes.string
+  activeStep: React.PropTypes.string,
+  existingAircraftCharter: React.PropTypes.object
 };
 
 export default AircraftCharter;

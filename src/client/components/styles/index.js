@@ -3,7 +3,7 @@ export const styles = {
     background: '#b70304'
   },
   armsWhite: {
-      background: 'white'
+    background: 'white'
   },
   receiptContainer: {
     paddingTop: '50px'

@@ -88,5 +88,5 @@ function updateTotals(ctx) {
 }
 
 const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, handleDOB,
-  handleDate };
+  handleDate, updateTotals };
 export default ReceiptHandler;

@@ -64,7 +64,7 @@ function getAirlines(cb) {
     .then(cb);
 }
 
-function addReceipt(receipt, cb) {
+function upsertReceipt(receipt, cb) {
   return fetch(`/api/receipt`, {
     method: 'POST',
     headers: {
@@ -72,6 +72,19 @@ function addReceipt(receipt, cb) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(receipt)
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function deleteReceipt(query, cb) {
+  query = query ? query : '';
+  return fetch(`/api/receipt?receiptId=${query}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
   }).then(checkStatus)
     .then(parseJSON)
     .then(cb);
@@ -93,5 +106,6 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, addReceipt };
+const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, upsertReceipt,
+  deleteReceipt };
 export default Client;

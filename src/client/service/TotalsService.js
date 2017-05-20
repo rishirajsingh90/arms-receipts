@@ -1,35 +1,45 @@
 import find from 'lodash/find';
-import update from 'immutability-helper';
 
 let patientDetails = {};
+let caseFeesTotals = {};
+let carTransportTotals = {};
+let airlineTicketTotals = {};
+let aircraftCharterTotals = {};
+let ambulanceFeeTotals = {};
 
-let caseFeeTotals = {
-  type: 0,
-  repatriation: 0,
-  doctorEscort: 0,
-  nurseEscort: 0,
-  total: 0
-};
+function initTotals() {
 
-let carTransportTotals = {
-  providerRate: 0,
-  mileagePrice: 0,
-  total: 0
-};
+  patientDetails = {};
 
-let airlineTicketTotals = {
-};
+  caseFeesTotals = {
+    type: 0,
+    repatriation: 0,
+    doctorEscort: 0,
+    nurseEscort: 0,
+    total: 0
+  };
 
-let aircraftCharterTotals = {
-  providerRate: 0,
-  total: 0
-};
+  carTransportTotals = {
+    providerRate: 0,
+    mileagePrice: 0,
+    total: 0
+  };
 
-let ambulanceFeeTotals = {
-  providerRate: 0,
-  mileagePrice: 0,
-  total: 0
-};
+  airlineTicketTotals = {
+    amount: 0
+  };
+
+  aircraftCharterTotals = {
+    providerRate: 0,
+    total: 0
+  };
+
+  ambulanceFeeTotals = {
+    providerRate: 0,
+    mileagePrice: 0,
+    total: 0
+  };
+}
 
 function setPatientDetails(details) {
   patientDetails = details;
@@ -43,68 +53,112 @@ function calculateCaseFeeTotals(caseFees) {
     return;
   }
   if (caseFees.caseType === 'simple') {
-    caseFeeTotals.type = selectedCompany.simple_fee || 0;
+    caseFees.type = selectedCompany.simple_fee || 0;
   } else if (caseFees.caseType === 'complex') {
-    caseFeeTotals.type = selectedCompany.complex_fee || 0;
+    caseFees.type = selectedCompany.complex_fee || 0;
   } else {
-    caseFeeTotals.type = caseFees.amount || 0;
+    caseFees.type = caseFees.amount || 0;
   }
-  if (caseFees.repatriation) {
-    caseFeeTotals.repatriation = selectedCompany.repatriation || 0;
-  }
-  if (caseFees.doctorEscort) {
-    caseFeeTotals.doctorEscort = selectedCompany.doctor_escort || 0;
-  }
-  if (caseFees.nurseEscort) {
-    caseFeeTotals.nurseEscort = selectedCompany.nurse_scort || 0;
-  }
-  caseFeeTotals.total = caseFeeTotals.type + caseFeeTotals.repatriation +
-    caseFeeTotals.doctorEscort + caseFeeTotals.nurseEscort || 0;
-  caseFeeTotals = update(caseFees, { $merge: caseFeeTotals });
+  caseFees.repatriation = caseFees.repatriation ? selectedCompany.repatriation : 0;
+  caseFees.doctorEscort = caseFees.doctorEscort ? selectedCompany.doctor_escort : 0;
+  caseFees.nurseEscort = caseFees.nurseEscort ? selectedCompany.nurse_escort : 0;
+  caseFees.total = caseFees.type + caseFees.repatriation +
+    caseFees.doctorEscort + caseFees.nurseEscort || 0;
+  caseFeesTotals = caseFees;
 }
 
 function calculateCarTransportTotals(carTransport, mileageRate) {
-  carTransportTotals.mileagePrice = mileageRate * carTransport.distance || 0;
-  carTransportTotals.total = carTransportTotals.mileagePrice || 0;
-  carTransportTotals = update(carTransport, { $merge: carTransportTotals });
+  carTransport.mileagePrice = mileageRate * carTransport.distance || 0;
+  carTransport.total = carTransport.mileagePrice || 0;
+  carTransportTotals = carTransport;
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
-  airlineTicketTotals = airlineTicket;
+  airlineTicketTotals = airlineTicket && airlineTicket.amount ? airlineTicket : { amount: 0 };
 }
 
 function calculateAircraftCharterTotals(aircraftCharter) {
   const selectedAircraft = find(aircraftCharter.airlines, function(provider) {
-    return aircraftCharter.provider === provider.name;
+    return aircraftCharter.provider === provider.value;
   });
   if (!selectedAircraft) {
     return;
   }
-  aircraftCharterTotals.total = aircraftCharter.flyingTime * selectedAircraft.rate || 0;
-  aircraftCharterTotals = update(aircraftCharter, { $merge: aircraftCharterTotals });
+  aircraftCharter.total = aircraftCharter.flyingTime * selectedAircraft.rate || 0;
+  aircraftCharterTotals = aircraftCharter;
 }
 
 function calculateAmbulanceFeeTotals(ambulanceFee, mileageRate) {
-  ambulanceFeeTotals.mileagePrice = mileageRate * ambulanceFee.distance || 0;
-  ambulanceFeeTotals.total = carTransportTotals.mileagePrice || 0;
-  ambulanceFeeTotals = update(ambulanceFee, { $merge: carTransportTotals });
+  ambulanceFee.mileagePrice = mileageRate * ambulanceFee.distance || 0;
+  ambulanceFee.total = ambulanceFee.mileagePrice || 0;
+  ambulanceFeeTotals = ambulanceFee;
 }
 
-function getReceipt(description) {
+function buildReceipt(_id, description) {
+  // scrub unneeded data
   return {
+    _id: _id || undefined,
     description: description,
-    patientDetails: patientDetails,
-    caseFee: caseFeeTotals,
-    carTransport: carTransportTotals,
-    airlineTicket: airlineTicketTotals,
-    aircraftCharter: aircraftCharterTotals,
-    ambulanceFee: ambulanceFeeTotals,
-    total: caseFeeTotals.total + carTransportTotals.total + airlineTicketTotals.total + aircraftCharterTotals.total + ambulanceFeeTotals.total,
+    patientDetails: {
+      dob: patientDetails.dob,
+      firstName: patientDetails.firstName,
+      lastName: patientDetails.lastName
+    },
+    caseFee: {
+      amount: caseFeesTotals.amount || 0,
+      caseType: caseFeesTotals.caseType,
+      company: caseFeesTotals.company,
+      country: caseFeesTotals.country,
+      doctorEscort: caseFeesTotals.doctorEscort,
+      nurseEscort: caseFeesTotals.nurseEscort,
+      total: caseFeesTotals.total,
+      type: caseFeesTotals.type
+    },
+    carTransport: {
+      distance: carTransportTotals.distance,
+      endDate: carTransportTotals.endDate,
+      fromCity: carTransportTotals.fromCity,
+      mileagePrice: carTransportTotals.mileagePrice,
+      provider: carTransportTotals.provider,
+      startDate: carTransportTotals.startDate,
+      toCity: carTransportTotals.toCity,
+      total: carTransportTotals.total
+    },
+    airlineTicket: {
+      amount: airlineTicketTotals.amount || 0,
+      endDate: airlineTicketTotals.endDate,
+      flightClass: airlineTicketTotals.flightClass,
+      fromCity: airlineTicketTotals.fromCity,
+      provider: airlineTicketTotals.provider,
+      startDate: airlineTicketTotals.startDate,
+      toCity: airlineTicketTotals.toCity
+    },
+    aircraftCharter: {
+      aircraftType: aircraftCharterTotals.aircraftType,
+      endDate: aircraftCharterTotals.endDate,
+      flyingTime: aircraftCharterTotals.flyingTime,
+      fromCity: aircraftCharterTotals.fromCity,
+      provider: aircraftCharterTotals.provider,
+      startDate: aircraftCharterTotals.startDate,
+      toCity: aircraftCharterTotals.toCity,
+      total: aircraftCharterTotals.total || 0
+    },
+    ambulanceFee: {
+      distance: ambulanceFeeTotals.distance,
+      endDate: ambulanceFeeTotals.endDate,
+      fromCity: ambulanceFeeTotals.fromCity,
+      mileagePrice: ambulanceFeeTotals.mileagePrice,
+      provider: ambulanceFeeTotals.provider,
+      startDate: ambulanceFeeTotals.startDate,
+      toCity: ambulanceFeeTotals.toCity,
+      total: ambulanceFeeTotals.total || 0
+    },
+    total: caseFeesTotals.total + carTransportTotals.total + airlineTicketTotals.amount + aircraftCharterTotals.total + ambulanceFeeTotals.total,
     email: 'rishis@arms.com' // TODO fix this
   };
 }
 
 const TotalsService = { setPatientDetails, calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
-  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, getReceipt };
+  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt, initTotals };
 export default TotalsService;
 
