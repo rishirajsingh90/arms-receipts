@@ -11,4 +11,14 @@ export const styles = {
   dateWidth: {
     width: '300%'
   },
+  runningTotals: {
+    borderRadius: '4px',
+    border: '1px #ddd solid'
+  },
+  runningTotalsSection: {
+    padding: '5px'
+  },
+  receiptTotalSection: {
+    backgroundColor: 'green'
+  }
 };
