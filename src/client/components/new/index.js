@@ -75,7 +75,7 @@ class NewReceipt extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column width={4}>
-            <RunningTotals />
+            <RunningTotals existingReceipt={this.state.existingReceipt} />
           </Grid.Column>
         </Grid>
       </div>
