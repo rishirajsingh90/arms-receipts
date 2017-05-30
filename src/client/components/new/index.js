@@ -39,9 +39,10 @@ class NewReceipt extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
+    const existingId = this.state.existingReceipt._id;
+    const receipt = TotalsService.buildReceipt(existingId, this.state.description);
     this.setState({ isLoading: true }, () => {
-      const existingId = this.state.existingReceipt._id;
-      Client.upsertReceipt(TotalsService.buildReceipt(existingId, this.state.description)).then(function(response) {
+      Client.upsertReceipt(receipt).then(function(response) {
         browserHistory.push({
           pathName: 'review',
           state: {
