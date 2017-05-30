@@ -115,6 +115,7 @@ function buildReceipt(_id, description) {
       country: caseFeesTotals.country,
       doctorEscort: caseFeesTotals.doctorEscort,
       nurseEscort: caseFeesTotals.nurseEscort,
+      repatriation: caseFeesTotals.repatriation,
       total: caseFeesTotals.total,
       type: caseFeesTotals.type
     },
