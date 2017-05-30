@@ -31,7 +31,7 @@ class CaseFees extends Component {
         repatriation: this.props.existingCaseFees.repatriation,
         doctorEscort: this.props.existingCaseFees.doctorEscort,
         nurseEscort: this.props.existingCaseFees.nurseEscort
-      }, () => TotalsService.calculateCaseFeeTotals(this.props.existingCaseFees));
+      }, () => TotalsService.calculateCaseFeeTotals(this.props.existingCaseFees, this.state.companies));
     }
   }
   getCompanies() {

@@ -28,7 +28,7 @@ class AmbulanceFees extends Component {
         startDate: this.props.existingAmbulanceFees.startDate,
         endDate: this.props.existingAmbulanceFees.endDate,
         distance: this.props.existingAmbulanceFees.distance
-      }, () => TotalsService.calculateAmbulanceFeeTotals(this.props.existingAmbulanceFees));
+      }, () => TotalsService.calculateAmbulanceFeeTotals(this.props.existingAmbulanceFees, 4.5));
     }
   }
   getAmbulanceProviders() {
