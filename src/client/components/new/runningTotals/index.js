@@ -24,6 +24,8 @@ class RunningTotals extends Component {
     let repatriation = null;
     let carTransportLabel = null;
     let carTransportFees = null;
+    let airlineTicketLabel = null;
+    let airlineTicketFees = null;
 
     if (this.state.existingReceipt.caseFee) {
       companyName = <Header.Subheader>{this.state.existingReceipt.caseFee.company}</Header.Subheader>;
@@ -42,6 +44,11 @@ class RunningTotals extends Component {
     if (this.state.existingReceipt.carTransport) {
       carTransportLabel = <Header.Subheader>{this.state.existingReceipt.carTransport.fromCity} -> {this.state.existingReceipt.carTransport.toCity}</Header.Subheader>;
       carTransportFees = <Header.Subheader>${this.state.existingReceipt.carTransport.total}</Header.Subheader>;
+    }
+
+    if (this.state.existingReceipt.airlineTickets) {
+      airlineTicketLabel = <Header.Subheader>{this.state.existingReceipt.airlineTicket.fromCity} -> {this.state.existingReceipt.airlineTicket.toCity}</Header.Subheader>;
+      airlineTicketFees = <Header.Subheader>${this.state.existingReceipt.airlineTicket.total}</Header.Subheader>;
     }
 
     return (
