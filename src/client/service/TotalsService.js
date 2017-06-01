@@ -26,7 +26,8 @@ function initTotals() {
   };
 
   airlineTicketTotals = {
-    amount: 0
+    amount: 0,
+    total: 0
   };
 
   aircraftCharterTotals = {
@@ -45,11 +46,12 @@ function setPatientDetails(details) {
   patientDetails = details;
 }
 
-function calculateCaseFeeTotals(caseFees) {
-  const selectedCompany = find(caseFees.companies, function(company) {
+function calculateCaseFeeTotals(caseFees, companies) {
+  const selectedCompany = find(companies ? companies : caseFees.companies, function(company) {
     return caseFees.company === company.name;
   });
   if (!selectedCompany) {
+    caseFeesTotals.total = 0;
     return;
   }
   if (caseFees.caseType === 'simple') {
@@ -74,14 +76,16 @@ function calculateCarTransportTotals(carTransport, mileageRate) {
 }
 
 function calculateAirlineTicketTotals(airlineTicket) {
-  airlineTicketTotals = airlineTicket && airlineTicket.amount ? airlineTicket : { amount: 0 };
+  airlineTicket.total = airlineTicket.amount;
+  airlineTicketTotals = airlineTicket;
 }
 
-function calculateAircraftCharterTotals(aircraftCharter) {
-  const selectedAircraft = find(aircraftCharter.airlines, function(provider) {
+function calculateAircraftCharterTotals(aircraftCharter, airlines) {
+  const selectedAircraft = find(airlines? airlines : aircraftCharter.airlines, function(provider) {
     return aircraftCharter.provider === provider.value;
   });
   if (!selectedAircraft) {
+    aircraftCharterTotals.total = 0;
     return;
   }
   aircraftCharter.total = aircraftCharter.flyingTime * selectedAircraft.rate || 0;
@@ -111,6 +115,7 @@ function buildReceipt(_id, description) {
       country: caseFeesTotals.country,
       doctorEscort: caseFeesTotals.doctorEscort,
       nurseEscort: caseFeesTotals.nurseEscort,
+      repatriation: caseFeesTotals.repatriation,
       total: caseFeesTotals.total,
       type: caseFeesTotals.type
     },
@@ -125,13 +130,14 @@ function buildReceipt(_id, description) {
       total: carTransportTotals.total
     },
     airlineTicket: {
-      amount: airlineTicketTotals.amount || 0,
+      amount: airlineTicketTotals.total || 0,
       endDate: airlineTicketTotals.endDate,
       flightClass: airlineTicketTotals.flightClass,
       fromCity: airlineTicketTotals.fromCity,
       provider: airlineTicketTotals.provider,
       startDate: airlineTicketTotals.startDate,
-      toCity: airlineTicketTotals.toCity
+      toCity: airlineTicketTotals.toCity,
+      total: airlineTicketTotals.total
     },
     aircraftCharter: {
       aircraftType: aircraftCharterTotals.aircraftType,
@@ -153,7 +159,7 @@ function buildReceipt(_id, description) {
       toCity: ambulanceFeeTotals.toCity,
       total: ambulanceFeeTotals.total || 0
     },
-    total: caseFeesTotals.total + carTransportTotals.total + airlineTicketTotals.amount + aircraftCharterTotals.total + ambulanceFeeTotals.total,
+    total: caseFeesTotals.total + carTransportTotals.total + airlineTicketTotals.total + aircraftCharterTotals.total + ambulanceFeeTotals.total,
     email: 'rishis@arms.com' // TODO fix this
   };
 }

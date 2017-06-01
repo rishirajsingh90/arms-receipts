@@ -28,7 +28,7 @@ class CarTransport extends Component {
         startDate: this.props.existingCarTransport.startDate,
         endDate: this.props.existingCarTransport.endDate,
         distance: this.props.existingCarTransport.distance
-      }, () => TotalsService.calculateCarTransportTotals(this.props.existingCarTransport));
+      }, () => TotalsService.calculateCarTransportTotals(this.props.existingCarTransport, 1.5)); // TODO fix this
     }
   }
   getCarProviders() {

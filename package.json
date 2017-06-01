@@ -39,6 +39,7 @@
     "eslint-plugin-react": "6.10.3",
     "eslint-watch": "3.0.1",
     "express": "4.15.2",
+    "file-loader":"0.11.1",
     "fetch-mock": "5.10.0",
     "fs": "0.0.2",
     "jsdom": "9.12.0",
@@ -52,8 +53,10 @@
     "react-router": "2.0.0",
     "react-scripts": "0.7.0",
     "sass-loader": "3.2.3",
+    "semantic-ui-css": "2.2.10",
     "semantic-ui-react": "0.63.5",
     "style-loader": "0.13.2",
+    "url-loader": "0.5.8",
     "webpack": "1.14.0",
     "whatwg-fetch": "2.0.3"
   },

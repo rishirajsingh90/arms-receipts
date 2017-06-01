@@ -29,7 +29,7 @@ class AircraftCharter extends Component {
         startDate: this.props.existingAircraftCharter.startDate,
         endDate: this.props.existingAircraftCharter.endDate,
         flyingTime: this.props.existingAircraftCharter.flyingTime
-      }, () => TotalsService.calculateAircraftCharterTotals(this.props.existingAircraftCharter));
+      }, () => TotalsService.calculateAircraftCharterTotals(this.props.existingAircraftCharter, this.state.airlines));
     }
   }
   getAirlines() {

@@ -4,6 +4,7 @@ import App from './components/App';
 import NewReceipt from './components/new';
 import ReviewReceipts from './components/review';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import 'semantic-ui-css/semantic.min.css';
 
 render(
   // TODO potentially drop this in a routes file

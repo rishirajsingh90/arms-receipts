@@ -28,7 +28,7 @@ class AirlineTickets extends Component {
         toCity: this.props.existingAirlineTickets.toCity,
         startDate: this.props.existingAirlineTickets.startDate,
         endDate: this.props.existingAirlineTickets.endDate,
-        amount: this.props.existingAirlineTickets.amount
+        amount: this.props.existingAirlineTickets.total
       }, () => TotalsService.calculateAirlineTicketTotals(this.props.existingAirlineTickets));
     }
   }
