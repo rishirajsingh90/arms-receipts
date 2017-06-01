@@ -113,7 +113,8 @@ class AmbulanceFees extends Component {
 
 AmbulanceFees.propTypes = {
   activeStep: React.PropTypes.string,
-  existingAmbulanceFees: React.PropTypes.object
+  existingAmbulanceFees: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default AmbulanceFees;

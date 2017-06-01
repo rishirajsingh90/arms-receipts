@@ -133,7 +133,8 @@ class AircraftCharter extends Component {
 
 AircraftCharter.propTypes = {
   activeStep: React.PropTypes.string,
-  existingAircraftCharter: React.PropTypes.object
+  existingAircraftCharter: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default AircraftCharter;

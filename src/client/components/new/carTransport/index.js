@@ -113,7 +113,8 @@ class CarTransport extends Component {
 
 CarTransport.propTypes = {
   activeStep: React.PropTypes.string,
-  existingCarTransport: React.PropTypes.object
+  existingCarTransport: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default CarTransport;

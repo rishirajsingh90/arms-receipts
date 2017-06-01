@@ -55,7 +55,8 @@ class PatientDetails extends Component {
 
 PatientDetails.propTypes = {
   activeStep: React.PropTypes.string,
-  existingPatientDetails: React.PropTypes.object
+  existingPatientDetails: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default PatientDetails;
