@@ -22,6 +22,7 @@ class NewReceipt extends Component {
     };
     this.setStep = this.setStep.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateReceipt = this.updateReceipt.bind(this);
   }
   componentDidMount() {
     if (this.props.routeParams.receiptId) {
@@ -36,6 +37,11 @@ class NewReceipt extends Component {
   }
   setStep(activeStep) {
     this.setState({ activeStep: activeStep });
+  }
+  updateReceipt() {
+    const existingId = this.state.existingReceipt._id;
+    const receipt = TotalsService.buildReceipt(existingId, this.state.description);
+    this.setState({ updatedReceipt: receipt });
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -66,17 +72,17 @@ class NewReceipt extends Component {
                   onChange={e => this.setState({ description: e.target.value })} name='description' error={!this.state.description} />
               </Form.Group>
               <Divider />
-              <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} />
-              <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee} />
-              <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} />
-              <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} />
-              <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} />
-              <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} />
+              <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} updateReceipt={this.updateReceipt} />
+              <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee} updateReceipt={this.updateReceipt} />
+              <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} updateReceipt={this.updateReceipt} />
+              <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} updateReceipt={this.updateReceipt} />
+              <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} updateReceipt={this.updateReceipt} />
+              <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} updateReceipt={this.updateReceipt} />
               <Form.Button content={this.props.routeParams.receiptId ? 'Update receipt' : 'Create receipt'} />
             </Form>
           </Grid.Column>
           <Grid.Column width={4}>
-            <RunningTotals existingReceipt={this.state.existingReceipt} />
+            <RunningTotals existingReceipt={this.state.existingReceipt} updatedReceipt={this.state.updatedReceipt} />
           </Grid.Column>
         </Grid>
       </div>

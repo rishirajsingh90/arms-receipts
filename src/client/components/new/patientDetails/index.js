@@ -33,10 +33,10 @@ class PatientDetails extends Component {
         <h4>Patient Information</h4>
         <Form.Group widths="equal">
           <Form.Input
-            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true)}
+            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true, this.props.updateReceipt)}
             value={this.state.firstName} name='firstName' label="First name" />
           <Form.Input
-            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true)}
+            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true, this.props.updateReceipt)}
             value={this.state.lastName} name='lastName' label="Last name" />
         </Form.Group>
         <Form.Group widths="equal">
@@ -45,7 +45,7 @@ class PatientDetails extends Component {
             placeholder='DD/MM/YYYY'
             label='Date of birth'
             value={this.state.dob}
-            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this)}
+            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this, this.props.updateReceipt)}
             error={this.state.error.dob} />
         </Form.Group>
       </div>

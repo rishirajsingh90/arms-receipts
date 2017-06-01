@@ -58,10 +58,10 @@ class CaseFees extends Component {
     });
   }
   handleDropDownChange(e, { id, value }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this, this.props.updateReceipt);
   }
   handleSelectChange(e, { name, value, checked }) {
-    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
+    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);
   }
   render() {
 

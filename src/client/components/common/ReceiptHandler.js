@@ -1,45 +1,51 @@
 import TotalsService from '../../service/TotalsService';
 
-function handleSelectChange(e, { name, value, checked }, ctx) {
+function handleSelectChange(e, { name, value, checked }, ctx, callback) {
   ctx.setState({ [name]: value ? value : checked }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
-function handleDropDownChange(e, { id, value }, ctx) {
+function handleDropDownChange(e, { id, value }, ctx, callback) {
   return ctx.setState({ [id]: value }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
-function handleChange(input, value, ctx, isText) {
+function handleChange(input, value, ctx, isText, callback) {
   if (!isText) {
     value = value ? parseInt(value, 10) : 0;
   }
   ctx.setState({ [input]: value }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
-function handleStartDate(date, ctx) {
+function handleStartDate(date, ctx, callback) {
   ctx.setState({ startDate: date }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
-function handleEndDate(date, ctx) {
+function handleEndDate(date, ctx, callback) {
   ctx.setState({ endDate: date }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
-function handleDOB(date, ctx) {
+function handleDOB(date, ctx, callback) {
   ctx.setState({ dob: date }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
-function handleDate(name, date, ctx) {
+function handleDate(name, date, ctx, callback) {
   const tokens = date.split('/');
   let error = null;
   if (!tokens || tokens.length !== 3 || tokens[2].length !== 4 || tokens[1].length !== 2 || tokens[0].length !== 2) {
@@ -55,6 +61,7 @@ function handleDate(name, date, ctx) {
   ctx.setState({ error: errorObj });
   ctx.setState({ [name]: date }, () => {
     updateTotals(ctx);
+    callback();
   });
 }
 
