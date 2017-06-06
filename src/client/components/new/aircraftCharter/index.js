@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
-import TotalsService from '../../../service/TotalsService';
 
 class AircraftCharter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: {}
+      error: {},
+      provider: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.provider : null,
+      aircraftType: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.aircraftType : null,
+      fromCity: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.fromCity : null,
+      toCity: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.toCity : null,
+      startDate: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.startDate : null,
+      endDate: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.endDate : null,
+      flyingTime: this.props.existingAircraftCharter ? this.props.existingAircraftCharter.flyingTime : null
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingAircraftCharter) {
-      this.setState({
-        provider: this.props.existingAircraftCharter.provider,
-        aircraftType: this.props.existingAircraftCharter.aircraftType,
-        fromCity: this.props.existingAircraftCharter.fromCity,
-        toCity: this.props.existingAircraftCharter.toCity,
-        startDate: this.props.existingAircraftCharter.startDate,
-        endDate: this.props.existingAircraftCharter.endDate,
-        flyingTime: this.props.existingAircraftCharter.flyingTime
-      }, () => TotalsService.calculateAircraftCharterTotals(this.props.existingAircraftCharter, this.state.airlines));
-    }
   }
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);

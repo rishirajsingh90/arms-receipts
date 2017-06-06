@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
-import TotalsService from '../../../service/TotalsService';
 
 class PatientDetails extends Component {
   constructor (props) {
     super(props);
     this.state = {
       error: {},
-      firstName: "",
-      lastName: "",
-      dob: ""
+      firstName: this.props.existingPatientDetails ? this.props.existingPatientDetails.firstName : "",
+      lastName: this.props.existingPatientDetails ? this.props.existingPatientDetails.lastName : "",
+      dob: this.props.existingPatientDetails ? this.props.existingPatientDetails.dob : ""
     };
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingPatientDetails) {
-      this.setState({
-        firstName: this.props.existingPatientDetails.firstName,
-        lastName: this.props.existingPatientDetails.lastName,
-        dob: this.props.existingPatientDetails.dob
-      }, () => TotalsService.setPatientDetails(this.props.existingPatientDetails));
-    }
   }
   render() {
 

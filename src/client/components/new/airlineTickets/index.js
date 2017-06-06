@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
-import TotalsService from '../../../service/TotalsService';
 
 class AirlineTickets extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      error: {}
+      error: {},
+      provider: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.provider : null,
+      flightClass: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.flightClass : null,
+      fromCity: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.fromCity : null,
+      toCity: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.toCity : null,
+      startDate: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.startDate : null,
+      endDate: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.endDate : null,
+      amount: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.total : null
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingAirlineTickets) {
-      this.setState({
-        provider: this.props.existingAirlineTickets.provider,
-        flightClass: this.props.existingAirlineTickets.flightClass,
-        fromCity: this.props.existingAirlineTickets.fromCity,
-        toCity: this.props.existingAirlineTickets.toCity,
-        startDate: this.props.existingAirlineTickets.startDate,
-        endDate: this.props.existingAirlineTickets.endDate,
-        amount: this.props.existingAirlineTickets.total
-      }, () => TotalsService.calculateAirlineTicketTotals(this.props.existingAirlineTickets));
-    }
   }
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);

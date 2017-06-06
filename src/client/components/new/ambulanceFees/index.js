@@ -3,14 +3,19 @@ import { Form, Input, Dropdown } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
-import TotalsService from '../../../service/TotalsService';
 
 class AmbulanceFees extends Component {
   constructor (props) {
     super(props);
     this.state = {
       ambulanceProviders: [],
-      error: {}
+      error: {},
+      provider: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.provider : null,
+      fromCity: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.fromCity : null,
+      toCity: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.toCity : null,
+      startDate: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.startDate : null,
+      endDate: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.endDate : null,
+      distance: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.distance : null
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -18,18 +23,6 @@ class AmbulanceFees extends Component {
   }
   componentDidMount() {
     this.getAmbulanceProviders();
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingAmbulanceFees) {
-      this.setState({
-        provider: this.props.existingAmbulanceFees.provider,
-        fromCity: this.props.existingAmbulanceFees.fromCity,
-        toCity: this.props.existingAmbulanceFees.toCity,
-        startDate: this.props.existingAmbulanceFees.startDate,
-        endDate: this.props.existingAmbulanceFees.endDate,
-        distance: this.props.existingAmbulanceFees.distance
-      }, () => TotalsService.calculateAmbulanceFeeTotals(this.props.existingAmbulanceFees, 4.5)); // TODO fix this
-    }
   }
   getAmbulanceProviders() {
     Client.getAmbulanceProviders((ambulanceProviders) => {

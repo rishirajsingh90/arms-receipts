@@ -3,14 +3,19 @@ import { Form, Input, Dropdown } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
 import Client from '../../Client';
 import map from 'lodash/map';
-import TotalsService from '../../../service/TotalsService';
 
 class CarTransport extends Component {
   constructor (props) {
     super(props);
     this.state = {
       carProviders: [],
-      error: {}
+      error: {},
+      provider: this.props.existingCarTransport ? this.props.existingCarTransport.provider : null,
+      fromCity: this.props.existingCarTransport ? this.props.existingCarTransport.fromCity : null,
+      toCity: this.props.existingCarTransport ? this.props.existingCarTransport.toCity : null,
+      startDate: this.props.existingCarTransport ? this.props.existingCarTransport.startDate : null,
+      endDate: this.props.existingCarTransport ? this.props.existingCarTransport.endDate : null,
+      distance: this.props.existingCarTransport ? this.props.existingCarTransport.distance : null
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -18,18 +23,6 @@ class CarTransport extends Component {
   }
   componentDidMount() {
     this.getCarProviders();
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingCarTransport) {
-      this.setState({
-        provider: this.props.existingCarTransport.provider,
-        fromCity: this.props.existingCarTransport.fromCity,
-        toCity: this.props.existingCarTransport.toCity,
-        startDate: this.props.existingCarTransport.startDate,
-        endDate: this.props.existingCarTransport.endDate,
-        distance: this.props.existingCarTransport.distance
-      }, () => TotalsService.calculateCarTransportTotals(this.props.existingCarTransport, 1.5)); // TODO fix this
-    }
   }
   getCarProviders() {
     Client.getCarProviders((carProviders) => {
