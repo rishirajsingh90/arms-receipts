@@ -49,8 +49,10 @@ class NewReceipt extends Component {
     this.setState({ activeStep: activeStep });
   }
   updateReceipt(key, value) {
-    const receipt = this.state.existingReceipt;
+    const existingId = this.state.existingReceipt._id;
+    let receipt = this.state.existingReceipt;
     receipt[key] = value;
+    receipt = TotalsService.buildReceipt(existingId, this.state.description, receipt, this.state.companies, this.state.airlines);
     this.setState({ existingReceipt: receipt });
   }
   handleSubmit(e) {
