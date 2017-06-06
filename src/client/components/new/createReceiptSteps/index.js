@@ -26,7 +26,7 @@ class CreateReceiptSteps extends Component {
             <Step.Title>Patient Details</Step.Title>
           </Step.Content>
         </Step>
-        <Step name="caseHandling" active={activeStep === "caseHandling"} onClick={this.handleStepChange}>
+        <Step name="caseFee" active={activeStep === "caseFee"} onClick={this.handleStepChange}>
           <Icon name="money" />
           <Step.Content>
             <Step.Title>Case Handling Fee</Step.Title>

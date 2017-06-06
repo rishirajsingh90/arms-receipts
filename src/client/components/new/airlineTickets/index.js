@@ -16,9 +16,6 @@ class AirlineTickets extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
-  componentDidMount() {
-    this.getAirlines();
-  }
   componentWillReceiveProps() {
     if (this.props.existingAirlineTickets) {
       this.setState({
@@ -31,21 +28,6 @@ class AirlineTickets extends Component {
         amount: this.props.existingAirlineTickets.total
       }, () => TotalsService.calculateAirlineTicketTotals(this.props.existingAirlineTickets));
     }
-  }
-  getAirlines() {
-    Client.getAirlines((airlines) => {
-      airlines = reduce(airlines, function(result, airline) {
-        if (!airline.charter) {
-          result.push({
-            key: airline._id,
-            value: airline.name,
-            text: airline.name
-          });
-        }
-        return result;
-      }, []);
-      this.setState({ airlines: airlines });
-    });
   }
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);
@@ -78,7 +60,7 @@ class AirlineTickets extends Component {
         <Form.Group>
           <Dropdown
             id='provider'
-            options={this.state.airlines}
+            options={this.props.airlines}
             fluid labeled search selection className='icon'
             placeholder='Select Airline'
             onChange={this.handleDropDownChange}

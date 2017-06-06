@@ -2,5 +2,8 @@ node_modules/
 *npm-debug.log
 *.DS_Store
 public/bundle.js
+public/*.eot
+public/*.svg
+public/*.ttf
 .idea/
 *.iml

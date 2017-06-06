@@ -10,9 +10,7 @@ class RunningTotals extends Component {
     };
   }
   componentWillReceiveProps() {
-    if (this.props.updatedReceipt) {
-      this.setState({ existingReceipt: this.props.updatedReceipt });
-    } else if (this.props.existingReceipt) {
+    if (this.props.existingReceipt) {
       this.setState({ existingReceipt: this.props.existingReceipt });
     }
   }
@@ -163,8 +161,7 @@ class RunningTotals extends Component {
 }
 
 RunningTotals.propTypes = {
-  existingReceipt: React.PropTypes.object,
-  updatedReceipt: React.PropTypes.func
+  existingReceipt: React.PropTypes.object
 };
 
 export default RunningTotals;

@@ -16,9 +16,6 @@ class AircraftCharter extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
-  componentDidMount() {
-    this.getAirlines();
-  }
   componentWillReceiveProps() {
     if (this.props.existingAircraftCharter) {
       this.setState({
@@ -31,21 +28,6 @@ class AircraftCharter extends Component {
         flyingTime: this.props.existingAircraftCharter.flyingTime
       }, () => TotalsService.calculateAircraftCharterTotals(this.props.existingAircraftCharter, this.state.airlines));
     }
-  }
-  getAirlines() {
-    Client.getAirlines((airlines) => {
-      airlines = reduce(airlines, function(result, airline) {
-        if (airline.charter) {
-          result.push({
-            key: airline._id,
-            value: airline.name,
-            text: airline.name
-          });
-        }
-        return result;
-      }, []);
-      this.setState({ airlines: airlines });
-    });
   }
   handleSelectChange(e, { name, value, checked }) {
     ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);
