@@ -116,20 +116,23 @@ class NewReceipt extends Component {
         newReceiptBody = (
           <div>
             <PatientDetails activeStep={this.state.activeStep} existingPatientDetails={this.state.existingReceipt.patientDetails} updateReceipt={this.updateReceipt} />
-            <CaseFees activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee} updateReceipt={this.updateReceipt}
-              companies={this.state.companies} countries={this.state.countries} />
+            <CaseFees
+              activeStep={this.state.activeStep} existingCaseFees={this.state.existingReceipt.caseFee}
+              updateReceipt={this.updateReceipt} companies={this.state.companies} countries={this.state.countries} />
             <CarTransport activeStep={this.state.activeStep} existingCarTransport={this.state.existingReceipt.carTransport} updateReceipt={this.updateReceipt} />
-            <AirlineTickets activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket} updateReceipt={this.updateReceipt}
-              airlines={this.state.commercialAirlines} />
-            <AircraftCharter activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter} updateReceipt={this.updateReceipt}
-              airlines={this.state.charterAirlines} />
+            <AirlineTickets
+              activeStep={this.state.activeStep} existingAirlineTickets={this.state.existingReceipt.airlineTicket}
+              updateReceipt={this.updateReceipt} airlines={this.state.commercialAirlines} />
+            <AircraftCharter
+              activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter}
+              updateReceipt={this.updateReceipt} airlines={this.state.charterAirlines} />
             <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} updateReceipt={this.updateReceipt} />
           </div>
         );
       } else {
         newReceiptBody = (
           <Loader active>Loading content..</Loader>
-        )
+        );
       }
     }
 

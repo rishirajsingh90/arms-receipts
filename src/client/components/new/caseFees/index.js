@@ -92,6 +92,8 @@ class CaseFees extends Component {
 
 CaseFees.propTypes = {
   activeStep: React.PropTypes.string,
+  companies:  React.PropTypes.array,
+  countries: React.PropTypes.array,
   existingCaseFees: React.PropTypes.object,
   updateReceipt: React.PropTypes.func
 };

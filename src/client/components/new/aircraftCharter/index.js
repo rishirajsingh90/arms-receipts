@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
-import Client from '../../Client';
-import reduce from 'lodash/reduce';
 import TotalsService from '../../../service/TotalsService';
 
 class AircraftCharter extends Component {
@@ -115,6 +113,7 @@ class AircraftCharter extends Component {
 
 AircraftCharter.propTypes = {
   activeStep: React.PropTypes.string,
+  airlines: React.PropTypes.array,
   existingAircraftCharter: React.PropTypes.object,
   updateReceipt: React.PropTypes.func
 };
