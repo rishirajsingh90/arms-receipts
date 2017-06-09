@@ -107,7 +107,6 @@ class AircraftCharter extends Component {
 
 AircraftCharter.propTypes = {
   activeStep: React.PropTypes.string,
-  airlines: React.PropTypes.array,
   existingAircraftCharter: React.PropTypes.object,
   updateReceipt: React.PropTypes.func
 };

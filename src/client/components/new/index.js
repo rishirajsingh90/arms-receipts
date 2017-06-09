@@ -79,7 +79,7 @@ class NewReceipt extends Component {
         company.key = company._id;
         company.value = company.name;
         company.text = company.name;
-        return company;3
+        return company;
       });
       this.setState({ companies: companies });
       return companies;
