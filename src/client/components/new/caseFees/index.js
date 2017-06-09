@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Dropdown, Icon } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import coreConstants from '../../common/constants';
 
 class CaseFees extends Component {
   constructor (props) {
@@ -27,7 +28,7 @@ class CaseFees extends Component {
   }
   render() {
 
-    if (this.props.activeStep !== 'caseFee') {
+    if (this.props.activeStep !== coreConstants.CASE_FEE_STATE) {
       return null;
     }
 

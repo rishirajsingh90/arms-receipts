@@ -9,11 +9,6 @@ class RunningTotals extends Component {
       existingReceipt: {}
     };
   }
-  componentWillReceiveProps() {
-    if (this.props.existingReceipt) {
-      this.setState({ existingReceipt: this.props.existingReceipt });
-    }
-  }
   render() {
 
     let companyName = null;
@@ -30,38 +25,38 @@ class RunningTotals extends Component {
     let ambulanceFeeLabel = null;
     let ambulanceFeeTotals = null;
 
-    if (this.state.existingReceipt.caseFee) {
-      companyName = <Header.Subheader>{this.state.existingReceipt.caseFee.company}</Header.Subheader>;
-      caseFee = <Header.Subheader>${this.state.existingReceipt.caseFee.type}</Header.Subheader>;
-      if (this.state.existingReceipt.caseFee.doctorEscort) {
-        doctorEscort = <Header.Subheader>${this.state.existingReceipt.caseFee.doctorEscort}</Header.Subheader>;
+    if (this.props.existingReceipt.caseFee) {
+      companyName = <Header.Subheader>{this.props.existingReceipt.caseFee.company}</Header.Subheader>;
+      caseFee = <Header.Subheader>${this.props.existingReceipt.caseFee.type}</Header.Subheader>;
+      if (this.props.existingReceipt.caseFee.doctorEscort) {
+        doctorEscort = <Header.Subheader>${this.props.existingReceipt.caseFee.doctorEscort}</Header.Subheader>;
       }
-      if (this.state.existingReceipt.caseFee.nurseEscort) {
-        nurseEscort = <Header.Subheader>${this.state.existingReceipt.caseFee.nurseEscort}</Header.Subheader>;
+      if (this.props.existingReceipt.caseFee.nurseEscort) {
+        nurseEscort = <Header.Subheader>${this.props.existingReceipt.caseFee.nurseEscort}</Header.Subheader>;
       }
-      if (this.state.existingReceipt.caseFee.repatriation) {
-        repatriation = <Header.Subheader>${this.state.existingReceipt.caseFee.repatriation}</Header.Subheader>;
+      if (this.props.existingReceipt.caseFee.repatriation) {
+        repatriation = <Header.Subheader>${this.props.existingReceipt.caseFee.repatriation}</Header.Subheader>;
       }
     }
 
-    if (this.state.existingReceipt.carTransport) {
-      carTransportLabel = <Header.Subheader>{this.state.existingReceipt.carTransport.fromCity} -> {this.state.existingReceipt.carTransport.toCity}</Header.Subheader>;
-      carTransportFees = <Header.Subheader>${this.state.existingReceipt.carTransport.total}</Header.Subheader>;
+    if (this.props.existingReceipt.carTransport) {
+      carTransportLabel = <Header.Subheader>{this.props.existingReceipt.carTransport.fromCity} -> {this.props.existingReceipt.carTransport.toCity}</Header.Subheader>;
+      carTransportFees = <Header.Subheader>${this.props.existingReceipt.carTransport.total}</Header.Subheader>;
     }
 
-    if (this.state.existingReceipt.airlineTicket) {
-      airlineTicketLabel = <Header.Subheader>{this.state.existingReceipt.airlineTicket.fromCity} -> {this.state.existingReceipt.airlineTicket.toCity}&nbsp;({this.state.existingReceipt.airlineTicket.flightClass})</Header.Subheader>;
-      airlineTicketFees = <Header.Subheader>${this.state.existingReceipt.airlineTicket.total}</Header.Subheader>;
+    if (this.props.existingReceipt.airlineTicket) {
+      airlineTicketLabel = <Header.Subheader>{this.props.existingReceipt.airlineTicket.fromCity} -> {this.props.existingReceipt.airlineTicket.toCity}&nbsp;({this.props.existingReceipt.airlineTicket.flightClass})</Header.Subheader>;
+      airlineTicketFees = <Header.Subheader>${this.props.existingReceipt.airlineTicket.total}</Header.Subheader>;
     }
 
-    if (this.state.existingReceipt.aircraftCharter) {
-      aircraftCharterLabel = <Header.Subheader>{this.state.existingReceipt.aircraftCharter.fromCity} -> {this.state.existingReceipt.aircraftCharter.toCity}&nbsp;({this.state.existingReceipt.aircraftCharter.aircraftType})</Header.Subheader>;
-      aircraftCharterFees = <Header.Subheader>${this.state.existingReceipt.aircraftCharter.total}</Header.Subheader>;
+    if (this.props.existingReceipt.aircraftCharter) {
+      aircraftCharterLabel = <Header.Subheader>{this.props.existingReceipt.aircraftCharter.fromCity} -> {this.props.existingReceipt.aircraftCharter.toCity}&nbsp;({this.props.existingReceipt.aircraftCharter.aircraftType})</Header.Subheader>;
+      aircraftCharterFees = <Header.Subheader>${this.props.existingReceipt.aircraftCharter.total}</Header.Subheader>;
     }
 
-    if (this.state.existingReceipt.ambulanceFee) {
-      ambulanceFeeLabel = <Header.Subheader>{this.state.existingReceipt.ambulanceFee.fromCity} -> {this.state.existingReceipt.ambulanceFee.toCity}</Header.Subheader>;
-      ambulanceFeeTotals = <Header.Subheader>${this.state.existingReceipt.ambulanceFee.total}</Header.Subheader>;
+    if (this.props.existingReceipt.ambulanceFee) {
+      ambulanceFeeLabel = <Header.Subheader>{this.props.existingReceipt.ambulanceFee.fromCity} -> {this.props.existingReceipt.ambulanceFee.toCity}</Header.Subheader>;
+      ambulanceFeeTotals = <Header.Subheader>${this.props.existingReceipt.ambulanceFee.total}</Header.Subheader>;
     }
 
     return (
@@ -152,7 +147,7 @@ class RunningTotals extends Component {
             <div color='green' style={styles.itemTitle}>Receipt Total:</div>
           </Grid.Column>
           <Grid.Column width={5}>
-            <div color='green' style={styles.itemTitle}>${this.state.existingReceipt ? this.state.existingReceipt.total : 0}</div>
+            <div color='green' style={styles.itemTitle}>${this.props.existingReceipt ? this.props.existingReceipt.total : 0}</div>
           </Grid.Column>
         </Grid>
       </div>

@@ -32,18 +32,21 @@ class NewReceipt extends Component {
     this.updateReceipt = this.updateReceipt.bind(this);
   }
   componentDidMount() {
-    if (this.props.routeParams.receiptId) {
-      Client.search(this.props.routeParams.receiptId, (receipts) => {
-        const existingReceipt = receipts[0];
-        this.setState({ existingReceipt });
-        this.setState({ description: existingReceipt.description });
-      });
-    } else {
-      TotalsService.initTotals();
-    }
-    this.getCompanies();
-    this.getCountries();
-    this.getAirlines();
+    const receiptId = this.props.routeParams.receiptId;
+    Promise.all([
+      this.getCompanies(),
+      this.getCountries(),
+      this.getAirlines()
+    ]).then((result) => {
+      if (receiptId) {
+        Client.search(receiptId, (receipts) => {
+          const existingReceipt = receipts[0];
+          const receipt = TotalsService.buildReceipt(existingReceipt._id, existingReceipt.description, existingReceipt, result[0], result[2]);
+          this.setState({ existingReceipt: receipt });
+          this.setState({ description: existingReceipt.description });
+        });
+      }
+    });
   }
   setStep(activeStep) {
     this.setState({ activeStep: activeStep });
@@ -71,18 +74,19 @@ class NewReceipt extends Component {
     });
   }
   getCompanies() {
-    Client.getCompanies((companies) => {
+    return Client.getCompanies((companies) => {
       companies = map(companies, function(company) {
         company.key = company._id;
         company.value = company.name;
         company.text = company.name;
-        return company;
+        return company;3
       });
       this.setState({ companies: companies });
+      return companies;
     });
   }
   getCountries() {
-    Client.getCountries((countries) => {
+    return Client.getCountries((countries) => {
       countries = map(countries , function (country) {
         return {
           key: country._id,
@@ -91,10 +95,11 @@ class NewReceipt extends Component {
         };
       });
       this.setState({ countries: countries });
+      return countries;
     });
   }
   getAirlines() {
-    Client.getAirlines((airlines) => {
+    return Client.getAirlines((airlines) => {
       const charterAirlines = [];
       const commercialAirlines = [];
       each(airlines, function(airline) {
@@ -107,6 +112,7 @@ class NewReceipt extends Component {
       });
       this.setState({ charterAirlines });
       this.setState({ commercialAirlines });
+      return airlines;
     });
   }
   render() {

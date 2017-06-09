@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import coreConstants from '../../common/constants';
 
 class PatientDetails extends Component {
   constructor (props) {
@@ -14,7 +15,7 @@ class PatientDetails extends Component {
   }
   render() {
 
-    if (this.props.activeStep !== 'patientDetails') {
+    if (this.props.activeStep !== coreConstants.PATIENT_DETAILS_STATE) {
       return null;
     }
 

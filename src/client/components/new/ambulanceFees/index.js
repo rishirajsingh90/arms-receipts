@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import coreConstants from '../../common/constants';
 import Client from '../../Client';
 import map from 'lodash/map';
 
@@ -47,7 +48,7 @@ class AmbulanceFees extends Component {
   }
   render() {
 
-    if (this.props.activeStep !== 'ambulanceFees') {
+    if (this.props.activeStep !== coreConstants.AMBULANCE_FEE_STATE) {
       return null;
     }
 
@@ -95,7 +96,7 @@ class AmbulanceFees extends Component {
           <Form.Field>
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
-              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this, this.props.updateReceipt)} defaultValue={this.state.distance}
+              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this, false, this.props.updateReceipt)} defaultValue={this.state.distance}
               pattern="[0-9]*" name="distance" disabled={!this.state.provider} />
           </Form.Field>
         </Form.Group>

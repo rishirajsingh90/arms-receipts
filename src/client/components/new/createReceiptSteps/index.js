@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Step, Icon } from 'semantic-ui-react';
+import coreConstants from '../../common/constants';
 
 class CreateReceiptSteps extends Component {
   constructor (props) {
@@ -20,37 +21,37 @@ class CreateReceiptSteps extends Component {
     const { activeStep } = this.state;
     return (
       <Step.Group size="mini">
-        <Step name="patientDetails"  active={activeStep === "patientDetails"} onClick={this.handleStepChange}>
+        <Step name={coreConstants.PATIENT_DETAILS_STATE}  active={activeStep === coreConstants.PATIENT_DETAILS_STATE} onClick={this.handleStepChange}>
           <Icon name="user" />
           <Step.Content>
             <Step.Title>Patient Details</Step.Title>
           </Step.Content>
         </Step>
-        <Step name="caseFee" active={activeStep === "caseFee"} onClick={this.handleStepChange}>
+        <Step name={coreConstants.CASE_FEE_STATE} active={activeStep === coreConstants.CASE_FEE_STATE} onClick={this.handleStepChange}>
           <Icon name="money" />
           <Step.Content>
             <Step.Title>Case Handling Fee</Step.Title>
           </Step.Content>
         </Step>
-        <Step name="carTransport"  active={activeStep === "carTransport"} onClick={this.handleStepChange}>
+        <Step name={coreConstants.CAR_TRANSPORT_STATE}  active={activeStep === coreConstants.CAR_TRANSPORT_STATE} onClick={this.handleStepChange}>
           <Icon name="car" />
           <Step.Content>
             <Step.Title>Car Transport</Step.Title>
           </Step.Content>
         </Step>
-        <Step name="airlineTickets"  active={activeStep === "airlineTickets"} onClick={this.handleStepChange}>
+        <Step name={coreConstants.AIRLINE_TICKETS_STATE}  active={activeStep === coreConstants.AIRLINE_TICKETS_STATE} onClick={this.handleStepChange}>
           <Icon name="ticket" />
           <Step.Content>
             <Step.Title>Airline Tickets</Step.Title>
           </Step.Content>
         </Step>
-        <Step name="aircraftCharter"  active={activeStep === "aircraftCharter"} onClick={this.handleStepChange}>
+        <Step name={coreConstants.AIRCRAFT_CHARTER_STATE}  active={activeStep === coreConstants.AIRCRAFT_CHARTER_STATE} onClick={this.handleStepChange}>
           <Icon name="plane" />
           <Step.Content>
             <Step.Title>Aircraft Charter</Step.Title>
           </Step.Content>
         </Step>
-        <Step name="ambulanceFees"  active={activeStep === "ambulanceFees"} onClick={this.handleStepChange}>
+        <Step name={coreConstants.AMBULANCE_FEE_STATE}  active={activeStep === coreConstants.AMBULANCE_FEE_STATE} onClick={this.handleStepChange}>
           <Icon name="ambulance" />
           <Step.Content>
             <Step.Title>Ambulance Fees</Step.Title>

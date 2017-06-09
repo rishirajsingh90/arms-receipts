@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
+import coreConstants from '../../common/constants';
 
 class AirlineTickets extends Component {
   constructor (props) {
@@ -41,7 +42,7 @@ class AirlineTickets extends Component {
 
     const { flightClass } = this.state;
 
-    if (this.props.activeStep !== "airlineTickets") {
+    if (this.props.activeStep !== coreConstants.AIRLINE_TICKETS_STATE) {
       return null;
     }
 
@@ -100,7 +101,7 @@ class AirlineTickets extends Component {
         <Form.Group widths="equal">
           <Form.Field>
             <Input
-              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, this.props.updateReceipt)}
+              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, false, this.props.updateReceipt)}
               defaultValue={this.state.amount} pattern="[0-9]*" name='amount' disabled={!this.state.provider}>
               <Icon name='dollar' />
               <input />

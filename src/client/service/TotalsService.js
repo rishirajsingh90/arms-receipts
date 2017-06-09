@@ -179,6 +179,6 @@ function buildReceipt(_id, description, receipt, companies, airlines) {
 }
 
 const TotalsService = { setPatientDetails, calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
-  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt, initTotals };
+  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt };
 export default TotalsService;
 

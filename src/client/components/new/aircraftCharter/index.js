@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
+import coreConstants from '../../common/constants';
 
 class AircraftCharter extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class AircraftCharter extends Component {
 
     const { aircraftType } = this.state;
 
-    if (this.props.activeStep !== "aircraftCharter") {
+    if (this.props.activeStep !== coreConstants.AIRCRAFT_CHARTER_STATE) {
       return null;
     }
 
@@ -95,7 +96,7 @@ class AircraftCharter extends Component {
           <Form.Field>
             <Input
               placeholder="Flying Time" type="number" labelPosition="right" label="hrs"
-              onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this, this.props.updateReceipt)}
+              onChange={e => ReceiptHandler.handleChange('flyingTime', e.target.value, this, false, this.props.updateReceipt)}
               defaultValue={this.state.flyingTime} pattern="[0-9]*" name='flyingTime' disabled={!this.state.provider} />
           </Form.Field>
         </Form.Group>
