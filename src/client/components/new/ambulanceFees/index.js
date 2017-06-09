@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
+import coreConstants from '../../common/constants';
 import Client from '../../Client';
 import map from 'lodash/map';
-import TotalsService from '../../../service/TotalsService';
 
 class AmbulanceFees extends Component {
   constructor (props) {
     super(props);
     this.state = {
       ambulanceProviders: [],
-      error: {}
+      error: {},
+      provider: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.provider : null,
+      fromCity: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.fromCity : null,
+      toCity: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.toCity : null,
+      startDate: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.startDate : null,
+      endDate: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.endDate : null,
+      distance: this.props.existingAmbulanceFees ? this.props.existingAmbulanceFees.distance : null
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
@@ -18,18 +24,6 @@ class AmbulanceFees extends Component {
   }
   componentDidMount() {
     this.getAmbulanceProviders();
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingAmbulanceFees) {
-      this.setState({
-        provider: this.props.existingAmbulanceFees.provider,
-        fromCity: this.props.existingAmbulanceFees.fromCity,
-        toCity: this.props.existingAmbulanceFees.toCity,
-        startDate: this.props.existingAmbulanceFees.startDate,
-        endDate: this.props.existingAmbulanceFees.endDate,
-        distance: this.props.existingAmbulanceFees.distance
-      }, () => TotalsService.calculateAmbulanceFeeTotals(this.props.existingAmbulanceFees, 4.5)); // TODO fix this
-    }
   }
   getAmbulanceProviders() {
     Client.getAmbulanceProviders((ambulanceProviders) => {
@@ -44,17 +38,17 @@ class AmbulanceFees extends Component {
     });
   }
   handleStartDate(date) {
-    ReceiptHandler.handleStartDate(date, this);
+    ReceiptHandler.handleStartDate(date, this, this.props.updateReceipt);
   }
   handleEndDate(date) {
-    ReceiptHandler.handleEndDate(date, this);
+    ReceiptHandler.handleEndDate(date, this, this.props.updateReceipt);
   }
   handleDropDownChange(e, { id, value }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this, this.props.updateReceipt);
   }
   render() {
 
-    if (this.props.activeStep !== 'ambulanceFees') {
+    if (this.props.activeStep !== coreConstants.AMBULANCE_FEE_STATE) {
       return null;
     }
 
@@ -74,10 +68,10 @@ class AmbulanceFees extends Component {
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
-            placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
+            placeholder='From' onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true, this.props.updateReceipt)}
             defaultValue={this.state.fromCity} label="From" control={Input} name="fromCity" disabled={!this.state.provider} />
           <Form.Field
-            placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
+            placeholder='To' onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true, this.props.updateReceipt)}
             defaultValue={this.state.toCity} label="To" control={Input} name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
@@ -87,14 +81,14 @@ class AmbulanceFees extends Component {
             placeholder='DD/MM/YYYY'
             label='Start'
             defaultValue={this.state.startDate}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, this.props.updateReceipt)}
             error={this.state.error.startDate} />
           <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
             label='End'
             defaultValue={this.state.endDate}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, this.props.updateReceipt)}
             error={this.state.error.endDate} />
         </Form.Group>
         <h4>Transport Information</h4>
@@ -102,7 +96,7 @@ class AmbulanceFees extends Component {
           <Form.Field>
             <Input
               placeholder='Distance' type='number' labelPosition='right' label='km'
-              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this)} defaultValue={this.state.distance}
+              onChange={e => ReceiptHandler.handleChange('distance', e.target.value, this, false, this.props.updateReceipt)} defaultValue={this.state.distance}
               pattern="[0-9]*" name="distance" disabled={!this.state.provider} />
           </Form.Field>
         </Form.Group>
@@ -113,7 +107,8 @@ class AmbulanceFees extends Component {
 
 AmbulanceFees.propTypes = {
   activeStep: React.PropTypes.string,
-  existingAmbulanceFees: React.PropTypes.object
+  existingAmbulanceFees: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default AmbulanceFees;

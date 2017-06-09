@@ -1,71 +1,34 @@
 import React, { Component } from 'react';
 import { Form, Dropdown, Icon } from 'semantic-ui-react';
-import Client from '../../Client';
 import ReceiptHandler from '../../common/ReceiptHandler';
-import map from 'lodash/map';
-import TotalsService from '../../../service/TotalsService';
+import coreConstants from '../../common/constants';
 
 class CaseFees extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      companies: [],
-      countries: [],
       error: {},
-      amount: 0
+      company: this.props.existingCaseFees ? this.props.existingCaseFees.company : null,
+      country: this.props.existingCaseFees ? this.props.existingCaseFees.country : null,
+      caseType: this.props.existingCaseFees ? this.props.existingCaseFees.caseType : null,
+      amount: this.props.existingCaseFees ? this.props.existingCaseFees.amount  : 0,
+      repatriation: this.props.existingCaseFees ? this.props.existingCaseFees.repatriation : null,
+      doctorEscort: this.props.existingCaseFees ? this.props.existingCaseFees.doctorEscort : null,
+      nurseEscort: this.props.existingCaseFees ? this.props.existingCaseFees.nurseEscort : null
     };
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
-  componentDidMount() {
-    this.getCompanies();
-    this.getCountries();
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingCaseFees) {
-      this.setState({
-        company: this.props.existingCaseFees.company,
-        country: this.props.existingCaseFees.country,
-        caseType: this.props.existingCaseFees.caseType,
-        amount: this.props.existingCaseFees.amount,
-        repatriation: this.props.existingCaseFees.repatriation,
-        doctorEscort: this.props.existingCaseFees.doctorEscort,
-        nurseEscort: this.props.existingCaseFees.nurseEscort
-      }, () => TotalsService.calculateCaseFeeTotals(this.props.existingCaseFees, this.state.companies));
-    }
-  }
-  getCompanies() {
-    Client.getCompanies((companies) => {
-      companies = map(companies, function(company) {
-        company.key = company._id;
-        company.value = company.name;
-        company.text = company.name;
-        return company;
-      });
-      this.setState({ companies: companies });
-    });
-  }
-  getCountries() {
-    Client.getCountries((countries) => {
-      countries = map(countries , function (country) {
-        return {
-          key: country._id,
-          value: country.value,
-          text: country.value
-        };
-      });
-      this.setState({ countries: countries });
-    });
-  }
+
   handleDropDownChange(e, { id, value }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this, this.props.updateReceipt);
   }
   handleSelectChange(e, { name, value, checked }) {
-    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
+    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);
   }
   render() {
 
-    if (this.props.activeStep !== 'caseHandling') {
+    if (this.props.activeStep !== coreConstants.CASE_FEE_STATE) {
       return null;
     }
 
@@ -76,7 +39,7 @@ class CaseFees extends Component {
         <Form.Group widths="equal">
           <Dropdown
             id='company'
-            options={this.state.companies}
+            options={this.props.companies}
             fluid labeled search selection className='icon'
             placeholder='Company'
             onChange={this.handleDropDownChange}
@@ -84,7 +47,7 @@ class CaseFees extends Component {
             name="company" />
           <Dropdown
             id="country"
-            options={this.state.countries}
+            options={this.props.countries}
             fluid labeled search selection className='icon'
             placeholder='Country'
             onChange={this.handleDropDownChange}
@@ -105,7 +68,7 @@ class CaseFees extends Component {
             onChange={this.handleSelectChange} disabled={!this.state.company} />
           <Form.Input
             iconPosition='left' placeholder='Amount'  type='number' disabled={caseType !== 'custom'}
-            onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)} value={this.state.amount}
+            onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, false, this.props.updateReceipt)} value={this.state.amount}
             pattern="[0-9]*" name='amount'>
             <Icon name='dollar' />
             <input />
@@ -130,7 +93,10 @@ class CaseFees extends Component {
 
 CaseFees.propTypes = {
   activeStep: React.PropTypes.string,
-  existingCaseFees: React.PropTypes.object
+  companies:  React.PropTypes.array,
+  countries: React.PropTypes.array,
+  existingCaseFees: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default CaseFees;

@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import ReceiptHandler from '../../common/ReceiptHandler';
-import TotalsService from '../../../service/TotalsService';
+import coreConstants from '../../common/constants';
 
 class PatientDetails extends Component {
   constructor (props) {
     super(props);
     this.state = {
       error: {},
-      firstName: "",
-      lastName: "",
-      dob: ""
+      firstName: this.props.existingPatientDetails ? this.props.existingPatientDetails.firstName : "",
+      lastName: this.props.existingPatientDetails ? this.props.existingPatientDetails.lastName : "",
+      dob: this.props.existingPatientDetails ? this.props.existingPatientDetails.dob : ""
     };
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingPatientDetails) {
-      this.setState({
-        firstName: this.props.existingPatientDetails.firstName,
-        lastName: this.props.existingPatientDetails.lastName,
-        dob: this.props.existingPatientDetails.dob
-      }, () => TotalsService.setPatientDetails(this.props.existingPatientDetails));
-    }
   }
   render() {
 
-    if (this.props.activeStep !== 'patientDetails') {
+    if (this.props.activeStep !== coreConstants.PATIENT_DETAILS_STATE) {
       return null;
     }
 
@@ -33,10 +24,10 @@ class PatientDetails extends Component {
         <h4>Patient Information</h4>
         <Form.Group widths="equal">
           <Form.Input
-            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true)}
+            placeholder='First name'  type='text' onChange={e => ReceiptHandler.handleChange('firstName', e.target.value, this, true, this.props.updateReceipt)}
             value={this.state.firstName} name='firstName' label="First name" />
           <Form.Input
-            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true)}
+            placeholder='Last name'  type='text' onChange={e => ReceiptHandler.handleChange('lastName', e.target.value, this, true, this.props.updateReceipt)}
             value={this.state.lastName} name='lastName' label="Last name" />
         </Form.Group>
         <Form.Group widths="equal">
@@ -45,7 +36,7 @@ class PatientDetails extends Component {
             placeholder='DD/MM/YYYY'
             label='Date of birth'
             value={this.state.dob}
-            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this)}
+            onChange={e => ReceiptHandler.handleDate('dob', e.target.value, this, this.props.updateReceipt)}
             error={this.state.error.dob} />
         </Form.Group>
       </div>
@@ -55,7 +46,8 @@ class PatientDetails extends Component {
 
 PatientDetails.propTypes = {
   activeStep: React.PropTypes.string,
-  existingPatientDetails: React.PropTypes.object
+  existingPatientDetails: React.PropTypes.object,
+  updateReceipt: React.PropTypes.func
 };
 
 export default PatientDetails;

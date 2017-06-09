@@ -98,7 +98,21 @@ function calculateAmbulanceFeeTotals(ambulanceFee, mileageRate) {
   ambulanceFeeTotals = ambulanceFee;
 }
 
-function buildReceipt(_id, description) {
+function buildReceipt(_id, description, receipt, companies, airlines) {
+
+  initTotals();
+
+  setPatientDetails(receipt.patientDetails);
+
+  calculateCaseFeeTotals(receipt.caseFee, companies);
+  calculateCarTransportTotals(receipt.carTransport, 1.5); // TODO fix this once you add in config,
+                                                          // also pull out doc/nurse escort fees,
+                                                          // default to 950 and 650 respectively
+  calculateAirlineTicketTotals(receipt.airlineTicket);
+  calculateAircraftCharterTotals(receipt.aircraftCharter, airlines);
+  calculateAmbulanceFeeTotals(receipt.ambulanceFee, 4.5); // TODO fix this once you add in config,
+                                                          // also pull out doc/nurse escort fees,
+                                                          // default to 950 and 650 respectively
   // scrub unneeded data
   return {
     _id: _id || undefined,
@@ -165,6 +179,6 @@ function buildReceipt(_id, description) {
 }
 
 const TotalsService = { setPatientDetails, calculateCaseFeeTotals, calculateCarTransportTotals, calculateAirlineTicketTotals,
-  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt, initTotals };
+  calculateAircraftCharterTotals, calculateAmbulanceFeeTotals, buildReceipt };
 export default TotalsService;
 

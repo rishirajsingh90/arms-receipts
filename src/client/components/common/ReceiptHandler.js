@@ -1,45 +1,43 @@
-import TotalsService from '../../service/TotalsService';
-
-function handleSelectChange(e, { name, value, checked }, ctx) {
+function handleSelectChange(e, { name, value, checked }, ctx, callback) {
   ctx.setState({ [name]: value ? value : checked }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function handleDropDownChange(e, { id, value }, ctx) {
+function handleDropDownChange(e, { id, value }, ctx, callback) {
   return ctx.setState({ [id]: value }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function handleChange(input, value, ctx, isText) {
+function handleChange(input, value, ctx, isText, callback) {
   if (!isText) {
     value = value ? parseInt(value, 10) : 0;
   }
   ctx.setState({ [input]: value }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function handleStartDate(date, ctx) {
+function handleStartDate(date, ctx, callback) {
   ctx.setState({ startDate: date }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function handleEndDate(date, ctx) {
+function handleEndDate(date, ctx, callback) {
   ctx.setState({ endDate: date }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function handleDOB(date, ctx) {
+function handleDOB(date, ctx, callback) {
   ctx.setState({ dob: date }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function handleDate(name, date, ctx) {
+function handleDate(name, date, ctx, callback) {
   const tokens = date.split('/');
   let error = null;
   if (!tokens || tokens.length !== 3 || tokens[2].length !== 4 || tokens[1].length !== 2 || tokens[0].length !== 2) {
@@ -54,39 +52,10 @@ function handleDate(name, date, ctx) {
   errorObj[name] = error;
   ctx.setState({ error: errorObj });
   ctx.setState({ [name]: date }, () => {
-    updateTotals(ctx);
+    callback(ctx.props.activeStep, ctx.state);
   });
 }
 
-function updateTotals(ctx) {
-  switch (ctx.props.activeStep) {
-    case "patientDetails":
-      TotalsService.setPatientDetails(ctx.state);
-      break;
-    case "caseHandling":
-      TotalsService.calculateCaseFeeTotals(ctx.state);
-      break;
-    case "carTransport":
-      TotalsService.calculateCarTransportTotals(ctx.state, 1.5); // TODO fix this once you add in config,
-                                                                 // also pull out doc/nurse escort fees,
-                                                                 // default to 950 and 650 respectively
-      break;
-    case "airlineTickets":
-      TotalsService.calculateAirlineTicketTotals(ctx.state);
-      break;
-    case "aircraftCharter":
-      TotalsService.calculateAircraftCharterTotals(ctx.state);
-      break;
-    case "ambulanceFees":
-      TotalsService.calculateAmbulanceFeeTotals(ctx.state, 4.5); // TODO fix this once you add in config,
-                                                                 // also pull out doc/nurse escort fees,
-                                                                 // default to 950 and 650 respectively
-      break;
-    default:
-      break;
-  }
-}
-
 const ReceiptHandler = { handleSelectChange, handleDropDownChange, handleChange, handleStartDate, handleEndDate, handleDOB,
-  handleDate, updateTotals };
+  handleDate };
 export default ReceiptHandler;

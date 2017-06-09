@@ -1,60 +1,34 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 import ReceiptHandler from '../../common/ReceiptHandler';
-import Client from '../../Client';
-import reduce from 'lodash/reduce';
-import TotalsService from '../../../service/TotalsService';
+import coreConstants from '../../common/constants';
 
 class AirlineTickets extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      error: {}
+      error: {},
+      provider: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.provider : null,
+      flightClass: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.flightClass : null,
+      fromCity: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.fromCity : null,
+      toCity: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.toCity : null,
+      startDate: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.startDate : null,
+      endDate: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.endDate : null,
+      amount: this.props.existingAirlineTickets ? this.props.existingAirlineTickets.total : null
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleEndDate = this.handleEndDate.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
-  componentDidMount() {
-    this.getAirlines();
-  }
-  componentWillReceiveProps() {
-    if (this.props.existingAirlineTickets) {
-      this.setState({
-        provider: this.props.existingAirlineTickets.provider,
-        flightClass: this.props.existingAirlineTickets.flightClass,
-        fromCity: this.props.existingAirlineTickets.fromCity,
-        toCity: this.props.existingAirlineTickets.toCity,
-        startDate: this.props.existingAirlineTickets.startDate,
-        endDate: this.props.existingAirlineTickets.endDate,
-        amount: this.props.existingAirlineTickets.total
-      }, () => TotalsService.calculateAirlineTicketTotals(this.props.existingAirlineTickets));
-    }
-  }
-  getAirlines() {
-    Client.getAirlines((airlines) => {
-      airlines = reduce(airlines, function(result, airline) {
-        if (!airline.charter) {
-          result.push({
-            key: airline._id,
-            value: airline.name,
-            text: airline.name
-          });
-        }
-        return result;
-      }, []);
-      this.setState({ airlines: airlines });
-    });
-  }
   handleSelectChange(e, { name, value, checked }) {
-    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this);
+    ReceiptHandler.handleSelectChange(e, { name, value, checked }, this, this.props.updateReceipt);
   }
   handleStartDate(date) {
-    ReceiptHandler.handleStartDate(date, this);
+    ReceiptHandler.handleStartDate(date, this, this.props.updateReceipt);
   }
   handleEndDate(date) {
-    ReceiptHandler.handleEndDate(date, this);
+    ReceiptHandler.handleEndDate(date, this, this.props.updateReceipt);
   }
   handleChange(input, value) {
     this.setState({ [input]: value }, () => {
@@ -62,13 +36,13 @@ class AirlineTickets extends Component {
     });
   }
   handleDropDownChange(e, { id, value }) {
-    ReceiptHandler.handleDropDownChange(e, { id, value }, this);
+    ReceiptHandler.handleDropDownChange(e, { id, value }, this, this.props.updateReceipt);
   }
   render() {
 
     const { flightClass } = this.state;
 
-    if (this.props.activeStep !== "airlineTickets") {
+    if (this.props.activeStep !== coreConstants.AIRLINE_TICKETS_STATE) {
       return null;
     }
 
@@ -78,7 +52,7 @@ class AirlineTickets extends Component {
         <Form.Group>
           <Dropdown
             id='provider'
-            options={this.state.airlines}
+            options={this.props.airlines}
             fluid labeled search selection className='icon'
             placeholder='Select Airline'
             onChange={this.handleDropDownChange}
@@ -100,10 +74,10 @@ class AirlineTickets extends Component {
         <h4>Cities</h4>
         <Form.Group widths="equal">
           <Form.Field
-            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true)}
+            placeholder="From" onChange={e => ReceiptHandler.handleChange('fromCity', e.target.value, this, true, this.props.updateReceipt)}
             defaultValue={this.state.fromCity} label="From" control="input" name="fromCity" disabled={!this.state.provider} />
           <Form.Field
-            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true)}
+            placeholder="To" onChange={e => ReceiptHandler.handleChange('toCity', e.target.value, this, true, this.props.updateReceipt)}
             defaultValue={this.state.toCity} label="To" control="input" name="toCity" disabled={!this.state.provider} />
         </Form.Group>
         <h4>Dates</h4>
@@ -113,21 +87,21 @@ class AirlineTickets extends Component {
             placeholder='DD/MM/YYYY'
             label='Start'
             defaultValue={this.state.startDate}
-            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this)}
+            onChange={e => ReceiptHandler.handleDate('startDate', e.target.value, this, this.props.updateReceipt)}
             error={this.state.error.startDate} />
           <Form.Input
             name='endDate'
             placeholder='DD/MM/YYYY'
             label='End'
             defaultValue={this.state.endDate}
-            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this)}
+            onChange={e => ReceiptHandler.handleDate('endDate', e.target.value, this, this.props.updateReceipt)}
             error={this.state.error.endDate} />
         </Form.Group>
         <h4>Travel Information</h4>
         <Form.Group widths="equal">
           <Form.Field>
             <Input
-              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this)}
+              iconPosition='left' placeholder='Amount' type='number' onChange={e => ReceiptHandler.handleChange('amount', e.target.value, this, false, this.props.updateReceipt)}
               defaultValue={this.state.amount} pattern="[0-9]*" name='amount' disabled={!this.state.provider}>
               <Icon name='dollar' />
               <input />
@@ -141,6 +115,7 @@ class AirlineTickets extends Component {
 
 AirlineTickets.propTypes = {
   activeStep: React.PropTypes.string,
+  airlines: React.PropTypes.array,
   existingAirlineTickets: React.PropTypes.object,
   updateReceipt: React.PropTypes.func
 };
