@@ -19,7 +19,7 @@ class ReviewReceipts extends Component {
     this.getReceipts();
   }
   getReceipts() {
-    Client.search(null, (receipts) => {
+    Client.getReceipt(null, (receipts) => {
       this.setState({ receipts: receipts });
     });
   }
@@ -55,7 +55,7 @@ class ReviewReceipts extends Component {
           title='Delete receipt?' content='Are you sure you want to delete this receipt?'
           showModal={this.state.showModal} handleSubmit={this.handleDeleteReceipt} handleCancel={this.handleDismissModal} />
         <Header as='h3'>Review Receipts</Header>
-        <Table celled selectable>
+        <Table celled selectable unstackable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Description</Table.HeaderCell>

@@ -102,17 +102,29 @@ function buildReceipt(_id, description, receipt, companies, airlines) {
 
   initTotals();
 
-  setPatientDetails(receipt.patientDetails);
+  if (receipt.patientDetails) {
+    setPatientDetails(receipt.patientDetails);
+  }
 
-  calculateCaseFeeTotals(receipt.caseFee, companies);
-  calculateCarTransportTotals(receipt.carTransport, 1.5); // TODO fix this once you add in config,
-                                                          // also pull out doc/nurse escort fees,
-                                                          // default to 950 and 650 respectively
-  calculateAirlineTicketTotals(receipt.airlineTicket);
-  calculateAircraftCharterTotals(receipt.aircraftCharter, airlines);
-  calculateAmbulanceFeeTotals(receipt.ambulanceFee, 4.5); // TODO fix this once you add in config,
-                                                          // also pull out doc/nurse escort fees,
-                                                          // default to 950 and 650 respectively
+  if (receipt.caseFee) {
+    calculateCaseFeeTotals(receipt.caseFee, companies);
+  }
+  if (receipt.carTransport) {
+    calculateCarTransportTotals(receipt.carTransport, 1.5); // TODO fix this once you add in config,
+    // also pull out doc/nurse escort fees,
+    // default to 950 and 650 respectively
+  }
+  if (receipt.airlineTicket) {
+    calculateAirlineTicketTotals(receipt.airlineTicket);
+  }
+  if (receipt.aircraftCharter) {
+    calculateAircraftCharterTotals(receipt.aircraftCharter, airlines);
+  }
+  if (receipt.ambulanceFee) {
+    calculateAmbulanceFeeTotals(receipt.ambulanceFee, 4.5); // TODO fix this once you add in config,
+    // also pull out doc/nurse escort fees,
+    // default to 950 and 650 respectively
+  }
   // scrub unneeded data
   return {
     _id: _id || undefined,

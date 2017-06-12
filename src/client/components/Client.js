@@ -1,9 +1,21 @@
 /* eslint-disable no-undef */
 import 'whatwg-fetch';
 
-function search(query, cb) {
+function getReceipt(query, cb) {
   query = query ? query : '';
   return fetch(`/api/receipt?receiptId=${query}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function searchReceipts(query, cb) {
+  query = query ? query : '';
+  return fetch(`/api/search?query=${query}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -106,6 +118,6 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, upsertReceipt,
-  deleteReceipt };
+const Client = { getReceipt, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, upsertReceipt,
+  deleteReceipt, searchReceipts };
 export default Client;

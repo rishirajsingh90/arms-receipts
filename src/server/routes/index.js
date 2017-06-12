@@ -47,6 +47,15 @@ router.post('/receipt', (req, res) => {
   });
 });
 
+router.get('/search', (req, res) => {
+  receipt.search(req.query.query).toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    res.send(JSON.stringify(result));
+  });
+});
+
 router.get('/countries', (req, res) => {
   countries.get().toArray(function(err, result) {
     if (err) {

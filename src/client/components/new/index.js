@@ -39,7 +39,7 @@ class NewReceipt extends Component {
       this.getAirlines()
     ]).then((result) => {
       if (receiptId) {
-        Client.search(receiptId, (receipts) => {
+        Client.getReceipt(receiptId, (receipts) => {
           const existingReceipt = receipts[0];
           const receipt = TotalsService.buildReceipt(existingReceipt._id, existingReceipt.description, existingReceipt, result[0], result[2]);
           this.setState({ existingReceipt: receipt });
@@ -133,6 +133,25 @@ class NewReceipt extends Component {
               activeStep={this.state.activeStep} existingAircraftCharter={this.state.existingReceipt.aircraftCharter}
               updateReceipt={this.updateReceipt} airlines={this.state.charterAirlines} />
             <AmbulanceFees activeStep={this.state.activeStep} existingAmbulanceFees={this.state.existingReceipt.ambulanceFee} updateReceipt={this.updateReceipt} />
+          </div>
+        );
+      } else {
+        newReceiptBody = (
+          <Loader active>Loading content..</Loader>
+        );
+      }
+    } else {
+      if (!isEmpty(this.state.companies) && !isEmpty(this.state.countries)) {
+        newReceiptBody = (
+          <div>
+            <PatientDetails activeStep={this.state.activeStep} updateReceipt={this.updateReceipt} />
+            <CaseFees activeStep={this.state.activeStep} updateReceipt={this.updateReceipt} companies={this.state.companies} countries={this.state.countries} />
+            <CarTransport activeStep={this.state.activeStep} updateReceipt={this.updateReceipt} />
+            <AirlineTickets
+              activeStep={this.state.activeStep} updateReceipt={this.updateReceipt} airlines={this.state.commercialAirlines} />
+            <AircraftCharter
+              activeStep={this.state.activeStep} updateReceipt={this.updateReceipt} airlines={this.state.charterAirlines} />
+            <AmbulanceFees activeStep={this.state.activeStep} updateReceipt={this.updateReceipt} />
           </div>
         );
       } else {
