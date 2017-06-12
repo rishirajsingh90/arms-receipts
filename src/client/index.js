@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import App from './components/App';
 import NewReceipt from './components/new';
 import ReviewReceipts from './components/review';
+import Search from './components/search';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -14,6 +15,7 @@ render(
       <Route path="/review" component={ReviewReceipts} />
       <Route path="/new" component={NewReceipt} />
       <Route path="/edit/:receiptId" component={NewReceipt} />
+      <Route path="/search" component={Search} />
       <Route path="*" component={ReviewReceipts} />
     </Route>
   </Router>, document.getElementById('root'));

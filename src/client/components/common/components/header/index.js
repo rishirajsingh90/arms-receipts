@@ -21,7 +21,7 @@ class Header extends Component {
 
     return (
       <div>
-        <Menu style={styles.armsRed}>
+        <Menu style={styles.armsRed} unstackable>
           <Menu.Item
             id='newReceipt'
             active={activeItem === 'new'}
