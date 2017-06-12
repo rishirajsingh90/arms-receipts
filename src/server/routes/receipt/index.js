@@ -9,13 +9,12 @@ exports.get = function(receiptId) {
 exports.search = function(query) {
   query = new RegExp(query, "i");
   return db.getClient().collection('receipt').find({
-    $or:
-      [
-        { "patientDetails.firstName": { $regex: query } },
-        { "patientDetails.lastName": { $regex: query } },
-        { "patientDetails.dob": { $regex: query } },
-        { "description": { $regex: query } }
-      ]
+    $or: [
+      { "patientDetails.firstName": { $regex: query } },
+      { "patientDetails.lastName": { $regex: query } },
+      { "patientDetails.dob": { $regex: query } },
+      { "description": { $regex: query } }
+    ]
   });
 };
 

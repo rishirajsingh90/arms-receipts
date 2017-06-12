@@ -57,7 +57,8 @@ class ReceiptSearch extends Component {
         <Form class="ui form" loading={this.state.isLoading} onSubmit={this.handleSubmit}>
           <p>Currently supports search by first name, last name, receipt Id, description and date of birth (DD-MM-YYYY)</p>
           <Form.Group widths="equal">
-            <Form.Input name="search" placeholder='Please enter a search query' type='text'
+            <Form.Input
+              name="search" placeholder='Please enter a search query' type='text'
               onChange={(e, { value }) => this.setState({ query: value })} />
           </Form.Group>
           <Form.Group widths="equal">
@@ -66,7 +67,7 @@ class ReceiptSearch extends Component {
         </Form>
         {receiptSet}
       </div>
-    )
+    );
   }
 }
 
