@@ -156,7 +156,7 @@ class NewReceipt extends Component {
         );
       } else {
         newReceiptBody = (
-          <Loader active>Loading content..</Loader>
+          <Loader active>Loading contenton..</Loader>
         );
       }
     }
