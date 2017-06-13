@@ -102,6 +102,58 @@ function deleteReceipt(query, cb) {
     .then(cb);
 }
 
+function addAmbulanceProvider(ambulanceProvider, cb) {
+  return fetch(`/api/ambulance-providers`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(ambulanceProvider)
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function addAirline(airline, cb) {
+  return fetch(`/api/airlines`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(airline)
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function addCarProvider(carProvider, cb) {
+  return fetch(`/api/car-providers`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(carProvider)
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function addCompanyFee(companyFee, cb) {
+  return fetch(`/api/companies`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(companyFee)
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -119,5 +171,5 @@ function parseJSON(response) {
 }
 
 const Client = { getReceipt, getCompanies, getCountries, getCarProviders, getAirlines, getAmbulanceProviders, upsertReceipt,
-  deleteReceipt, searchReceipts };
+  deleteReceipt, searchReceipts, addAirline, addAmbulanceProvider, addCarProvider, addCompanyFee };
 export default Client;
