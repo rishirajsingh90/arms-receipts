@@ -9,6 +9,7 @@
     "lint": "eslint src/**",
     "lint:watch": "esw -w src/**",
     "build": "npm run lint && npm run test",
+    "local": "npm run build && node src/server/server.js",
     "start": "node src/server/server.js",
     "postinstall": "webpack -p --config webpack.prod.config.js"
   },
