@@ -62,7 +62,7 @@ class Header extends Component {
             Search
           </Menu.Item>
           <Menu.Item
-            id='findReceipt'
+            id='settings'
             active={activeItem === 'settings'}
             name='settings'
             onClick={this.handleItemClick}>

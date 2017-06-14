@@ -6,6 +6,7 @@ import ReviewReceipts from './components/review';
 import Search from './components/search';
 import AmbulanceProvider from './components/settings/ambulanceProvider';
 import CarProvider from './components/settings/carProvider';
+import CompanyFees from './components/settings/companyFees';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -20,6 +21,7 @@ render(
       <Route path="/search" component={Search} />
       <Route path="/ambulance-provider" component={AmbulanceProvider} />
       <Route path="/car-provider" component={CarProvider} />
+      <Route path="/companies" component={CompanyFees} />
       <Route path="*" component={ReviewReceipts} />
     </Route>
   </Router>, document.getElementById('root'));

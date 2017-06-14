@@ -15,7 +15,7 @@ before(function() {
 describe('<Header/> tests', function () {
   it('Header should display all sub menus', function () {
     expect(wrapper.find(Menu)).to.have.length(1);
-    expect(wrapper.find(Menu.Item)).to.have.length(3);
+    expect(wrapper.find(Menu.Item)).to.have.length(4);
   });
   it('should load new receipt on click', function() {
     const newReceipt = wrapper.find('#newReceipt');
